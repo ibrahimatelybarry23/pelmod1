@@ -1,0 +1,789 @@
+\intro{}
+
+Introduciamo i concetti di base del linguaggio C++ da cui partirà tutto il resto del corso.
+
+\section{Definizioni fondamentali}
+\defnlist{Concetti fondamentali}{
+    \item \textbf{Tipi di dati:} Un tipo di dato in c++  definisce l'insieme dei valori che può assumere e le operazioni che possono essere eseguite su di essi. 
+    
+    \item \textbf{Oggetto:} Un oggetto  è un area di memoria a cui è associato un tipo.
+    \item \textbf{Variabile:} Una variabile è un oggetto a cui è associato un identificatore.
+}
+Un puntatore è una variabile che contiene l'indirizzo di un'area di memoria. Nell'esempio seguente, \inlinecode{a} è un puntatore a un intero allocato dinamicamente tramite \inlinecode{malloc()}:
+
+
+
+\begin{codeexample}[Allocazione di memoria dinamica]
+\begin{lstlisting}
+    int *a = (int*) malloc(sizeof(int)); 
+\end{lstlisting}
+\end{codeexample}
+\begin{center}
+
+    \begin{tikzpicture}
+        % Variabile puntatore
+        \draw (0,0) rectangle (0.8,0.8);
+        \fill (0.4,0.4) circle (2pt);
+        \node[below] at (0.4,0) {\texttt{a}};
+        
+        % Freccia
+        \draw[->, thick] (0.8,0.4) -- (3,0.4);
+        
+        % Blocco di memoria (array)
+        \draw (3,0) rectangle (7,0.8);
+    \end{tikzpicture}
+\end{center}
+
+La funzione \inlinecode{malloc()} (ereditata dal linguaggio C) alloca un blocco di memoria della dimensione specificata da \inlinecode{sizeof(int)} e restituisce un puntatore generico (\inlinecode{void*}), che viene convertito a \inlinecode{int*} tramite un cast esplicito. La variabile \inlinecode{a} non contiene direttamente un valore intero, ma l'indirizzo della cella di memoria allocata. Per accedere al valore puntato si usa l'operatore di dereferenziazione \inlinecode{*a}.
+
+\subsection{Casting}
+Il casting consiste nella conversione di un valore da un tipo all'altro. Nel linguaggio C++, esistono due tipologie di conversione: 
+
+\begin{itemize}
+    \item \textbf{Conversione implicita:} il compilatore converte da solo i tipi nelle espressioni \virgolette{miste}, promuovendo il tipo più piccolo verso quello più grande.
+
+    vediamo un esempio: 
+
+
+\pagebreak
+
+\begin{codeexample}[Casting implicito]
+\begin{codebox}
+\begin{lstlisting}
+    int a = 7; 
+    int b = 3; 
+    double c= a*1.0/b;  //  a e b vengono promossi a in double  => c = 2.333...
+\end{lstlisting}
+\end{codebox}
+
+\end{codeexample}
+
+
+    Per esempio \inlinecode{int} $\rightarrow$ \inlinecode{double}, in questo caso non abbiamo perdita di informazione.
+    \item  \textbf{Conversione esplicita (cast):} In questo caso viene forzata la conversione da un tipo all'altro.  In C++ viene utilizzata la sintassi. \inlinecode{static\_cast\textless type\textgreater(x)}. 
+
+        vediamo un esempio: 
+        \begin{codeexample}
+        [Casting esplicito]
+        \begin{codebox}
+    \begin{lstlisting}
+    int total = 5;
+    int count = 2;
+    double average;
+
+    // senza cast: promozione automatica
+    average = total / count;      // 5 / 2 = 2 (int), poi 2 => 2.0
+
+    // con cast: controlli tu la conversione
+    average = static_cast<double>(total) / count; // 5.0 / 2 = 2.5
+    \end{lstlisting}
+    \end{codebox}
+
+        \end{codeexample}
+
+
+    
+\end{itemize}
+
+
+\pagebreak 
+
+\subsection{Perdita di informazione:}
+\defn{Narrowing}{
+    La perdita di informazione si ha quando si converte da un tipo \virgolette{capiente} a un più piccolo.
+}
+
+
+
+
+
+
+
+
+
+
+
+\begin{center}
+\begin{tikzpicture}[
+    every node/.style={font=\sffamily},
+    >=Stealth
+]
+
+% --- FLOAT BOX (sinistra) ---
+\node[
+    draw=floatcol, line width=1.6pt, rounded corners=8pt,
+    fill=bgfloat,
+    minimum width=4.2cm, minimum height=5.8cm,
+    label={[font=\sffamily\large\bfseries, text=floatcol]above:{\texttt{float}}}
+] (floatbox) at (0,0) {};
+
+% Contenuto float: parte intera + decimale
+\node[
+    draw=floatcol!70, line width=1pt, rounded corners=4pt,
+    fill=white,
+    minimum width=3.4cm, minimum height=1.6cm,
+] (intpart) at (0, 1.1) {};
+\node[font=\sffamily\bfseries\large, text=floatcol!80] at (0, 1.45) {3};
+\node[font=\sffamily\footnotesize, text=arrowcol] at (0, 0.7) {parte intera};
+
+\node[
+    draw=lostcol!80, line width=1pt, rounded corners=4pt,
+    fill=lostcol!10,
+    minimum width=3.4cm, minimum height=1.6cm,
+] (decpart) at (0, -1.1) {};
+\node[font=\sffamily\bfseries\large, text=lostcol] at (0, -0.75) {.14159};
+\node[font=\sffamily\footnotesize, text=arrowcol] at (0, -1.5) {parte decimale};
+
+
+
+% --- FRECCIA CONVERSIONE ---
+\draw[->, line width=2.5pt, color=arrowcol, shorten >=4pt, shorten <=4pt]
+    (2.8, 0) -- node[above, font=\sffamily\small\bfseries, text=arrowcol, yshift=2pt] {(int)}
+    (5.5, 0);
+
+% Label troncamento
+\node[font=\sffamily\footnotesize\itshape, text=intcol!80, align=center] at (4.15, -0.55) {troncamento};
+
+% --- INT BOX (destra) ---
+\node[
+    draw=intcol, line width=1.6pt, rounded corners=8pt,
+    fill=bgint,
+    minimum width=4.2cm, minimum height=5.8cm,
+    label={[font=\sffamily\large\bfseries, text=intcol]above:{\texttt{int}}}
+] (intbox) at (8.3, 0) {};
+
+% Contenuto int: solo parte intera
+\node[
+    draw=intcol!70, line width=1pt, rounded corners=4pt,
+    fill=white,
+    minimum width=3.4cm, minimum height=1.6cm,
+] (intval) at (8.3, 1.1) {};
+\node[font=\sffamily\bfseries\large, text=intcol!80] at (8.3, 1.45) {3};
+\node[font=\sffamily\footnotesize, text=arrowcol] at (8.3, 0.7) {parte intera};
+
+% Zona vuota / persa
+\node[
+    draw=gray!40, line width=1pt, rounded corners=4pt,
+    fill=gray!5, dashed,
+    minimum width=3.4cm, minimum height=1.6cm,
+] (lostval) at (8.3, -1.1) {};
+\node[font=\sffamily\footnotesize\itshape, text=gray!60, align=center] at (8.3, -1.1) {non rappresentabile};
+
+% Valore sotto il box int
+
+
+% --- INDICATORE PERDITA ---
+\draw[->, line width=1.4pt, color=lostcol, dashed, bend left=30, shorten >=6pt, shorten <=6pt]
+    (decpart.east) to
+    node[below, font=\sffamily\small\bfseries, text=lostcol, yshift=-10pt, xshift=5pt] {PERSO!}
+    (lostval.west);
+
+% --- BARRA INFERIORE: riepilogo ---
+\node[
+    draw=arrowcol!30, line width=0.8pt, rounded corners=6pt,
+    fill=arrowcol!5,
+    minimum height=1.1cm,
+    text width=11.5cm,
+    align=center,
+    font=\sffamily\small
+] at (4.15, -4.8) {
+    \textbf{Narrowing conversion:} \texttt{float} (32 bit, con decimali)
+    $\longrightarrow$ \texttt{int} (32 bit, solo interi)
+    $\Rightarrow$ la parte frazionaria viene \textbf{troncata}
+};
+
+\end{tikzpicture}
+\end{center}
+
+Nello standard di C++ 11 è stata introdotta l'inizializzazione  con \inlinecode{\{\}}, che impedisce la narrowing conversion generando un errore in fase di compilazione. 
+\begin{codeexample}[Utilizzo dell'inizializzazione che impedisce il narrowing]
+\begin{codebox}
+
+\begin{lstlisting}
+double x = 3.7;
+int a = x;  // narrowing implicito: concesso
+int b{x};   // narrowing vietato: errore di compilazione 
+\end{lstlisting}
+\end{codebox}
+
+\end{codeexample}
+\begin{itemize}
+    \item La riga con \inlinecode{=} permette la conversione da double a int.
+    \item La riga con \inlinecode{\{\}}, secondo lo standard C++ 11, deve rifiutare il narrowing; quindi, il compilatore restituisce un errore.
+\end{itemize}
+
+\subsection{Left value Right value}
+\defnlist{Left value e Right value}{
+    \item \textbf{Left value:} è un espressione che identifica una locazione di memoria persistente, cioè un oggetto che ha un indirizzo a cui si può accedere anche dopo la valutazione dell'espressione. Il nome \virgolette{left value} deriva dal fatto che storicamente  è ciò che può stare  a sinistra di un operatore di assegnamento. 
+    \item \textbf{Right value:} è un'espressione temporanea senza un indirizzo persistente, che può stare solo a destra.
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\vspace{2.5cm}
+
+\begin{center}
+
+\begin{minipage}{15.5cm}
+\begin{lstlisting}[style=stile_disegno,language = C++, escapechar = !,
+    basicstyle = \ttfamily\bfseries\large, linewidth = .705\linewidth]
+int x = 10;!\tikz[remember picture] \node[] (line1end){};!
+int y;!\tikz[remember picture] \node[] (line2end){};!
+y = 1 + x;!\tikz[remember picture] \node[] (line3end){};!
+\end{lstlisting}
+\end{minipage}
+
+\end{center}
+\begin{tikzpicture}[remember picture, overlay,
+    every edge/.append style = {->, thick, >=stealth,
+                                DimGray, dashed, line width = 1pt},
+    every node/.append style = {align = center, minimum height = 10pt,
+                                font = \bfseries\small},
+    text width = 3.2cm]
+
+  % ===== LINEA 1: int x = 10; =====
+  % Nodo per "x" (lvalue) – approssimato sopra la riga 1
+  \node[fill = blue!15, rounded corners = 3pt, text width = 2.6cm,
+        above left = 1.5cm and 1.0cm of line1end]
+        (L1) {lvalue\\[-2pt]{\scriptsize\normalfont locazione di \texttt{x}}};
+
+  % Nodo per "10" (rvalue)
+  \node[fill = orange!20, rounded corners = 3pt, text width = 2.6cm,
+        right = 1.8cm of L1]
+        (R1) {rvalue\\[-2pt]{\scriptsize\normalfont letterale \texttt{10}}};
+
+  % Frecce
+  \draw (L1.south) edge ([xshift=-2.2cm, yshift=0.25cm]line1end.west);
+  \draw (R1.south) edge ([xshift=-0.2cm, yshift=0.25cm]line1end.west);
+
+  % ===== LINEA 2: int y; =====
+
+  % ===== LINEA 3: y = 1 + x; =====
+  \node[fill = blue!15, rounded corners = 3pt, text width = 2.6cm,
+        below left = 1.4cm and 1.0cm of line3end]
+        (L3) {lvalue\\[-2pt]{\scriptsize\normalfont \texttt{y} riceve il risultato}};
+
+  \node[fill = orange!20, rounded corners = 3pt, text width = 3.0cm,
+        right = 0.3cm of L3]
+        (R3a) {rvalue\\[-2pt]{\scriptsize\normalfont espressione \texttt{1\,+\,x} (= 11)}};
+
+  \node[fill = Goldenrod!25, rounded corners = 3pt, text width = 3.4cm,
+        right = 0.8cm of R3a]
+        (R3b) {\texttt{x} \`e un lvalue\\usato come rvalue\\[-2pt]{\scriptsize\normalfont si legge il valore di \texttt{x}}};
+
+  \draw (L3.north) edge ([xshift=-2.8cm, yshift=-0.25cm]line3end.west);
+  \draw (R3a.north) edge ([xshift=-1.5cm, yshift=-0.25cm]line3end.west);
+  \draw (R3b.north) edge ([xshift=-0.2cm, yshift=-0.25cm]line3end.east);
+
+\end{tikzpicture}
+
+\vspace{2.5cm}
+
+
+
+
+
+\section{Passaggio dei parametri}
+
+Prima di addentrarci su come funzionano i passaggi per parametro in C++, andiamo a definire le \textbf{reference}. 
+
+
+\defn{Reference}{
+In C++ una reference è un alias per una variabile, ossia un nome alternativo che fa da riferimento all'area di memoria occupato dalla variabile originale. Una volta inizializzata, una reference non può essere riassegnata per riferirsi ad un altro oggetto.
+}
+
+\begin{center}
+\begin{tikzpicture}[
+    cell/.style = {draw, minimum width = 2.5cm, minimum height = 1cm, 
+                   font = \ttfamily\bfseries\large, fill = blue!10},
+    lbl/.style = {font = \bfseries\ttfamily\large},
+    arrow/.style = {->, thick, >=stealth, DimGray, line width = 1pt},
+  ]
+
+  % === Cella di memoria ===
+  \node[cell] (mem) at (0, 0) {42};
+  \node[above = 0.1cm of mem, font=\footnotesize\ttfamily\color{Gray}] 
+    {0x7ffc2a04};
+
+  % === Etichette variabili ===
+  \node[lbl] (x) at (-3.5, 0.6) {x};
+  \node[lbl, color=DarkRed] (ref) at (-3.5, -0.6) {ref};
+
+  % Frecce
+  \draw[arrow] (x.east) -- (mem.west |- x);
+  \draw[arrow, DarkRed] (ref.east) -- (mem.west |- ref);
+
+  % Annotazione a destra
+  \draw[decorate, decoration={brace, amplitude=6pt, mirror}, thick]
+    ([xshift=0.3cm]mem.north east) -- ([xshift=0.3cm]mem.south east)
+    node[midway, right = 10pt, font=\small, align=left] 
+    {stessa area\\di memoria};
+
+  % Tipo sotto le etichette
+  \node[below = 0.05cm of x, font=\footnotesize\color{Gray}] {\texttt{int}};
+  \node[below = 0.05cm of ref, font=\footnotesize\color{DarkRed!70}] {\texttt{int\&}};
+
+\end{tikzpicture}
+\end{center}
+
+
+
+In C++ il passagio dei parametri può essere fatto per valore  e per riferimento.
+
+\begin{codeexample}[Swap passagio per valore]
+Nel passaggio per valore , alla funzione viene passata una \textbf{copia} del valore
+dell'argomento effettivo. Le modifiche ai parametri formali all'interno della funzione non
+influenzano le variabili originali nel chiamante.
+
+\begin{codebox}
+\begin{lstlisting}[language=C++]
+void swap(int a, int b){
+    int c = a;
+    a = b;
+    b= c;
+    // Qui a e b sono effettivamente scambiati,
+    // ma sono solo copie locali!
+}
+
+int main() {
+    int x = 5;
+    int y = 3;
+
+    swap(x, y); // Passiamo i valori 5 e 3
+
+    cout << x << " " << y;
+    return 0;
+}
+\end{lstlisting}
+\end{codebox}
+
+L'output del programma sarà \texttt{5 3}: \texttt{x} e \texttt{y} non vengono scambiati
+perché \texttt{a} e \texttt{b} sono solo copie locali che vengono distrutte alla fine
+della funzione.
+\end{codeexample}
+
+
+
+
+\begin{codeexample}[Passaggio per copia di una \texttt{struct}]
+Consideriamo una struttura \texttt{st} definita come segue:
+
+\begin{codebox}
+\begin{lstlisting}[language=C++]
+struct st {
+    int    a;
+    int*   b;
+    double c;
+};
+\end{lstlisting}
+\end{codebox}
+
+Quando si passa una \texttt{struct} per valore, il parametro formale \texttt{par}
+riceve una \textbf{copia bit per bit} di tutti i campi del parametro effettivo.
+Quanti byte vengono copiati dipende dalla composizione della struttura e viene
+calcolato \textbf{staticamente} dal compilatore tramite \texttt{sizeof()}.
+
+Nel caso di \textbf{allocazione statica} del campo \texttt{b} (ad esempio
+\texttt{int b[20]}), \texttt{sizeof(st)} vale \texttt{21 int + 1 double} e
+l'intera sequenza di byte viene copiata. In questo scenario non ci sono problemi:
+la copia è completa e autonoma.
+
+Il discorso cambia con l'\textbf{allocazione dinamica}. Se \texttt{b} è un
+puntatore a un array allocato con \texttt{malloc}, \texttt{sizeof(st)} vale
+\texttt{int + puntatore + double}: viene copiato solo il \emph{valore} del
+puntatore, non l'array a cui esso punta. Si creano così due \textbf{puntatori
+confluenti}: \texttt{x.b} e \texttt{par.b} puntano alla stessa area di memoria,
+il che genera un \textbf{problema di ownership}: chi è responsabile di liberare
+quella memoria? Una chiamata a \texttt{free(par.b)} all'interno di \texttt{foo}
+lascerebbe \texttt{x.b} come puntatore \emph{dangling}.
+
+\begin{codebox}
+\begin{lstlisting}[language=C++]
+struct st {
+    int    a;
+    int*   b;
+    double c;
+};
+
+void foo(st par) {
+    par.a    = 12;
+    par.b[0] = 33;   // modifica l'array originale! (puntatori confluenti)
+    par.c    = 3.14;
+}
+
+int main() {
+    st x;
+    x.b = (int*) malloc(sizeof(int) * 20);
+    foo(x);
+    cout << x.a;     // stampa 0: x.a non e' stato modificato
+    return 0;
+}
+\end{lstlisting}
+\end{codebox}
+
+Si distinguono quindi due tipi di copia:
+\begin{itemize}
+    \item \textbf{Shallow copy} (copia superficiale): viene copiato solo il
+          \emph{valore} del puntatore; i due puntatori condividono la stessa
+          area di memoria.
+    \item \textbf{Deep copy} (copia profonda): viene copiato anche il
+          \emph{contenuto} dell'area puntata; le due strutture sono completamente
+          indipendenti.
+\end{itemize}
+\end{codeexample}
+
+
+
+\begin{codeexample}[\texttt{malloc} vs \texttt{new}]
+In C++ esistono due modi per allocare memoria dinamicamente: la funzione
+\texttt{malloc} (ereditata dal C) e l'operatore \texttt{new} (introdotto dal C++).
+La differenza fondamentale è che \texttt{malloc} è una \textbf{funzione di libreria},
+mentre \texttt{new} è un \textbf{operatore del linguaggio}.
+
+Questa distinzione ha una conseguenza pratica importante: essendo \texttt{new} un
+operatore, è \textbf{tipato}. \texttt{malloc} restituisce un \texttt{void*}, cioè un
+puntatore generico che va esplicitamente castato al tipo desiderato; \texttt{new}
+invece restituisce direttamente un puntatore al tipo specificato (ad esempio
+\texttt{int*}), senza bisogno di cast.
+
+\begin{codebox}
+\begin{lstlisting}[language=C++]
+// malloc: restituisce void*, richiede cast esplicito
+int* p1 = (int*) malloc(sizeof(int) * 10);
+free(p1);
+
+// new: restituisce int*, nessun cast necessario
+int* p2 = new int[10];
+delete[] p2;
+\end{lstlisting}
+\end{codebox}
+
+Alla \texttt{new} corrisponde l'operatore \texttt{delete} (o \texttt{delete[]} per
+gli array), che libera la memoria allocata dinamicamente, analogamente a
+\texttt{free} per \texttt{malloc}.
+
+A differenza di linguaggi come Java o Python, il C++ \textbf{non ha un garbage
+collector}. In quei linguaggi, il garbage collector è un programma che si attiva in
+modo trasparente, controlla tutti gli oggetti allocati in memoria e verifica se
+esistono ancora puntatori che vi fanno riferimento: se non ne esistono, libera
+automaticamente quella memoria. In C++ la gestione della memoria è invece
+completamente a carico del programmatore: ogni area allocata con \texttt{new} deve
+essere esplicitamente liberata con \texttt{delete}, pena \textbf{memory leak}.
+\end{codeexample}
+
+\section{Uso preferenziale dei cicli }
+
+In C++(e in generale), si usano tre tipi di cilico in base a quando conosci il numero di iterazioni e quando vuoi fare il testo della condizione.  Quando si  sceglie tra \inlinecode{while}, \inlinecode{do…while},\inlinecode{for} (e range-based for), la domanda vera è sempre: che tipo di ripetizione voglio esprimere?
+
+
+\subsection{Uso preferenziale del for}
+Il costrutto \inlinecode{for} è il più adatto quando il numero di iterazioni è collegato a un contatore che parte da un valore iniziale, viene aggiornato regolarmente e rimane all'interno di un certo intervallo.
+
+La forma generale è: 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\vspace{2.3cm}
+
+\begin{center}
+
+\begin{minipage}{15.5cm}
+\begin{lstlisting}[style=stile_disegno,language = C++, escapechar = !,
+    basicstyle = \ttfamily\bfseries\large, linewidth = .705\linewidth]
+for(int i = 0; i < size ; i++)!\tikz[remember picture] \node[] (line1end){};!
+\end{lstlisting}
+\end{minipage}
+
+\end{center}
+\begin{tikzpicture}[remember picture, overlay,
+    every edge/.append style = {->, thick, >=stealth,
+                                DimGray, dashed, line width = 1pt},
+    every node/.append style = {align = center, minimum height = 10pt,
+                                font = \bfseries\small},
+    text width = 3.2cm]
+
+  % Etichetta Inizializzazione
+  \node[fill = blue!15, rounded corners = 3pt, text width = 3.2cm,
+        above left = 1.5cm and 6.5cm of line1end]
+        (INIT) {Inizializzazione\\[-2pt]{\scriptsize\normalfont \texttt{int i = 0}}};
+
+  % Etichetta Condizione
+  \node[fill = orange!20, rounded corners = 3pt, text width = 2.8cm,
+        above left = 1.5cm and 3cm of line1end]
+        (COND) {Condizione\\[-2pt]{\scriptsize\normalfont \texttt{i < size}}};
+
+  % Etichetta Incremento
+  \node[fill = green!20, rounded corners = 3pt, text width = 2.6cm,
+        above left = 1.5cm and -0.5cm of line1end]
+        (INCR) {Incremento\\[-2pt]{\scriptsize\normalfont \texttt{i++}}};
+
+  % Frecce
+  \draw (INIT.south) edge ([xshift=-7.5cm, yshift=0.25cm]line1end.west);
+  \draw (COND.south) edge ([xshift=-4.5cm, yshift=0.25cm]line1end.west);
+  \draw (INCR.south) edge ([xshift=-1cm, yshift=0.25cm]line1end.west);
+
+\end{tikzpicture}
+
+
+e ha il vantaggio di riassumere in una sola riga tutte le informazioni sul ciclo: dove parte, quando si ferma, come si aggiorna il contatore.
+
+
+
+Il range‑based for (\inlinecode{for (auto x : v)}) è un caso particolare ancora più leggibile quando vogliamo dire “per ogni elemento della collezione v”; nasconde i dettagli sugli indici e mette l'attenzione sui dati.
+
+In sintesi, se possiamo formulare il problema come “ripeti questa azione per tutti i valori di un contatore” o “per ogni elemento di una struttura”, il for (o il range‑based for) è la scelta preferenziale.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\subsection{While}
+Il \inlinecode{while} è il ciclo più generale e si usa quando la durata della ripetizione dipende da una condizione logica che non necessariamente è legata a un semplice contatore.
+
+Il ciclo \inlinecode{while}  viene utilizzato nei seguenti casi: 
+\begin{itemize}
+    \item \textbf{ Sentinel‑controlled:} Qui il ciclo continua finché il valore letto non è uguale a un valore sentinella scelto apposta (per esempio -1), che non rappresenta un dato valido ma un segnale di “fine input”. È la situazione tipica quando non sappiamo quanti valori l’utente inserirà: leggiamo e processiamo ogni valore, e ci fermiamo quando arriva il sentinel.
+    \item \textbf{Flag‑controlled:} n un ciclo flag‑controlled la condizione di continuazione dipende da una variabile booleana (il flag) che rappresenta lo stato del problema, per esempio “abbiamo già trovato quello che cercavamo?”. All’inizio il flag è impostato in modo da far entrare nel ciclo, e durante le iterazioni il programma aggiorna il flag; quando il flag assume il valore che significa “finito”, il ciclo termina. Questo schema è utile quando la fine della ripetizione dipende da un evento logico interno (trovare un elemento, soddisfare un vincolo, ecc.).
+
+    \item \textbf{EOF-controlled:}Nel caso EOF‑controlled, la condizione del \inlinecode{while} è legata alla disponibilità di nuovi dati in uno stream di input (file o tastiera). Un pattern tipico è \inlinecode{while (in >> x)} oppure \inlinecode{while (cin >> x)}, che fa proseguire il ciclo finché l’operazione di lettura ha successo. Questo è il modo preferenziale per elaborare tutti i dati di un file senza conoscere in anticipo quanti record contiene.
+\end{itemize}
+
+
+
+La forma generale è: 
+
+
+
+
+
+\vspace{2.3cm}
+\begin{center}
+\begin{minipage}{15.5cm}
+\begin{lstlisting}[style=stile_disegno, language = C++,
+    escapechar = !,
+    basicstyle = \ttfamily\bfseries\large,
+    linewidth = .705\linewidth]
+while (condizione)!\tikz[remember picture] \node[] (wline1end){};!
+        corpo;!\tikz[remember picture] \node[] (wline2end){};!
+        i++;!\tikz[remember picture] \node[] (wline3end){};!
+\end{lstlisting}
+\end{minipage}
+\end{center}
+
+\begin{tikzpicture}[remember picture, overlay,
+    every edge/.append style = {->, thick, >=stealth,
+                                DimGray, dashed, line width = 1pt},
+    every node/.append style = {align = center, minimum height = 10pt,
+                                font = \bfseries\small},
+    text width = 3.2cm]
+
+  % Etichetta Condizione
+  \node[fill = orange!20, rounded corners = 3pt, text width = 3.2cm,
+        above left = 1cm and 2.5cm of wline1end]
+        (WCOND) {Condizione\\[-2pt]{\scriptsize\normalfont testata prima di ogni iterazione}};
+
+  % Etichetta Corpo
+  \node[fill = blue!15, rounded corners = 3pt, text width = 3.0cm,
+        below left = 1.5cm and 3.5cm of wline2end]
+        (WBODY) {Corpo\\[-2pt]{\scriptsize\normalfont eseguito finché la condizione è vera}};
+
+  % Etichetta Contatore
+  \node[fill = green!20, rounded corners = 3pt, text width = 3.0cm,
+        below left = 0.8cm and -2.5cm of wline3end]
+        (WCNT) {Contatore\\[-2pt]{\scriptsize\normalfont aggiorna la variabile di controllo}};
+
+  % Frecce
+  \draw (WCOND.south) edge ([xshift=-3.0cm, yshift=0.25cm]wline1end.west);
+  \draw (WBODY.north) edge ([xshift=-2.0cm, yshift=-0.25cm]wline2end.west);
+  \draw (WCNT.north) edge ([xshift=-1cm, yshift=-0.25cm]wline3end.west);
+
+\end{tikzpicture}
+
+\vspace{2.5cm}
+
+In generale il \inlinecode{while} è la scelta migliore quando vogliamo esprimere un processo che continua \virgolette{finché una certa situazione rimane vera}, dove la situazone può dipendere da input, stato interno o dalla fine dei dati. 
+
+
+
+
+
+
+\section{Do while }
+Il \inlinecode{do...while} si distingue perché la condizione viene controllata alla dine dell'iterazione, quindi il corpo del ciclo viene eseguito almeno una volta in ogni caso. 
+È particolarmente adatto quando la logica naturale è “esegui questo blocco, poi decidi se ripeterlo”: è il caso tipico dei menu interattivi, dove bisogna mostrare le opzioni almeno una volta prima di chiedere se l'utente vuole continuare.
+
+La forma generale del ciclo \texttt{do...while} è:
+
+\vspace{2.3cm}
+\begin{center}
+\begin{minipage}{15.5cm}
+\begin{lstlisting}[style=stile_disegno, language = C++,
+    escapechar = !,
+    basicstyle = \ttfamily\bfseries\large,
+    linewidth = .705\linewidth]
+do {!\tikz[remember picture] \node[] (dwline1end){};!
+    corpo;!\tikz[remember picture] \node[] (dwline2end){};!
+    i++;!\tikz[remember picture] \node[] (dwline3end){};!
+} while (condizione);!\tikz[remember picture] \node[] (dwline4end){};!
+\end{lstlisting}
+\end{minipage}
+\end{center}
+
+\begin{tikzpicture}[remember picture, overlay,
+    every edge/.append style = {->, thick, >=stealth,
+                                DimGray, dashed, line width = 1pt},
+    every node/.append style = {align = center, minimum height = 10pt,
+                                font = \bfseries\small},
+    text width = 3.2cm]
+
+  % Etichetta Corpo
+  \node[fill = blue!15, rounded corners = 3pt, text width = 3.0cm,
+        above left = 0.8cm and 2.5cm of dwline2end]
+        (DWBODY) {Corpo\\[-2pt]{\scriptsize\normalfont eseguito almeno una volta}};
+
+  % Etichetta Contatore
+  \node[fill = green!20, rounded corners = 3pt, text width = 3.0cm,
+        below left = 0.8cm and 2.5cm of dwline3end]
+        (DWCNT) {Contatore\\[-2pt]{\scriptsize\normalfont aggiorna la variabile di controllo}};
+
+  % Etichetta Condizione
+  \node[fill = orange!20, rounded corners = 3pt, text width = 3.2cm,
+        below left = 0.8cm and 2.5cm of dwline4end]
+        (DWCOND) {Condizione\\[-2pt]{\scriptsize\normalfont testata alla fine di ogni iterazione}};
+
+  % Frecce
+  \draw (DWBODY.south) edge ([xshift=-2.5cm, yshift=0.25cm]dwline2end.west);
+  \draw (DWCNT.north) edge ([xshift=-2.5cm, yshift=-0.25cm]dwline3end.west);
+  \draw (DWCOND.north) edge ([xshift=-3.5cm, yshift=-0.25cm]dwline4end.west);
+
+\end{tikzpicture}
+
+\vspace{2.5cm}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{table}[H]
+\centering
+\begin{tabular}{lll}
+\toprule
+Situazione                 & Ciclo   & Motivo                          \\
+\midrule
+Iterazioni da 1 a N        & \inlinecode{for}     & Contatore naturale              \\
+Input finché sentinel      & \inlinecode{while}   & Valore sentinella per terminare \\
+Menu ripetuto all'utente   & \inlinecode{do...while} & Corpo eseguito almeno una volta \\
+Scansione array con indice & \inlinecode{for}     & Indice da 0 a size-1           \\
+Condizione logica complessa& \inlinecode{while}   & Test separato dal setup         \\
+\bottomrule
+\end{tabular}
+
+\medskip
+\raggedright
+\textit{Un valore sentinella (sentinel) è un valore speciale non valido come dato normale, usato solo per indicare la fine dell'input o del ciclo.}
+\end{table}
+
+
+
+
+
+\section{Programmazione strutturata}
+In questo corso e in \virgolette{generale} è preferibile utilizzare il paradigma della \textbf{programmazione strutturata}, questo paradigma impone di scrivere i programmi usando re costrutti di controllo, senza ricorrere a salti incondizionati come \inlinecode{goto, break,continue}.
+
+
+ I tre costrutti fondamentali:
+ \begin{itemize}
+     \item \textbf{Sequenza:} Le istruzioni vengono eseguite una dopo l'altra, nell'ordine in cui appaiono nel codice, Non c'è salto, non c'è scelta: si esegue A, poi B, poi C.
+     \item \textbf{Selezione:} In base a una condizione booleana si sceglie quale ramo eseguire. In C++ sono l' \inlinecode{if}, \inlinecode{if\ldots else} e lo \inlinecode{switch}. Solo uno dei rami viene eseguito, poi il controllo riprende dopo la struttura. 
+     \item \textbf{Ripetizione:} Un blocco di istruzioni viene eseguito ripetutamente finchè una condizione è vera. In C++ sono il \inlinecode{while}, il \inlinecode{do\ldots  while} e il \inlinecode{for}.
+     
+ \end{itemize}
+\thm{ Böhm–Jacopini (1966)}{
+Ogni algoritmo calcolabile può essere espresso usando soltanto i tre costrutti di sequenza, selezione e iterazione, senza mai ricorrere a salti incondizionati.
+}
+
+
+

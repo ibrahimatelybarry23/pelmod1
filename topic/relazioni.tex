@@ -1,0 +1,1798 @@
+
+\intro{
+
+In questo capitolo introdurremo i concetti fondamentali relativi alle \textbf{relazioni tra insiemi}.
+Analizzeremo cosa si intende per relazione, come essa può essere rappresentata e quali proprietà può possedere (riflessività, simmetria, antisimmetria, transitività).
+Vedremo inoltre come classificare le relazioni, distinguendo in particolare le \textbf{relazioni di equivalenza} e le \textbf{relazioni d’ordine}, e come queste possano essere rappresentate graficamente o mediante matrici.
+Infine, presenteremo alcuni esempi e proprietà fondamentali che consentono di comprendere il ruolo delle relazioni nella struttura logica e matematica degli insiemi.
+}
+\section{Introduzione alle relazioni}
+
+\defn{Relazioni}{
+ In matematica, una relazione è un legame che associa elementi di un insieme o più tra loro. Formalmente, si esprime tra coppie o ennuple di elementi che soddisfano una certa proprietà.
+
+}
+
+\begin{esempio}
+    Siano $A$ e $B$ due insiemi, consideriamo le seguenti relazioni espresse in termini di coppie $(x,y)$ con $x\in A$ e $y\in B$ 
+\begin{enumerate}
+    \item Sia $A=B=$  insieme di persone 
+   
+    \begin{itemize}
+        \item  \( \{ (x, y) \mid x \text{ è padre di } y \} \)
+        \item   \( \{ (x, y) \mid x \text{ è amico di } y \} \)
+        \item   \( \{ (x, y) \mid x \text{ e } y  \text{ abitano nella stessa città} \}  \)
+    \end{itemize}
+    \item Sia $A=B=\mathbb{Z}$ 
+    \begin{itemize}
+        \item \(\bigl\{(x, y) \mid x < y \bigr\} \)
+        \item\( \bigl\{(x, y) \mid x \text{ è un divisore di } y \bigr\} \)
+        \item   \( \{ (x, y) \mid x \text{ e } y  \text{ hanno un divisore comune} \}\)
+    \end{itemize}
+    \item Sia\(A=B=\mathcal{P}(S)\) dove \(S\) è un insieme 
+    \begin{itemize}
+        \item \(\{ \left(X,Y\right) \mid X \text{ è un sottoinsieme di } Y\}\)
+        \item \( \{ \left(X,Y\right) \mid X \cap Y = \emptyset\}\)
+        \item \(\{\left(X,Y\right)\mid |X \cup Y|>10 \}\)
+    \end{itemize}
+    \item Sia $A=\text{insieme di persone}$ e $B= \NN$
+    \begin{itemize}
+        \item \(\{(x,y)\mid x \text{ ha età} y\}\)
+         \item \(\{(x,y)\mid x \text{ ha } y \text{ followers su Instagram }\}\)
+    \end{itemize}
+\end{enumerate}
+\end{esempio}
+
+ Questi esempi mostrano come le relazioni possano descrivere legami familiari, proprietà numeriche. operazioni insiemistiche o  associazioni tra oggetti di natura diversa.
+
+\subsection{Relazione Binaria}
+\defn{Relazione Binaria}{Siano \(A\) e \(B\) due insiemi. Una \textbf{relazione binaria} \(\R\) tra \(A\) e \(B\) è definita come un sottoinsieme del prodotto cartesiano $A \times B$, cioè \(\R \subseteq A \times B\). L'insieme \(A\) viene chiamato \textbf{dominio della relazione} mentre l'insieme \(B\) è detto \textbf{codominio della relazione}. Se \(a \in A\) e \(b \in B\),scriveremo \(a\R b\) oppure \((a,b) \in \R\), per indicare che \(a\) e \(b\) sono in relazione rispetto a \(\R\).
+
+}
+Una relazione binaria assegna a certe coppie \( (a.b)\) del prodotto cartesiano \(A \times B\) la proprietà di essere \virgolette{in relazione}: \((a,b)\) appartiene a \( \R\) quando \(a\) e \(B\) sono legati dalla proprietà definita dalla relazione.
+
+  \subsection{Relazione n-aria}
+  \defn{Relazione n-aria}{
+Siano $A_1,\ldots, A_n$ $n$ insiemi.
+\begin{itemize}
+         \item Una \textbf{relazione n-aria} $\R$ tra $A_1,\ldots  A_n$ è un sottoinsieme del prodotto cartesiano 
+         $$A_1 \times A_2 \times \mathbf{\cdots} \times A_n,$$
+         cioè \(\R \subseteq A_1 \times \ldots \times A_n\)
+         
+     \end{itemize}
+      Sia ora  \(A\) un insieme:
+        \begin{itemize}
+            \item  Una \textbf{relazione n-aria} \(\R \text{ su } A\) è un sottoinsieme di \(A^n\),  cioè \(\mathbf{\mathcal{R} \subseteq \underbrace{A \times A \times \ldots \times A}_{n \ \text{ volte}}}\)
+        \end{itemize}
+  }
+
+  Una relazione n-aria seleziona alcune ennuple dal prodotto cartesiano: ogni tupla ammessa dalla relazione rappresenta \(n\) elementi che soddisfano una certa proprietà comune.
+
+
+
+
+
+
+
+       
+\subsection{Proprietà delle relazioni}
+
+
+\subsection{Proprietà delle relazioni}
+
+\defn{Proprietà riflessiva e irriflessiva}{
+Sia $A$ un insieme e \(\mathcal{R} \subseteq A \times A = A^2\). Diciamo che una relazione è:
+\begin{itemize}
+    \item \textbf{Riflessiva} se $x\,\mathcal{R}\,x$ per ogni $x \in A$, cioè
+    \[
+        (x,x) \in \mathcal{R} \quad \text{per ogni } x \in A.
+    \]
+    Esempi:
+    \begin{itemize}
+        \item “essere alto come”
+        \item “abitare nella stessa città”
+        \item “essere divisibile per” (ogni numero divide se stesso)
+    \end{itemize}
+\end{itemize}
+
+\begin{itemize}
+    \item \textbf{Irriflessiva} se $\neg(x \,\mathcal{R}\, x)$ per ogni $x \in A$, cioè
+    \[
+        (x,x) \notin \mathcal{R} \quad \text{per ogni } x \in A.
+    \]
+    Esempi:
+    \begin{itemize}
+        \item “essere più vecchio di”
+        \item “abitare nella casa di fronte a”
+        \item “essere strettamente minore di” ($<$)
+    \end{itemize}
+\end{itemize}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\defn{Proprietà simmetrica e antisimmetrica}{
+Sia $\mathcal{R} \subseteq A \times A$.
+
+\begin{itemize}
+    \item \textbf{Simmetrica} se da \(x \,\mathcal{R}\, y\) segue \(y \,\mathcal{R}\, x\) per ogni \(x,y \in A\), cioè
+    \[
+        \text{se } (x,y) \in \mathcal{R} \text{ allora } (y,x) \in \mathcal{R} \quad \text{per ogni } x,y \in A.
+    \]
+    Esempi:
+    \begin{itemize}
+        \item “essere fratello di”
+        \item “avere lo stesso prodotto 100”, cioè “$xy=100$”
+    \end{itemize}
+\end{itemize}
+ 
+\begin{itemize}
+    \item \textbf{Antisimmetrica} se, per ogni $x,y \in A$,
+    \[
+        \text{se } (x,y) \in \mathcal{R} \text{ e } (y,x) \in \mathcal{R} \text{ allora } x=y.
+    \]
+    Esempi:
+    \begin{enumerate}[label = \alph*)]
+        \item “essere sottoinsieme di” ($\subseteq$)
+        \item “$x \leq y$” (su $\mathbb{R}$ o $\mathbb{Z}$)
+        \item “essere divisore di” (su $\mathbb{N}$)
+    \end{enumerate}
+\end{itemize}
+
+\textbf{Osservazione:} antisimmetrica non significa “mai simmetrica”: una relazione può essere sia simmetrica che antisimmetrica (ad esempio l’uguaglianza).
+}
+
+
+\defn{Proprietà transitiva}{
+Sia $\mathcal{R} \subseteq A \times A$.
+\begin{itemize}
+    \item \textbf{Transitiva} se, ogni volta che $x$ è in relazione con $y$ e $y$ è in relazione con $z$, allora $x$ è in relazione con $z$, cioè:
+    \[
+        \text{se } (x,y) \in \mathcal{R} \text{ e } (y,z) \in \mathcal{R} \text{ allora } (x,z) \in \mathcal{R} \quad \text{per ogni } x,y,z \in A.
+    \]
+    Esempi:
+    \begin{enumerate}[label =\alph*)]
+        \item “avere lo stesso nome proprio”
+        \item “$x > y$”
+        \item “$x \ge y$”
+        \item “essere divisibile per” (se $x$ divide $y$ e $y$ divide $z$, allora $x$ divide $z$)
+    \end{enumerate}
+\end{itemize}
+}
+
+
+
+
+
+\section{Relazione d'ordine}
+
+
+\defn{Relazione d'ordine parziale}{
+
+
+
+
+Sia \(A\) un insieme. Una relazione binaria \(\mathcal{R}\) su \(A\) (\(\mathcal{R} \subseteq A \times A\)) è detta una \textbf{relazione d'ordine parziale} (o \textbf{ordinamento parziale}) se soddisfa le seguenti proprietà:
+
+\begin{itemize}
+    \item \textbf{Riflessiva}:
+    \[
+    \forall x \in A,\quad x \mathcal{R} x.
+    \]
+
+    \item \textbf{Antisimmetrica}:
+    \[
+    \forall x,y \in A,\quad (x \mathcal{R} y \land y \mathcal{R} x) \implies x = y.
+    \]
+
+    \item \textbf{Transitiva}:
+    \[
+    \forall x,y,z \in A,\quad (x \mathcal{R} y \land y \mathcal{R} z) \implies x \mathcal{R} z.
+    \]
+\end{itemize}
+
+In un ordine parziale possono esistere elementi \(x,y \in A\), con \(x \neq y\), tali che né \(x,y \in A\): in questo caso si dice che \(x\) e \(y\) non sono confrontabili.
+}
+
+\defn{Relazione d'ordine totale}
+{Una relazione binaria $\R$ su $A$ \(\left(\R \subseteq A \times A\right)\) è una \textbf{relazione d'ordine totale} (o \textbf{ordinamento totale}) se è un ordinamento parziale ed è verificata la seguente ulteriore proprietà di confrontabilità:
+\[
+    \forall x,y \left(x  \R y  \text{ oppure } y  \R x\right)
+\]
+}
+
+Un ordine totale è un ordine parziale in cui ogni coppia di elementi può essere confrontata: per qualunque $x$ e \(y\) in \(A\), uno dei due viene \virgolette{prima} dell'altro secondo la relazione
+
+
+% ---- Definizione intuitiva di confrontabilità---
+
+\medskip 
+
+\noindent Dopo aver dato le definizioni di ordine parziale e ordine totale, introduciamo il concetto di confrontabilità:
+\noindent \rmkb{
+Due elementi sono \textbf{confrontabili} (rispetto a una certa relazione d'ordine) quando ha senso dire chi dei due è \virgolette{prima} o \virgolette{più piccolo} dell'altro secondo quell'ordine. 
+
+
+\begin{itemize}
+    \item Con $\leq$ su $\mathbb{Z}$, qualunque coppia di numeri interi è confrontabile: tra due interi, uno è $\leq$ dell'altro.
+    \item Con $\subseteq$ su $\mathcal{P}(A)$, insiemi come $\{a\}$ e $\{b\}$ non sono confrontabili: nessuno dei due è contenuto nell'altro.
+\end{itemize}
+
+}
+
+
+
+
+
+
+
+
+
+\begin{esempio}
+La relazione $\subseteq$ è un ordine parziale sull'insieme dei sottoinsiemi di \(A\).
+
+\[
+A = \{a, b, c\}, \qquad \mathcal{P}(A) = \bigl\{ \emptyset, \{a\}, \{b\}, \{c\}, \{a, b\}, \{a, c\}, \{b, c\}, \{a, b, c\} \bigr\}.
+\]
+\begin{strategiabox}
+    Vogliamo mostrare che $\subseteq$ è un ordine parziale su $\mathcal{P}(A)$, cioè che soddisfa:
+\begin{itemize}
+    \item proprietà \textbf{riflessiva},
+    \item proprietà \textbf{antisimmetrica},
+    \item proprietà \textbf{transitiva}.
+\end{itemize}
+\end{strategiabox}
+
+
+\medskip
+\textbf{Proprietà riflessiva}
+
+\[
+X \subseteq X \quad \text{per ogni } X \in \mathcal{P}(A).
+\]
+
+Per definizione di sottoinsieme:
+\begin{itemize}
+    \item $X \subseteq Y$ significa: \(\forall x (x \in X \Rightarrow x \in Y)\).
+    \item Se prendiamo $Y = X$, otteniamo \(\forall x (x \in X \Rightarrow x \in X)\), che è sempre vera.
+\end{itemize}
+Quindi la proprietà riflessiva è verificata.
+
+\medskip
+\textbf{Proprietà antisimmetrica}
+
+La proprietà antisimmetrica richiede che, se \(X \subseteq Y\) e \(Y \subseteq X\), allora \(X = Y\).
+
+\begin{itemize}
+    \item Dire che \(X \subseteq Y\) e \(Y \subseteq X\) significa che ogni elemento di \(X\) è in \(Y\) e ogni elemento di \(Y\) è in \(X\).
+    \item Questa è esattamente la definizione di uguaglianza tra insiemi: \(X = Y\) se e solo se hanno gli stessi elementi.
+\end{itemize}
+
+Ad esempio, se prendiamo \(X = \{a\}\) e \(Y = \{a, b\}\), abbiamo \(X \subseteq Y\) ma non \(Y \subseteq X\), quindi non violiamo l’antisimmetria. L’unico caso in cui vale sia \(X \subseteq Y\) sia \(Y \subseteq X\) è quando \(X\) e \(Y\) coincidono.
+
+\medskip
+\textbf{Proprietà transitiva}
+
+Se \(X \subseteq Y\) e \(Y \subseteq Z\), allora \(X \subseteq Z\).
+
+\begin{itemize}
+    \item Da \(X \subseteq Y\) segue: \(\forall x (x \in X \Rightarrow x \in Y)\).
+    \item Da \(Y \subseteq Z\) segue: \(\forall x (x \in Y \Rightarrow x \in Z)\).
+    \item Componendo le due implicazioni otteniamo: \(\forall x (x \in X \Rightarrow x \in Z)\), cioè \(X \subseteq Z\).
+\end{itemize}
+
+\medskip
+Concludiamo che la relazione di inclusione \(\subseteq\) è un ordine parziale su \(\mathcal{P}(A)\).
+
+\end{esempio}
+
+\begin{osservazione}
+Non tutti i sottoinsiemi di \(A\) sono confrontabili rispetto a \(\subseteq\). Ad esempio:
+\[
+\{a\} \not\subseteq \{b\} \quad \text{e} \quad \{b\} \not\subseteq \{a\}.
+\]
+Per questo l’ordine è detto \emph{parziale} e non \emph{totale}.
+\end{osservazione}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{center}
+\begin{tikzpicture}[scale=2.8, >=stealth]
+
+% Nodi dell'insieme A
+\node (abc) at (0,3) {$\{a,b,c\}$};
+\node (ab) at (-2,2) {$\{a,b\}$};
+\node (ac) at (0,2) {$\{a,c\}$};
+\node (bc) at (2,2) {$\{b,c\}$};
+
+\node (a) at (-2,1) {$\{a\}$};
+\node (b) at (0,1) {$\{b\}$};
+\node (c) at (2,1) {$\{c\}$};
+
+\node (emptyset) at (0,0) {$\emptyset$};
+
+% Archi con simboli subseteq
+\draw[->] (emptyset) -- node[midway, left, yshift=-10] {$\subseteq$} (a);
+\draw[->] (emptyset) -- node[midway, below right] {$\subseteq$} (b);
+\draw[->] (emptyset) -- node[midway, below right] {$\subseteq$} (c);
+\draw[->] (a)-- node[pos=0.25,xshift=90pt,yshift=30pt] {$\subseteq$} (ac);
+\draw[->] (c) -- node[pos=0.25,xshift=20pt,yshift=30pt] {$\subseteq$} (ac);
+\draw[->] (b) -- node[pos=0.5, xshift=-60pt, yshift=10pt] {$\subseteq$} (ab);
+\draw[->] (a) -- node[midway, left ] {$\subseteq$} (ab);
+\draw[->] (b) -- node[pos=0.5, xshift=-40pt, yshift=10pt] {$\subseteq$} (bc);
+
+\draw[->] (c) -- node[midway, above right ] {$\subseteq$} (bc);
+\draw[->] (ab) -- node[midway, above left] {$\subseteq$} (abc);
+\draw[->] (ac) -- node[midway, above right] {$\subseteq$} (abc);
+\draw[->] (bc) -- node[midway, above right] {$\subseteq$} (abc);
+
+\end{tikzpicture}
+
+\end{center}
+\begin{osservazione}
+Il diagramma rappresenta graficamente l’ordine parziale dato da $\subseteq$ su $\mathcal{P}(A)$:
+\begin{itemize}
+    \item ogni nodo è un sottoinsieme di $A$;
+    \item esiste una freccia da $X$ a $Y$ se $X \subseteq Y$;
+    \item i nodi più in alto rappresentano sottoinsiemi “più grandi” (contengono più elementi), 
+          quelli più in basso sottoinsiemi “più piccoli”.
+\end{itemize}
+Questo tipo di rappresentazione è un modo visuale per capire la struttura dell’ordine e le relazioni di inclusione tra i sottoinsiemi.
+\end{osservazione}
+
+
+
+
+% \exm{ La relazione $\leq$ su $\mathbb{Z}$ è una relazione d'ordine totale?}
+% {
+% \begin{itemize}
+%     \item \textbf{La proprietà riflessiva è soddisfatta?}
+% \[
+%  7 \leq 7
+% \]
+% La proprietà è riflessiva $\forall x\in A$
+
+% \item \textbf{La proprietà antisimmetrica è soddisfatta?}
+% \[
+%  7 \leq 15 \ \text{ma} \ 15 \not\leq7
+% \]
+% La proprietà è antisimmetrica $\forall x,y\in A$
+% \medskip
+
+% \item \textbf{La proprietà transitiva è soddisfatta?}
+% \[
+%  7 \leq 15 \ \land \ 15 \leq 20 \implies 7 \leq 20
+% \]
+% La proprietà è transitiva $\forall x,y\in A$
+
+% \end{itemize}
+
+% }
+
+
+\begin{esempio}
+La relazione $\leq$ su $\mathbb{Z}$ è una relazione d'ordine totale?
+\medskip
+
+\noindent Consideriamo la relazione \(\leq\) definita sull’insieme dei numeri interi \(\mathbb{Z}\).  
+Vogliamo verificare se è una relazione d'ordine  (riflessiva, antisimmetrica, transitiva) e se è anche \emph{totale}.
+
+\strategia{
+Per mostrare che \(\leq\) è un ordine (e in più totale) su \(\mathbb{Z}\) verifichiamo che valgano:
+\begin{itemize}
+    \item proprietà \textbf{riflessiva},
+    \item proprietà \textbf{antisimmetrica},
+    \item proprietà \textbf{transitiva}.
+    \item confrontabilità di ogni coppia di interi (ordine totale).
+\end{itemize}
+}
+
+\medskip
+\textbf{Proprietà riflessiva}
+Per ogni \(x \in \mathbb{Z}\) vale:
+    \[
+        x \leq x.
+    \]
+    Ad esempio: \(7 \leq 7\).  
+    Questo è vero per definizione di \(\leq\), quindi la proprietà riflessiva è soddisfatta.
+\medskip
+
+    
+\textbf{Proprietà antisimmetrica}
+La proprietà simmetrica richiede che, per ogni \(x,y \in \ZZ\)
+\[
+    x \leq y \text{ e } y\leq x \Rightarrow x=y
+\]
+
+Non possono esistere due interi distinti \(x \neq y\) tali che entrambe le disuguaglianze siano vere.   Quindi la proprietà antisimmetrica è soddisfatta.
+\medskip
+
+\textbf{Proprietà transitiva} 
+Per ogni \(x,y,z \in \mathbb{Z}\), se
+    \[
+        x \leq y \quad \text{e} \quad y \leq z,
+    \]
+    allora
+    \[
+        x \leq z.
+    \]
+    Ad esempio, da \(7 \leq 15\) e \(15 \leq 20\) otteniamo \(7 \leq 20\).  
+    Quindi la relazione è transitiva.
+
+
+ \textbf{Ordine totale}  
+    Per ogni coppia \(x,y \in \mathbb{Z}\) vale sempre
+    \[
+        x \leq y \quad \text{o} \quad y \leq x.
+    \]
+    Cioè qualunque coppia di interi è confrontabile rispetto a \(\leq\).  
+    Questo rende l'ordine non solo parziale, ma \emph{totale}.
+
+Concludiamo che \((\mathbb{Z}, \leq)\) è un \textbf{insieme totalmente ordinato}.
+
+
+
+\end{esempio}
+
+\defn{Relazione d'ordine parziale stretta}{
+Sia $A$ un insieme: Una relazione binaria $\R$ su $A \ \left( R \subseteq A \times A\right)$ è una relazione\textbf{ d'ordine parziale stretta } se verifica le seguenti proprietà:
+\begin{itemize}
+    \item \textbf{Irriflessiva}: $\forall x \neg \left(x \R x\right)$
+    \item \textbf{Antisimmetrica}: $\forall x,y \in A,\quad (x \mathcal{R} y \land y \mathcal{R} x) \implies x = y.$
+    \item \textbf{Transitiva}: $\forall x,y,z \left( x \R y \text{ e } y \R z \implies x \R z \right)$
+\end{itemize}
+
+In pratica \(\R\) è detta:
+\begin{itemize}
+    \item \textbf{Parziale} perché possono esistere elementi $x,y \in A$ tali che non valga né $x \R  y$  né $y \R  x$ 
+    \item \textbf{Stretta} perché non ammette mai $x \R x$ e se $x \R y$, non può valere anche $y \R x$.
+\end{itemize}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\subsection{Ordini parziali e ordini parziali stretti}
+% ___ da sistemare_____
+Indichiamo in genere le \textbf{relazioni d'ordine non strette} con il simbolo \(\le\) \textbf{e gli ordini parziali stretti} con \(<\).
+Dato un ordine (parziale o totale) \((A,\le)\), si definisce l'ordine stretto associato \(<\) ponendo, per ogni \(x,y\in A\),
+
+\[
+x<y \;\iff\; x\le y \text{ e } x\ne y .
+\]
+Viceversa, data una relazione d'ordine parziale stretta \((A,<)\), si definisce l'ordine (non stretto) associato \(\le\) come la sua chiusura riflessiva:
+\[
+x\le y \;\iff\; x<y \ \text{oppure}\ x=y .
+\]
+In questo modo:
+\begin{itemize}
+    \item \(<\)  è sempre irriflessiva e transitiva (ordine stretto)
+    \item \(\le\) è riflessiva, antisimmetrica e transitiva (ordine non stretto)
+
+\end{itemize}
+
+%___________
+
+
+
+\noindent Dopo aver introdotto in modo informale il concetto di confrontabilità, 
+forniamo ora una definizione formale.
+
+\defn{Confrontabilità}{
+Sia $A$ un insieme e $\mathcal{R}$ una relazione d'ordine parziale su $A$.
+\begin{itemize}
+    \item Due elementi $x,y \in A$ si dicono \textbf{confrontabili} (rispetto a $\mathcal{R}$) se vale
+    \[
+        x\,\mathcal{R}\,y \quad \text{oppure} \quad y\,\mathcal{R}\,x.
+    \]
+     \item Due elementi $x,y \in A$ si dicono \textbf{inconfrontabili} se non vale né $x\mathcal{R}y$ né $y\mathcal{R}x$
+\end{itemize}
+
+In altre parole, due elementi sono confrontabili quando l'ordine ci permette di dire chi sta \virgolette{prima} dell'altro ( secondo $\R$); Se l'ordine non mete in relazione la coppia in nessun verso, i due elementi sono inconfrontabili.
+}
+\subsection{Catene e anticatene}
+
+\defn{Catena}{
+Un sottoinsieme $X$ di un insieme parzialmente ordinato $A$ è una \textbf{catena} se gli elementi di $X$ \textbf{sono confrontabili a due a due}.
+\medskip
+
+\noindent Intuitivamente una catena è un sottoinsieme in cui gli elementi sono \virgolette{allineati} dall'ordine: non ci sono coppie di elementi che rimangono incomparate rispetto a \(\R\).
+}
+\begin{esempio}
+     Si consideri l'insieme $\NN$ con la relazione .
+
+La sequenza:
+
+\[ 0 <1 <2 <3<4 \ldots\]
+rappresenta una catena: ogni sottoinsieme finito o infinito di $\NN$ ad esempio \(\{0,1,2,3,4\}\) è una catena, perché ogni coppia di elementi \(a,b\) vale sempre $a<b$ oppure \(b<a\).
+\end{esempio}
+
+
+
+\defn{Anticatene}{
+Un sottoinsieme $X$ di un insieme parzialmente ordinato $A$ è una \textbf{anticatena} se gli elementi di $X$ \textbf{sono inconfrontabili a due a due }
+}
+
+\begin{esempio}
+Si consideri l'insieme $X^{>3} \subseteq \NN$ dei numeri primi strettamente maggiori di $3$,
+con la relazione
+\[
+n_1 < n_2 \ \text{se e solo se}\ n_1 \text{ è un divisore di } n_2.
+\]
+Poiché un numero primo divide solo se stesso, per due primi distinti $p_1, p_2 \in X^{>3}$
+non vale mai $p_1 < p_2$ né $p_2 < p_1$. 
+
+Quindi l'insieme
+\[
+5,\ 7,\ 11,\ \ldots
+\]
+forma una anticatena: i suoi elementi sono tutti a due a due inconfrontabili rispetto a questa relazione.
+\end{esempio}
+
+
+
+
+
+\defn{Ordinamento ben fondato}{
+    Un ordinamento parziale \(\leq\) su un insieme \(A\) è detto \textbf{ben fondato} se non ammette catene discendenti infinite, ovvero non esistono catene della forma:
+\[
+a_0 > a_1 > a_2 > \cdots > a_n > \cdots
+\]
+dove tutti gli \(a_i \) appartengono ad \(A\).
+\medskip
+
+\noindent Intuitivamente, in  un ordinamento ben fondato non si può \virgolette{scendere all'infinito}: da ogni elemento, facendo passi verso il basso, prima o poi ci si deve fermare.  
+}
+
+\begin{esempio}
+     L'ordine naturale \(\leq\) su \(\mathbb{N}\), definito da
+\[
+x \leq y \ \text{se esiste } k \in \mathbb{N} \text{ tale che } y = x + k,
+\]
+è un ordinamento ben fondato.
+\medskip 
+
+\noindent Infatti abbiamo una catena crescente
+  \[
+  0 \leq 1 \leq 2 \leq \cdots
+  \]
+
+ma non può esistere una catena strettamente decrescente infinita
+\[
+ n_0 > n_1> n_2 > \ldots 
+\]
+perchè prima o poi si arriva a \(0\) e non si può più scendere.
+\end{esempio}
+
+
+\begin{esempio}
+L'ordine naturale \(\leq\) su \(\mathbb{Z}\), definito da
+\[
+x \leq y \ \text{se esiste } k \in \mathbb{N} \text{ tale che } y = x + k,
+\]
+\emph{non} è un ordinamento ben fondato.
+
+Infatti in \(\mathbb{Z}\) esiste una catena strettamente decrescente infinita:
+\[
+0 > -1 > -2 > -3 > \cdots
+\]
+Possiamo sempre continuare a “scendere” sottraendo 1, senza mai fermarci.
+Questo viola la condizione di ben fondatezza (assenza di catene discendenti infinite).
+\end{esempio}
+
+
+
+
+
+
+
+
+
+\begin{esempio}
+Si consideri l'ordine di divisibilità su $\NN$, definito da
+\[
+x \leq y \ \text{se e solo se}\ x \mid y,
+\]
+dove $x \mid y$ significa che $x$ divide $y$, cioè il resto di $y:x$ è $0$.
+In particolare:
+\begin{itemize}
+    \item $1 \mid n$ per ogni $n \in \NN$ (1 divide ogni numero);
+    \item $n \mid 0$ per ogni $n \in \NN$ (ogni numero positivo divide $0$).
+\end{itemize}
+
+Se ci restringiamo all’insieme delle potenze positive di un numero primo, otteniamo un ordinamento ben fondato.
+Ad esempio:
+\[
+1\leq 2 \leq 4 \leq 8\leq 16 \leq \ldots 
+\qquad
+1 \leq 3 \leq 9 \leq 27 \leq 81 \leq \ldots
+\]
+Ogni catena discendente di divisibilità tra potenze di un primo deve prima o poi fermarsi in $1$, 
+che è l’elemento minimo: quindi non esistono catene discendenti infinite.
+\end{esempio}
+
+
+\begin{esempio}
+Sia $A = \mathcal{P}(\{1,\ldots,n\})$ e sia $\subset$ la relazione di inclusione stretta. 
+
+\noindent La relazione $\subset$ è un ordinamento parziale stretto (non totale): infatti possono esistere
+elementi inconfrontabili, come ad esempio $\{1,2\}$ e $\{1,3\}$, per cui
+\[
+\{1,2\} \not\subset \{1,3\} \quad \text{e} \quad \{1,3\} \not\subset \{1,2\}.
+\]
+Poiché $A$ è finito, ogni catena strettamente discendente rispetto a $\subset$ deve prima o poi fermarsi.
+Quindi $\subset$ su $A$ è un ordinamento ben fondato.
+\end{esempio}
+
+\begin{esempio}
+Sia $A = \mathcal{P}(\NN)$ con la relazione $\subseteq$.
+
+\noindent $\subseteq$ su $A$ non è un ordinamento ben fondato, perché $A$ è infinito: infatti
+\[
+\NN \supset \NN\setminus\{0\} \supset \NN\setminus\{0,1\} \supset \NN\setminus\{0,1,2\} \supset \cdots
+\]
+è una catena strettamente discendente infinita.
+\end{esempio}
+
+
+
+
+
+\section{Stringhe o parole su un alfabeto A }
+\defn{Stringhe}{
+Sia $A=\{a_1, \ldots, a_n\}$ un alfabeto finito di caratteri
+\begin{itemize}
+    \item Una \textbf{stringa} (o \textbf{parola}) è una sequenza finita di caratteri di $A$, cioè è un ennupla $(a_1,\ldots ,a_n) \in A^n$
+    \item L'insieme delle stringhe di lunghezza finita su un alfabeto $A $si indica con $A^*$
+    \item Le stringhe vengono di solito indicate con le lettere greche $\alpha,\beta,\gamma, \ldots$
+    \item La stringa vuota si indica con $\varepsilon$
+    \item  La concatenazione di due stringhe $\alpha$ e $\beta$ si indica con $\alpha \beta $
+    \item Per esempio, la concatenazione di “piano” e “forte” `e la stringa “pianoforte”
+\end{itemize}
+In sintesi, un alfabeto $A$ è il \virgolette{vocabolario} di simboli, mentre $A^*$ è l'insieme di tutte le \virgolette{parole} che possiamo costruire concatenando simboli di \(A\).
+}
+
+
+
+
+
+
+
+
+
+
+\defn{L'ordine prefisso sulle stringhe}{
+Sia $A=\{a_1, \ldots, a_n\}$ un alfabeto finito di caratteri
+\begin{itemize}
+    \item L'ordine prefisso sulle stringhe si indica con $\leq_{pre}$ ed è definito come segue:
+    \item $\alpha \leq_{pre} \beta$ se esiste una stringa $\gamma$ tale che $\beta = \alpha\gamma$
+    \item $\leq_{pre}$ su $A^*$ è un ordinamento ben fondato 
+    
+
+\end{itemize} 
+
+
+\noindent In sintesi, l'ordine prefisso confronta le stringhe in base al fatto che una sia l'inizio dell'altra:
+scendendo rispetto a $\leq_{\text{pre}}$ le stringhe si accorciano, perciò non esistono catene discendenti infinite.
+
+}
+
+\begin{esempio}
+Consideriamo il seguente esempio, con l'ordine prefisso:
+\[
+\varepsilon \leq_{\text{pre}} \text{C} \leq_{\text{pre}} \text{CA} \leq_{\text{pre}} \text{CAN} \leq_{\text{pre}} \text{CANE},
+\]
+quindi, in senso strettamente decrescente,
+\[
+\text{CANE} >_{\text{pre}} \text{CAN} >_{\text{pre}} \text{CA} >_{\text{pre}} \text{C} >_{\text{pre}} \varepsilon.
+\]
+
+
+Ogni volta che \virgolette{scendiamo} togliamo almeno un carattere: una catena discendente non può essere infinita
+perché la lunghezza delle stringhe non può diventare negativa.
+
+\medskip
+\end{esempio}
+
+\defn{L'ordine lessicografico sulle stringhe}{
+Sia $A=\{a_1, \ldots, a_n\}$ un alfabeto finito di caratteri e $<$ un ordine totale stretto su $A$ tale che $a_1<a_2<\ldots< a_n$
+\begin{itemize}
+    \item L'\textbf{ordine lessicografico} $<_{lex}$ è un ordinamento totale su tutte le sequenze finite di elementi di $A$ ed è definito come segue:
+    \item Siano $a=(a_1,\ldots,a_n)$ e $b=(b_1,\ldots,b_n)$ due sequenze distinte di elementi di $A$, allora $a<_{lex} b$ se:
+    \begin{enumerate} [label= \alph*)] 
+
+        \item se $n<m$ e $a_i=b_i$ per $i=1,\ldots,n$
+        \item  oppure se esiste $k$ con $1 \leq k\leq n$ tale che che $a_i= b_i$ per $i=1,\ldots,k-1$ e $a_k<b_k$
+    \end{enumerate}
+
+\end{itemize}
+
+In sintesi, per confrontare due parole si guarda il primo simbolo che differisce; 
+se tutti coincidono, è minore la parola più corta (prefisso).
+
+}
+
+
+
+
+
+
+\begin{esempio}
+Consideriamo l'alfabeto $A=\{\text{A}<\text{B}<\cdots<\text{Z}\}$ con l'ordine usuale sulle lettere.
+\begin{enumerate}
+    \item Confrontiamo le due stringhe
+    \[
+        \alpha = (\text{C,A,N,E}), \qquad
+        \beta = (\text{C,A,N,E,S,T,R,O}).
+\]
+    I primi quattro simboli coincidono (C,A,N,E) e $\alpha$ è più corta di $\beta$:
+    quindi $\alpha$ è un prefisso proprio di $\beta$.
+    Per la condizione (b) della definizione, abbiamo
+    \[
+    (\text{C,A,N,E}) <_{\text{lex}} (\text{C,A,N,E,S,T,R,O}).
+    \]
+
+
+    \item  Confrontiamo
+    \[
+        \alpha = (\text{C,A,N,E}), \qquad
+        \gamma = (\text{C,A,V,O,L,O}).
+        \]
+    I primi due simboli coincidono (C,A), al terzo simbolo troviamo la prima differenza:
+    \[
+        \text{N} < \text{V}.
+    \]
+    Per la condizione (a), guardando il primo simbolo diverso, si ha
+\[
+(\text{C,A,N,E}) <_{\text{lex}} (\text{C,A,V,O,L,O}).
+\]
+    
+\end{enumerate}
+
+Queste regole riproducono esattamente il modo in cui le parole sono ordinate nei dizionari:
+prima si confrontano le lettere da sinistra a destra, e solo se una parola è l'inizio dell'altra
+viene prima la più corta.
+\end{esempio}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Relazione di equivalenza}
+\defn{Relazione di equivalenza}{
+    Sia \(A\) un insieme. Una relazione binaria \(\mathcal{R}\) su \(A\) (\(\mathcal{R} \subseteq A \times A\)) è detta una \textbf{relazione di equivalenza} se soddisfa le seguenti proprietà:
+
+\begin{itemize}
+    \item \textbf{Riflessiva}: Per ogni elemento \(x \in A\), \(x\) è sempre in relazione con sé stesso. Formalmente:
+    \[
+    \forall x \in A, \quad x \mathcal{R} x
+    \]
+
+    \item \textbf{Simmetrica}: Per ogni coppia di elementi \(x, y \in A\), se \(x\) è in relazione con \(y\), allora anche \(y\) è in relazione con \(x\). Formalmente:
+    \[
+    \forall x, y \in A, \; (x \mathcal{R} y \implies y \mathcal{R} x)
+    \]
+
+    \item \textbf{Transitiva}: Per ogni tre elementi \(x, y, z \in A\), se \(x\) è in relazione con \(y\) e \(y\) è in relazione con \(z\), allora \(x\) è in relazione con \(z\). Formalmente:
+    \[
+    \forall x, y, z \in A, \; (x \mathcal{R} y \land y \mathcal{R} z) \implies x \mathcal{R} z
+    \]
+\end{itemize}
+In sintesi, una relazione di equivalenza raggruppa gli elementi di \(A\) in \virgolette{classi} di elementi che si comportano allo stesso modo rispetto a \(\R\).
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{esempio}
+Sia \(A\) l'insieme degli studenti e sia \(\mathcal{R}\) la relazione definita come:
+\[
+\mathcal{R} = \{(x, y) \mid x \text{ e } y \text{ abitano nello stesso comune}\}
+\]
+
+\strategia{
+Verifichiamo che \(\R\) sia una relazione di equivalenza controllando che la relazione soddisfi le seguenti proprietà:
+\begin{itemize}
+    \item Riflessiva
+    \item Simmetrica
+    \item  Transitiva
+\end{itemize}
+}
+
+
+
+\begin{itemize}
+ \item \textbf{Riflessiva}: ogni studente \(x\) abita nello stesso comune di sé stesso, quindi
+       \((x,x)\in\mathcal{R}\) per ogni \(x\in A\).
+ \item \textbf{Simmetrica}: se \(x\) abita nello stesso comune di \(y\), allora anche \(y\) abita
+       nello stesso comune di \(x\); dunque da \((x,y)\in\mathcal{R}\) segue \((y,x)\in\mathcal{R}\).
+ \item \textbf{Transitiva}: se \(x\) abita nello stesso comune di \(y\) e \(y\) nello stesso comune
+       di \(z\), allora anche \(x\) e \(z\) abitano nello stesso comune; quindi da
+       \((x,y)\in\mathcal{R}\) e \((y,z)\in\mathcal{R}\) segue \((x,z)\in\mathcal{R}\).
+\end{itemize}
+In sintesi, la relazione \virgolette{abitare nello stesso comune} considera equivalenti tutti e soli gli studenti che condividono lo stesso comune di residenza.
+
+
+\end{esempio}
+
+
+
+
+
+Ora andremo a vedere una serie di esempi di relazioni e verificheremo,
+caso per caso, se sono relazioni di equivalenza. 
+
+\strategia{
+Per ogni relazione data:
+\begin{itemize}
+    \item verifichiamo separatamente le tre proprietà:
+          riflessiva, simmetrica, transitiva;
+    \item concludiamo se la relazione è oppure no una relazione di equivalenza.
+\end{itemize}
+}
+\begin{esempio}
+Quale di queste relazioni è una relazione di equivalenza?
+
+\begin{enumerate}
+\item Sia \(\mathcal{R}\) la relazione su \(\mathbb{N}\) definita da
+\[
+(x,y)\in\mathcal{R} \iff xy = 24.
+\]
+\begin{itemize}
+    \item \textbf{Riflessiva}: per essere riflessiva dovremmo avere \(x\mathcal{R}x\) per ogni \(x\), cioè \(x^2=24\).
+          Ma in \(\mathbb{N}\) non esiste nessun numero il cui quadrato valga 24. Quindi la proprietà
+          riflessiva fallisce già per tutti gli \(x\).
+    \item \textbf{Simmetrica}: se \(x\mathcal{R}y\), allora \(xy=24\). Poiché la moltiplicazione è commutativa,
+          anche \(yx=24\), quindi automaticamente vale anche \(y\mathcal{R}x\). La simmetria è soddisfatta.
+    \item \textbf{Transitiva}: la transitività chiederebbe che da \(x\mathcal{R}y\) e \(y\mathcal{R}z\) segua sempre
+          \(x\mathcal{R}z\). Qui \(x\mathcal{R}y\) significa \(xy=24\) e \(y\mathcal{R}z\) significa \(yz=24\).
+          Non esiste però alcuna scelta di \(x,y,z\in\mathbb{N}\) che renda vera questa proprietà per tutte
+          le triple: in particolare, non possiamo “comporre” le condizioni \(xy=24\) e \(yz=24\) per ottenere
+          \(xz=24\) in generale. La relazione quindi non è transitiva.
+\end{itemize}
+Conclusione: \(\mathcal{R}\) non è una relazione di equivalenza.
+
+\item Sia \(\mathcal{R}\) la relazione su \(\mathbb{Z}\) definita da
+\[
+(x,y)\in\mathcal{R} \iff x+y \text{ è pari}.
+\]
+\begin{itemize}
+\item \textbf{Riflessiva}: per ogni intero \(x\), abbiamo \(x\mathcal{R}x\) se \(x+x=2x\) è pari.
+      Ma \(2x\) è sempre un multiplo di 2, quindi è sempre pari: ogni elemento è in relazione con sé stesso.
+\item \textbf{Simmetrica}: se \(x\mathcal{R}y\), allora \(x+y\) è pari. Siccome la somma è commutativa
+      (\(x+y=y+x\)), anche \(y+x\) è pari. Questo significa che vale anche \(y\mathcal{R}x\):
+      invertire l’ordine degli addendi non cambia la parità della somma.
+\item \textbf{Transitiva}: supponiamo \(x\mathcal{R}y\) e \(y\mathcal{R}z\). Allora \(x+y\) è pari e \(y+z\) è pari.
+      Sommiamo queste due quantità:
+      \[
+      (x+y)+(y+z) = x + 2y + z.
+      \]
+      La somma di due numeri pari è ancora pari, quindi \(x+2y+z\) è pari. Poiché \(2y\) è sempre pari,
+      togliendolo non cambiamo la parità: ne segue che \(x+z\) è pari. Dunque \(x\mathcal{R}z\).
+\end{itemize}
+Conclusione: questa relazione è una relazione di equivalenza; “essere in relazione” qui significa
+“avere la stessa parità” (entrambi pari o entrambi dispari).
+
+\item Sia \(\mathcal{R}\) la relazione su \(\mathbb{Z}\) definita da
+\[
+(x,y)\in\mathcal{R} \iff x>y.
+\]
+\begin{itemize}
+    \item \textbf{Riflessiva}: per essere riflessiva dovremmo avere \(x>x\) per ogni \(x\), ma questa disuguaglianza
+          è sempre falsa. Quindi la proprietà riflessiva fallisce in modo evidente.
+    \item \textbf{Simmetrica}: se \(x>y\), allora per definizione \(y\) è più piccolo di \(x\) e non può accadere
+          contemporaneamente \(y>x\). Quindi non è possibile che da \(x\mathcal{R}y\) segua \(y\mathcal{R}x\):
+          la simmetria non è soddisfatta.
+    \item \textbf{Transitiva}: se \(x>y\) e \(y>z\), allora \(x\) è maggiore di \(y\) e \(y\) è maggiore di \(z\);
+          da queste due disuguaglianze segue automaticamente \(x>z\). Quindi la proprietà transitiva è soddisfatta.
+\end{itemize}
+Conclusione: la relazione è transitiva ma non riflessiva né simmetrica, dunque non è una relazione di equivalenza.
+\end{enumerate}
+\end{esempio}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{esempio}
+Dimostriamo che la relazione di uguaglianza \(x = y\) è una relazione di equivalenza su un insieme \(\mathcal{D}\).
+
+\begin{itemize}
+    \item \textbf{Riflessiva}: vogliamo che ogni elemento sia in relazione con sé stesso.
+    Per l'uguaglianza questo significa chiedere che, per ogni \(x \in \mathcal{D}\), valga \(x = x\):
+    questa affermazione è sempre vera, quindi la proprietà riflessiva è soddisfatta.
+
+    \item \textbf{Simmetrica}: se un elemento è in relazione con un altro, anche l’altro deve essere
+    in relazione con il primo. Per l'uguaglianza: se \(x = y\), allora automaticamente \(y = x\).
+    Invertire i due lati di un'uguaglianza non cambia la verità dell'affermazione, quindi la relazione è simmetrica.
+
+    \item \textbf{Transitiva}: se un primo elemento è in relazione con un secondo e il secondo con un terzo,
+    allora il primo deve essere in relazione con il terzo. Per l'uguaglianza:
+    se \(x = y\) e \(y = z\), allora segue necessariamente \(x = z\).
+    Dunque la proprietà transitiva è soddisfatta.
+\end{itemize}
+
+La relazione
+\[
+\mathcal{R} = \{(x,y) \mid x,y \in \mathcal{D} \text{ e } x=y\}
+\]
+è quindi una relazione di equivalenza, per ogni  \(\mathcal{D}\).
+\end{esempio}
+
+
+
+
+
+
+\begin{esempio}
+Si consideri la relazione \(\sim\) su \(\mathbb{N}\) definita da
+\[
+x \sim y \iff x \text{ e } y \text{ hanno lo stesso insieme di divisori primi}.
+\]
+Ad esempio:
+\[
+30 = 2\cdot3\cdot5, \qquad 90 = 2\cdot3^2\cdot5,
+\]
+quindi 30 e 90 hanno lo stesso insieme di divisori primi e vale \(30 \sim 90\).
+
+Dimostriamo che \(\sim\) è una relazione di equivalenza.
+
+\begin{itemize}
+     \item \textbf{Riflessiva}: per ogni \(x \in \mathbb{N}\), l'insieme dei divisori primi di \(x\)
+           coincide con sé stesso; quindi \(x \sim x\) per ogni \(x\).
+     \item \textbf{Simmetrica}: se \(x \sim y\), allora \(x\) e \(y\) hanno lo stesso insieme di
+           divisori primi; ma allora anche \(y\) e \(x\) hanno lo stesso insieme di divisori primi,
+           quindi \(y \sim x\).
+     \item \textbf{Transitiva}: se \(x \sim y\) e \(y \sim z\), allora l'insieme dei divisori primi
+           di \(x\) coincide con quello di \(y\), e quello di \(y\) coincide con quello di \(z\).
+           Di conseguenza, \(x\) e \(z\) hanno lo stesso insieme di divisori primi, cioè \(x \sim z\).
+\end{itemize}
+
+La relazione
+\[
+\mathcal{R} = \{ (x,y) \mid x,y \in \mathbb{N} \text{ e } x \sim y\}
+\]
+è dunque una relazione di equivalenza.
+\end{esempio}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{esempio}
+Sia $A$ l'insieme delle rette del piano. Per ogni coppia di rette $x$ e $y$ definiamo
+\[
+x \sim y \iff x \text{ e } y \text{ sono rette parallele}.
+\]
+Vogliamo mostrare che $\sim$ è una relazione di equivalenza.
+
+\begin{itemize}
+    \item \textbf{Riflessiva}: ogni retta è parallela a sé stessa (ha ovviamente la stessa direzione),
+          quindi per ogni $x\in A$ vale $x \sim x$.
+    \item \textbf{Simmetrica}: se una retta $x$ è parallela a una retta $y$, allora anche $y$ è parallela
+          a $x$; dunque da $x \sim y$ segue $y \sim x$.
+    \item \textbf{Transitiva}: se $x$ è parallela a $y$ e $y$ è parallela a $z$, allora $x$ e $z$
+          hanno entrambe la stessa direzione di $y$, quindi sono parallele tra loro: da
+          $x \sim y$ e $y \sim z$ segue $x \sim z$.
+\end{itemize}
+Quindi $\sim$ è una relazione di equivalenza su $A$.
+\end{esempio}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{esempio}
+Sia $A = \{(p,q) \mid p \in \mathbb{Z},\ q \in \mathbb{Z}\setminus\{0\}\}$. Definiamo, per
+\((p,q),(p',q')\in A\),
+\[
+(p,q) \sim (p',q') \iff pq' = p'q.
+\]
+Ad esempio:
+\[
+(4,3)\sim(12,9) \ \text{perché}\ 4\cdot9 = 12\cdot3 = 36,\qquad
+(3,-2)\sim(-6,4) \ \text{perché}\ 3\cdot4 = (-6)\cdot(-2) = 12.
+\]
+
+Vogliamo mostrare che $\sim$ è una relazione di equivalenza.
+
+\begin{itemize}
+    \item \textbf{Riflessiva}: per ogni $(p,q)\in A$ vale $p\cdot q = p\cdot q$, quindi
+          $(p,q)\sim(p,q)$.
+    \item \textbf{Simmetrica}: se $(p,q)\sim(p',q')$, allora $pq' = p'q$. Ma questa uguaglianza
+          è simmetrica: vale anche $p'q = pq'$, quindi $(p',q')\sim(p,q)$.
+    \item \textbf{Transitiva}: se $(p,q)\sim(p',q')$ e $(p',q')\sim(p'',q'')$, allora
+          \[
+          pq' = p'q \quad\text{e}\quad p'q'' = p''q'.
+          \]
+          Moltiplicando la prima per $q''$ e la seconda per $q$ otteniamo
+          \[
+          pq'q'' = p'qq'', \qquad p'qq'' = p''q'q.
+          \]
+          Dunque $pq'q'' = p''q'q$, e poiché $q'q''\neq 0$, possiamo semplificare e concludere
+          \(pq'' = p''q\), cioè \((p,q)\sim(p'',q'')\).
+\end{itemize}
+
+Quindi $\sim$ è una relazione di equivalenza su $A$: due coppie rappresentano lo stesso numero razionale.
+\end{esempio}
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+ \subsection{Classi di equivalenza }
+\defn{Definizioni e notazioni}{
+\begin{itemize}
+    \item Ogni relazione di equivalenza $\mathcal{R}$ su $A$ ripartisce l'insieme $A$ in \textbf{classi di equivalenza}.
+    \item Per ogni elemento $a \in A$, la classe di equivalenza di a viene indicata con $\mathbf{[a]_{\mathcal{R}}}$
+ed è definita come:
+\[
+    [a]_{\mathcal{R}}= \{x \in A \mid a \mathcal{R} x\}
+\]
+\item La classe di equivalenza $[a]_{\mathcal{R}}$ si indica anche $[a]$ o $a/\mathcal{R}$
+\item L'insieme $\{[a]_{\mathcal{R} } \mid a \in A \}$ delle classi di equivalenza di $A$ rispetto a $\mathcal{R}$ è detto insieme quoziente di $A$ rispetto a $\mathcal{R}$ e si indica con $A/\mathcal{R}$
+
+\end{itemize}
+
+
+In sintesi, una relazione di equivalenza raggruppa gli elementi di \(A\) in blocchi disgiunti
+(le classi), e \(A/\mathcal{R}\) è l'insieme di questi blocchi.
+
+
+ 
+}
+ 
+
+
+\subsection{Insieme quoziente}
+\defn{Partizione di $A$}{
+
+     L'insieme $\{[a]_{\mathcal{R}} \mid a \in A \}$ delle classi di equivalenza di A rispetto a $\mathcal{R}$ forma una partizione di $A$, infatti
+    \begin{itemize}
+        \item ogni classe è non vuota: infatti, per definizione, per ogni $a \in A\text{, }[a]_{\mathcal{R}} $ contiene almeno l'elemento $a$
+        \item l'unione di tutte le classi è uguale ad $A$
+        \[
+        \bigcup_{a \in A } [a]_{\mathcal{R}} = A
+        \]
+        infatti, ogni  $[a]_{\mathcal{R}} \subseteq A$ ogni elemento $a \in A$ appartiene ad una classe
+        \item classi distinte sono disgiunte, cioè  per ogni  $a,b \in A$ con $a \neq b $ tali che $[a]_{\mathcal{R} } \neq [b]_{\mathcal{R}} $, allora
+        \[
+        [a]_{\mathcal{R}} \cap [b]_{\mathcal{R}} = \emptyset
+        \]
+        \item ogni elemento di $A$ è contenuto in una ed una sola classe
+    \end{itemize}
+ In conclusione, le classi di equivalenza di \(\R\) suddividono \(A\) in \virgolette{blocchi} tra loro disgiunti: ogni elemento di \(A\) appartiene a uno di questi blocchi, e non può stare in due classi diverse.
+}
+
+
+
+\exm{Vogliamo mostrare che, per ogni $a,b \in A$, se $[a]_{\mathcal{R}} \neq [b]_{\mathcal{R}}$ allora
+\[
+[a]_{\mathcal{R}} \cap [b]_{\mathcal{R}} = \emptyset.
+\]}{
+
+\strategia{
+Procediamo per assurdo: supponiamo che le due classi siano diverse ma abbiano almeno
+un elemento in comune, e usiamo le proprietà di equivalenza per arrivare a una contraddizione.
+}
+Per assurdo, supponiamo che esista $x \in [a]_{\mathcal{R}} \cap [b]_{\mathcal{R}}$.
+Allora $a \mathcal{R} x$ e $b \mathcal{R} x$. Allora:
+
+\begin{itemize}
+    \item da  \(b \R x\), per simmetria, otteniamo \(x \R b\)
+       \item da $a \mathcal{R} x$ e $x \mathcal{R} b$, per transitività, otteniamo $a \mathcal{R} b$
+    \item quindi $b \in [a]_{\mathcal{R}}$ per definizione di $[a]_{\mathcal{R}}$
+    \item per riflessività $b \mathcal{R} b$, quindi $b \in [b]_{\mathcal{R}}$
+\end{itemize}
+Dunque $[a]_{\mathcal{R}}$ e $[b]_{\mathcal{R}}$ contengono esattamente gli stessi elementi, cioè
+$[a]_{\mathcal{R}} = [b]_{\mathcal{R}}$, in contraddizione con l’ipotesi $[a]_{\mathcal{R}} \neq [b]_{\mathcal{R}}$.
+Quindi deve essere $[a]_{\mathcal{R}} \cap [b]_{\mathcal{R}} = \emptyset$.
+
+
+}
+ % \begin{esempio}
+ %    Dimostrare che per ogni $a,b \in A$ con $a \neq b $ tali che $[a]_{\mathcal{R}} \neq [b]_{\mathcal{R}}$ allora
+ %    \[
+ %        [a]_{\mathcal{R}} \cap [b]_{\mathcal{R}} = \emptyset
+ %    \]
+ %        Per assurdo, supponiamo che esista $x \in [a]_{\mathcal{R}} \cap [b]_{\mathcal{R}}$, allora si avrebbe $a\mathcal{R}x$ e $b\mathcal{R}x$
+ %    \begin{itemize}
+
+ %        \item $b \mathcal{R}x$ implica $x \mathcal{R}b$, per la proprietà simmetrica
+ %        \item $a \mathcal{R} x $ e $x \mathcal{R}b$ implica $a\mathcal{R}b $ per la proprietà transitiva
+ %        \item $a \mathcal{R} b$ implica $b \in [a]_{\mathcal{R}}$, per definizione di $[a]_{\mathcal{R}}$
+ %        \item poiché $\mathcal{R}$ è riflessiva si ha $b \mathcal{R} b$ e $b \in [b]_{\mathcal{R}}$, per definizione di $[b]_{\mathcal{R}}$
+ %        \item Quindi $[a]_{\mathcal{R}} \cap [b]_{\mathcal{R}} \neq \emptyset$ e ciò contraddice l'ipotesi
+ %    \end{itemize}
+ % \end{esempio}
+
+\propi{}{
+\item Ogni partizione $P= \left(X_i \subseteq A : i \in I \right)$di un insieme $A$ determina una relazione di equivalenza $\mathcal{R}$ su $A$ definita come segue: per ogni $a,b \in A,$
+\[
+a \mathcal{R} b \text{ se e solo se } \exists i \in I : a,b \in X_i
+\]
+
+In altre parole, dichiariamo equivalenti due elementi se e solo se
+appartengono allo stesso \virgolette{pezzo} della partizione.
+}
+
+
+
+
+
+
+
+
+\begin{esempio}
+Sia $X$ l'insieme dei numeri primi minori o uguali a 100. Consideriamo la relazione
+\[
+\mathcal{R}=\{(x,y) \mid x,y \in X \land x \text{ e } y \text{ terminano con la stessa cifra}\}.
+\]
+
+\strategia{
+Verifichiamo che sia una relazione di equivalenza (riflessiva, simmetrica, transitiva) e poi
+descriviamo esplicitamente le sue classi di equivalenza.
+}
+\begin{itemize}
+    \item \textbf{Riflessiva}: ogni numero $x$ termina con la stessa cifra di sé stesso, quindi
+          $x \mathcal{R} x$ per ogni $x \in X$.
+    \item \textbf{Simmetrica}: se $x$ termina con la stessa cifra di $y$, allora anche $y$ termina
+          con la stessa cifra di $x$; dunque da $x \mathcal{R} y$ segue $y \mathcal{R} x$.
+    \item \textbf{Transitiva}: se $x$ termina con la stessa cifra di $y$ e $y$ con la stessa cifra
+          di $z$, allora $x$ e $z$ terminano con la stessa cifra; quindi da
+          $x \mathcal{R} y$ e $y \mathcal{R} z$ segue $x \mathcal{R} z$.
+\end{itemize}
+
+Le classi di equivalenza sono formate dai numeri primi di $X$ che terminano con la stessa cifra.
+Poiché un numero primo può terminare solo con $1,2,3,5,7,9$, otteniamo 6 classi:
+
+\begin{center}
+\begin{tabular}{c}
+$A = \{11,31,41,61,71\}$\\
+$B = \{2\}$\\
+$C = \{3,13,23,43,53,73,83\}$\\
+$D = \{5\}$\\
+$E = \{7,17,37,47,67,97\}$\\
+$F = \{19,29,59,79,89\}$\\
+\end{tabular}
+\end{center}
+
+In questo modo la relazione “terminare con la stessa cifra” partiziona $X$ in 6 blocchi disgiunti.
+\end{esempio}
+
+
+
+
+
+
+
+
+
+
+\newpage
+
+
+\section{Esercizi}
+
+% -------------
+\begin{esercizio}
+Date le seguenti relazioni, definite su un insieme di persone $A$, si determini, per ciascuna di essere quali proprietà sono soddisfatte e quali no. Si dica, inoltre, quali tra queste relazioni sono delle equivalenze.
+\begin{enumerate}\setlength\itemsep{1em}
+\item $x$ abita nella stessa città di $y$.
+\item $x$ è cugino/a di $y$.
+\item $x$ e $y$ hanno frequentato, almeno per un anno, la stessa scuola durante i loro studi.
+\item $x$ è padre di $y$.
+\item $x$ è nato nello stesso anno di $y$.
+\item $x$ è più giovane di $y$.
+\item $x$ è fratello (o sorella) di $y$ (nel senso che $x$ e $y$ hanno entrambi i genitori in comune).
+\item $x$ è fratellastro (o sorellastra) di $y$ (nel senso che $x$ e $y$ hanno esattamente un genitore in comune).
+\end{enumerate}
+\end{esercizio}
+
+
+\begin{soluzione}
+    \begin{enumerate}\setlength\itemsep{1em}
+\item  Riflessiva, Simmetrica, Transitiva $\rightarrow$ Equivalenza\\
+
+%x abita nella stessa città di se stesso? si; se x abita nella stessa città di y, y abita nella stessa città di x? si; se x abita nella stessa citta di y e y abita nella stessa città di z, z e x abitano nella stessa città? si.
+\item Irriflessiva, Simmetrica, Non-transitiva\\
+
+%x è cugino di se stesso? no; se x è cugino di y, y è cugino di x? si; se x è cugino di y e y è cugino di z, x è cugino di z? no, perchè x è figlio di uno zio di y e y è figlio di uno zio di z ma potrebbe non essere lo stesso zio.
+
+\item Riflessiva, Simmetrica, Non-transitiva\\
+
+%x ha frequentato (per almeno un anno) la stessa scuola di se stesso? si; se x ha frequentato (per almeno un anno) la stessa scuola di y, y ha frequentato (per almeno un anno) la stessa scuola di x? si; se x ha frequentato (per almeno un anno) la stessa scuola di y e y ha frequentato (per almeno un anno) la stessa scuola di z, x e z hanno frequentato la stessa scuola (per almeno un anno)? no, perché potrebbe essere che x e y hanno frequentato la stessa scuola un anno e poi l'anno dopo y ha cambiato scuola e ha frequentato la stessa di z che non è la stessa di x.
+
+\item Irriflessiva, Antisimmetrica, Non-transitiva\\
+
+%x è padre di se stesso? no; se x è padre di y, y è padre di x? no; se x è padre di y e y è padre di z, x è padre di z? no.
+
+\item Riflessiva, Simmetrica, Transitiva $\rightarrow$ Equivalenza\\
+
+%x è nato nello stesso anno di se stesso? si; se x è nato lo stesso anno di y, y è nato lo stesso anno di x? si; se x è nato lo stesso anno di y e y è nato lo stesso anno di z, x è nato lo stesso anno di z? si.
+
+\item Irriflessiva, Antisimmetrica, Transitiva\\
+
+%x è più giovane di se stesso? no; se x è più giovane di y, y è più giovane di x? no; se x è più giovane di y e y è più giovane di z, x è più giovane di z? si.
+
+\item Riflessiva, Simmetrica, Transitiva $\rightarrow$ Equivalenza\\
+
+%x ha entrambi i genitori in comune con se stesso? si; se x ha gli stessi genitori di y, y ha gli stessi genitori di x? si; se x ha gli stessi genitori di y e y ha gli stessi genitori di z, x ha gli stessi genitori di z? si.
+
+\item Irriflessiva, Simmetrica, Non-transitiva\\
+
+%x ha esattamente un genitore in comune con se stesso? no, li ha entrambi in comune; se x ha esattamente un genitore in comune con y, y ha esattamente un genitore in comune con x? si; se x ha esattamente un genitore in comune con y e y ha esattamente un genitore in comune con z,  x ha esattamente un genitore in comune con z? no, perché x e y potrebbero avere la mamma in comune, e y e z il papà quindi x e z non avrebbero alcun genitore in comune.
+
+\end{enumerate}
+
+\end{soluzione}
+
+
+
+
+% -------------
+
+
+
+
+
+% -------------
+
+\begin{esercizio}
+    Sia la relazione $R$ definita sull'insieme dei numeri interi ($\mathbb{Z}$) tale che: 
+	
+	\begin{center}
+		\virgolette{$aRb$ se e solo se $2a + 3b$ è divisibile per 5} $\forall a,b \in \mathbb{Z}$
+	\end{center}
+	
+	\noindent 
+	Dire se $R$ è una relazione riflessiva su $\mathbb{Z}$. 
+	
+\end{esercizio}
+
+
+\begin{soluzione}
+    	
+	Sia $a \in \mathbb{Z}$. 
+	
+	$2a + 3a = 5a$
+	
+	\noindent $5a$ è sempre divisibile per 5. La relazione $R$ è riflessiva su $\mathbb{Z}$. 
+	\bigskip
+    
+    \vspace{0.10cm}
+\end{soluzione}
+
+
+% -------------
+
+
+% -------------
+\begin{esercizio}
+    Sia la relazione $R$ definita sull'insieme dei numeri interi ($\mathbb{Z}$) tale che: 
+	
+	\begin{center}
+		\virgolette{$aRb$ se e solo se $a-b$ è divisibile per k} $\forall a,b \in \mathbb{Z}$ e $k \in \mathbb{Z}^+$
+	\end{center}
+	
+	\noindent 
+	Dire se $R$ è una relazione transitiva su $\mathbb{Z}$. 
+	
+\end{esercizio}
+
+\begin{soluzione}
+
+Siano $(a,b) \in R$ e $(b,c) \in R$.\\
+Assumiamo $(a-b)$ è divisibile per $k$ e $(b-c)$ è divisibile per $k$.\\
+Allora $[(a-b) + (b-c)] $ è divisibile per $k$, poiché la somma di due numeri divisibili per una certa cifra è ancora divisibile per quella stessa cifra.\\
+Ma $[(a-b) + (b-c)]=a-b+b-c=a-c$; dunque anche $(a,c)\in R$ per cui la relazione $R$ è transitiva su $\mathbb{Z}$.\\
+    \vspace{0.10cm}
+    
+\end{soluzione}
+
+% -------------
+
+
+% -------------
+
+\begin{esercizio}
+    Quale delle seguenti affermazioni è vera o falsa? Giustificare le risposte.
+	
+	\begin{enumerate}\setlength\itemsep{1em}
+		
+		\item Se $a$ e $b$ sono numeri pari allora $a+b$ è un numero pari. 
+		
+		Utilizzare le proprietà delle relazioni e delle variabili coinvolte.
+%[i numeri pari e i numeri dispari sono due particolari tipi di numeri interi. Sono pari tutti i numeri che terminano con 0, 2, 4, 6, 8. Di contro, i numeri dispari sono tutti e solo i numeri interi che non sono pari. Cosa accumuna i numeri pari? Sono tutti divisibili per 2. Aritmetica dei numeri pari e dispari: la somma di due numeri pari è anch'essa pari. Lo zero è un numero pari essendo un multiplo intero di 2 dato dal fatto che $0 \times 2 = 0$.]
+		\item Se $a+b$ è un numero pari allora $a$ e $b$ sono numeri pari. 
+		
+		Costruire un contro-esempio.
+		
+	\end{enumerate}
+\end{esercizio}
+
+
+\begin{soluzione}
+    	\begin{enumerate}\setlength\itemsep{1em}
+		\item Se $a$ e $b$ sono numeri pari allora esistono altri due numeri $r,s \in \mathbb{N}$ tali che possiamo riscrivere $a$ e $b$ nel seguente modo $a = 2r$ e $b = 2s$.\\
+Quindi $ a + b = 2r + 2s = 2(r + s)$, e $(r+s) \in \mathbb{N}$ poichè la somma di due numeri naturali è ancora un numero naturale.\\
+Inoltre $2(r+s)$ sarà sicuramente un numero pari in quanto divisibile per due quindi visto che $a+b=2r+2s$, $a+b$ è pari. Ne segue che il primo enunciato è vero.
+		
+		\item Se $a = 1$ e $b = 1$ allora nè $a$ nè $b$ sono numeri pari, ma $a+b = 1+1 = 2$ è pari nonostante $a$ e $b$ siano entrambi numeri dispari. Da questo contro-esempio ne segue che il secondo enunciato è falso.  
+	\end{enumerate}
+
+\end{soluzione}
+
+
+% -------------
+
+% -------------
+
+\begin{esercizio}
+    Determinare se le seguenti relazioni ($aR\hspace*{0.01cm}b$), sono relazioni di equivalenza, per ogni $a,\!b \in \mathbb{N}^{+}$. 
+	
+	\begin{enumerate}\setlength\itemsep{1em}
+		\item $a < b$
+		\item $a+b$ è dispari
+		\item $ab = 1$
+	\end{enumerate}
+\end{esercizio}
+
+\begin{soluzione}
+    	\begin{enumerate}\setlength\itemsep{1em}
+		\item La relazione non è riflessiva dato che per qualsiasi $a \in \mathbb{N}^{+}$ non è possibile che $a < a$. La relazione non è simmetrica dato che, $\forall a,b \in \mathbb{N}^{+}$, se $a < b$ allora non è possibile che $b < a$. La relazione è transitiva perchè, $\forall a,b,c \in \mathbb{N}^{+}$, se $a < b$ e $b < c$ allora $a < c$. Ne segue che la relazione non è una relazione d'equivalenza. 
+		
+		\item La relazione non è riflessiva dato che $a+a = 2a$ e non è mai dispari per qualsiasi $a \in \mathbb{N}^+$. La relazione è simmetrica poichè, $\forall a,b \in \mathbb{N}^{+}$, se $a+b$ è dispari, lo è anche $b+a$ per la proprietà commutativa dell'addizione. La relazione non è transitiva, ovvero $\forall a,b,c, \in \mathbb{N}^{+}$ se $a+b$ è dispari e $b+c$ è dispari, non è vero che anche $a+c$ è dispari.
+		Controesempio: se $a=1, b=2, c=3$ allora $a+b$ è dispari, $b+c$ è dispari ma $a+c$ è pari. Ne segue che la relazione non è una relazione d'equivalenza. 
+		
+		\item La relazione non è riflessiva per ogni $a \in \mathbb{N}^+$, controesempio: se $a = 2$, $a \times a = 4 \neq 1$. La relazione è simmetrica poichè, $\forall a,b, \in \mathbb{N}^{+}$, se $ab = 1$ allora anche $ba = 1$ per la proprietà commutativa della moltiplicazione. La relazione è transitiva perchè, $\forall a,b,c, \in \mathbb{N}^{+}$, se $ab = 1$ e $bc = 1$ significherebbe avere $a = b = c = 1$ allora anche $ac = 1$. Ne segue che la relazione non è una relazione d'equivalenza. 
+	\end{enumerate}
+
+\end{soluzione}
+
+% -------------
+
+
+% -------------
+
+\begin{esercizio}
+    Sia $X = \{ 1,2,5,6,7,9,11 \}$ e $xR\hspace*{0.01cm}x\text{\textquotesingle}$ la relazione \virgolette{$x-x\text{\textquotesingle}$ è divisibile per 5}. Verificare che la relazione $R$ sia una relazione d'equivalenza e descrivere la partizione di $X$ come classi equivalenti.
+\end{esercizio}
+\begin{soluzione}
+    \begin{itemize}\setlength\itemsep{1em}
+		\item La relazione è riflessiva. 
+		
+		$\forall x \in X$ avremo che $x-x = 0$ e 0 è divisibile per 5.
+		
+%[il criterio di divisibilità per 5 stabilisce che un numero è divisibile per 5 se la cifra delle unità è 0 o 5.]
+		
+		\item La relazione è simmetrica. 
+		
+	$\forall x,x\text{\textquotesingle} \in X$, se $x-x\text{\textquotesingle}$ è divisibile per 5 allora anche $x\text{\textquotesingle}-x$ è divisibile per 5.
+	Ad esempio, $6-1 = 5$ che è divisibile per 5 e $1-6 = -5$ che è ancora divisibile per 5.
+		
+%[presi comunque due elementi in X, se $x-x\text{\textquotesingle}$ è divisibile per 5 allora anche $x\text{\textquotesingle}-x$ è divisibile per 5. Notate che una relazione in un insieme non è simmetrica se vi è anche solo una coppia degli elementi dell'insieme tali che il primo è in relazione con il secondo, ma il secondo non è in relazione con il primo.]
+		
+		\item La relazione è transitiva. 
+		
+		$\forall x,y,z \in X$ se $x-y$ è divisibile per 5 e $y-z$ è divisibile per 5, allora anche $x-z$ è divisibile per 5. 
+		Ad esempio, $1-6 = -5$ e $6-11 = -5$ sono divisibili per 5 e $1-11 = -10$ è ancora divisibile per 5.   
+		
+	%[quanto detto sopra vale anche per la transitività.]
+	\end{itemize}
+	
+	\noindent Le classi di equivalenza sono: 
+	
+	\medskip 
+	
+	$[1] = \{ 1,6,11 \}$
+	
+	$[2] = \{2,7 \}$
+	
+	$[5] = \{ 5 \}$
+	
+	$[9] = \{ 9 \}$
+	
+	\medskip 
+	
+	\noindent $\{ 1,6,11 \}$, $\{2,7 \}$, $\{ 5 \}$, $\{ 9 \}$ è una partizione di $X$.\\
+	\vspace{0.10cm}
+\end{soluzione}
+
+% -------------
+
+
+
+% -------------
+
+\begin{esercizio}
+    Determinare se la seguente relazione binaria R definisce un ordinamento parziale su $\mathbb{N}^+$.
+	
+	\begin{center}
+		$xRy$ se e solo se $x$ divide $y$ oppure $x < y + 2$ \qquad $x,y \in \mathbb{N}^+$
+	\end{center}
+\end{esercizio}
+
+\begin{soluzione}
+    %\mo{la relazione R definisce un ordinamento parziale su $\mathbb{N}^+$ se verifica la proprietà riflessiva, transitiva e antisimmetrica.}
+
+\begin{itemize}\setlength\itemsep{1em}
+	\item La relazione è riflessiva. 
+	
+	Dato un arbitrario numero naturale positivo $x$, si ha che $xRx$ poichè $x$ divide $x$ ed in ogni case sarebbe soddisfatta anche l'altra condizione in quanto è sempre vero che $x<x+2$.
+	
+	%\mo{un numero diviso se stesso fa sempre 1 ed un numero naturale è divisibile per un altro numero naturale se il quoziente tra questi due numeri è ancora un numero naturale, quindi la divisione ha resto uguale a 0 (oppure, in altre parole, un numero è divisore di un altro numero se quest'ultimo è un suo multiplo). Una divisione con resto è una divisione non esatta ovvero è una divisione in cui il divisore non è multiplo del dividendo.}
+	
+	\item La relazione non è antisimmetrica. 
+	
+	$\forall x,y \in \mathbb{N}^+ $, se $xRy$ e $yRx$ non è necessariamente vero che $x=y$. Ad esempio, 1 è in relazione con 2 poichè 1 divide 2. Inoltre 2 è in relazione con 1 poichè $2 < 1+2$, ma 1 è diverso da 2. 
+	
+	\item La relazione non è transitiva. 
+	
+	$\forall x,y,z \in \mathbb{N}^+$, se $xRy$ e $yRz$ non è vero che $xRz$. Ad esempio, $4R3$ poiché $4<3+2$ e $3R2$ perché $3<2+2$ ma $4R2$ è falso, dato che nè 4 divide 2 nè $4 < 2+2$.
+\end{itemize}
+
+\end{soluzione}
+
+
+
+% -------------
+
+
+
+% -------------
+\begin{esercizio}
+    Determinare se la seguente relazione binaria R è una relazione di equivalenza su $\mathbb{N} \times \mathbb{N}$.
+	
+	\begin{center}
+		$(a,b) R (c,d)$ se e solo se $a+d = b+c$ \qquad $\forall (a,b),(c,d) \in \mathbb{N} \times \mathbb{N}$
+	\end{center}
+\end{esercizio}
+
+\begin{soluzione}
+    	\begin{itemize}\setlength\itemsep{1em}
+		\item La relazione è riflessiva.
+		
+		Data una coppia arbitraria di numeri naturali $(a,b)$, si ha che $(a,b)R(a,b)$ poichè è vero che $a+b = b+a$ per la proprietà commutativa della somma. 
+		
+		\item La relazione è simmetrica.
+		
+		Supponiamo $(a,b) R (c,d)$, cioè $a+d = b+c$. Proviamo che $(c,d)R(a,b)$, cioè $c+b = d+a$ che è vero sempre per la proprietà commutativa della somma.
+		
+		\item La relazione è transitiva. 
+		
+		Supponiamo $(a,b) R (c,d)$ e $(c,d)R(e,f)$, cioè $a+d = b+c$ e $c+f = d+e$ e vogliamo ottenere $(a,b)R(e,f)$ ossia $a+f=b+e$. Allora si ha che possiamo scrivere $a=b+c-d$ e $f=d+e-c$ e quindi possiamo anche scrivere: 
+		\begin{align*}
+			a+f &= (b+c-d)+(d+e-c)\\
+			      &= b+(c-c)+(d-d)+e\\
+			      &= b+e\\
+		\end{align*}
+		che implica appunto $(a,b)R(e,f).$
+	\end{itemize}
+
+\end{soluzione}
+% -------------
+
+
+
+% -------------
+\begin{esercizio}
+    Determinare se la seguente relazione binaria R è una relazione di equivalenza su $\mathbb{R}$.
+	
+	\begin{center}
+		$xRy \Leftrightarrow x-y \in \mathbb{Z}$
+	\end{center}
+
+	Determinare la classe di equivalenza del numero 1 e la classe di equivalenza di $\dfrac{1}{2}$.
+
+\end{esercizio}
+\begin{soluzione}
+    \begin{itemize}\setlength\itemsep{1em}
+
+	\item La relazione è riflessiva.
+	
+	Dato un numero reale arbitrario x, si ha che $xRx$ poichè $x-x = 0 \in \mathbb{Z}$.
+	
+	\item La relazione è simmetrica.
+
+	Ogni numero intero ammette un opposto, che a sua volta è un numero intero. Assumiamo $xRy \Leftrightarrow x-y \in \mathbb{Z}$ da cui si ricava che $-(x-y)\in \mathbb{Z}$, cioè $y-x \in \mathbb{Z}$ e $yRx$. 
+	
+	\item La relazione è transitiva. 
+	
+	Assumiamo $xRy$ e $yRz$ che implicano $x-y \in \mathbb{Z}$ e $y-z \in \mathbb{Z}$. Allora $(x-y)+(y-z) \in \mathbb{Z}$ poichè la somma  di due numeri interi è un numero intero. Infine $(x-y)+(y-z) = x-z \in \mathbb{Z}$, che implica $xRz$.
+\end{itemize}
+
+Inoltre:
+
+\begin{itemize}\setlength\itemsep{1em}
+	\item[*] Per definizione, la classe di equivalenza di 1 è l'insieme $[1]_R = \{ z \in \mathbb{R} \mid  z-1 \in \mathbb{Z} \}$. Dato che $z-1 \in \mathbb{Z}$ se e solo se $z \in \mathbb{Z}$, si ricava che $[1]_R = \mathbb{Z}$. 
+	
+	\item[*] Per definizione, la classe di equivalenza di $\dfrac{1}{2}$ è l'insieme $\bigg[\dfrac{1}{2}\bigg]_R = \bigg\{ z \in \mathbb{R} \mid z - \dfrac{1}{2} \in \mathbb{Z}  \bigg\}$. Dato che $z-\dfrac{1}{2}\in \mathbb{Z}$ si ricava che $\bigg[\dfrac{1}{2}\bigg]_R = \bigg\{ m + \dfrac{1}{2} \mid  m \in \mathbb{Z} \bigg\}$.
+\end{itemize}
+
+\end{soluzione}
+% -------------
+
+
+
+
+% -------------
+
+\begin{esercizio}
+    	Determinare se la seguente relazione binaria R è una relazione di equivalenza su $\mathbb{Z}$.
+	
+	\begin{center}
+		$xRy \Leftrightarrow x^2-y^2 \in \mathbb{Z}$
+	\end{center}
+	
+	Determinare la classe di equivalenza del numero 1
+\end{esercizio}
+
+\begin{soluzione}
+    \begin{itemize}\setlength\itemsep{1em}
+		
+		\item La relazione è riflessiva.
+		
+		Dato un numero reale arbitrario x, si ha che $xRx$ poichè $x^2-x^2 = 0 \in \mathbb{Z}$.
+		
+		\item La relazione è simmetrica.
+		
+		Ogni numero intero ammette un opposto, che a sua volta è un numero intero. Assumiamo $xRy \Leftrightarrow x^2-y^2 \in \mathbb{Z}$ da cui si ricava che $-(x^2-y^2)\in \mathbb{Z}$, cioè $y^2-x^2 \in \mathbb{Z}$ e $yRx$. 
+		
+		\item La relazione è transitiva. 
+		
+		Assumiamo $xRy$ e $yRz$ che implicano $x^2-y^2 \in \mathbb{Z}$ e $y^2-z^2 \in \mathbb{Z}$. Allora $(x^2-y^2)+(y^2-z^2) \in \mathbb{Z}$ poichè la somma  di due numeri interi è un numero intero. Infine $(x^2-y^2)+(y^2-z^2) = x^2-z^2 \in \mathbb{Z}$, che implica $xRz$.
+	\end{itemize}
+	
+	Inoltre:
+	
+	\begin{itemize}\setlength\itemsep{1em}
+		\item[*] Per definizione, la classe di equivalenza di 1 è l'insieme $[1]_R = \{ z \in \mathbb{Z} \mid  z^2-1 \in \mathbb{Z} \}$. Dato che $z^2-1 \in \mathbb{Z}$ se e solo se $z^2 \in \mathbb{Z}$, si ricava che $[1]_R = \mathbb{Z}$. 
+	\end{itemize}
+\end{soluzione}
+
+% -------------
+
+% -------------
+
+\begin{esercizio}
+    In $\mathbb{N}$ si consideri la relazione $xRy$ se $x = y$ oppure se $2x$ divide $y$.
+
+\begin{itemize}\setlength\itemsep{1em}
+
+\item Verificare che $R$ sia una relazione d'ordine parziale.
+
+\item Verificare se è un ordinamento totale.
+
+\item Sia $D$ il sottoinsieme di $\mathbb{N}$ dei numeri dispari. Provare che $R$ ristretta a $D$ è una relazione d'equivalenza e caratterizzare le classi di equivalenza.
+
+\end{itemize}
+
+\end{esercizio}
+
+\begin{soluzione}
+    \begin{itemize}\setlength\itemsep{1em}
+
+\item La relazione in esame gode chiaramente della proprietà riflessiva, in quanto x=x sarà sempre vero.\\ Per quanto riguarda la proprietà antisimmetrica abbiamo quanto segue, è chiaro che se $x=y$ e $y=x$ $x$ e $y$ sono in realtà lo stesso elemento. Poi abbiamo che sei $xRy$ e $yRx$ allora per forza $2x$ divide $y$ e $2y$ divide $x$  dunque avremo $$y=k\cdot 2x = 2k\cdot x=2k\cdot m\cdot 2y.$$ Dato che $x=m\cdot 2y$. Possiamo quindi scrivere $$y-2km2y = y(1-4km)=0$$ da cui $y=0$ ma se $y=0$ allora $x=2my=0$ il che dimostra che la proprietà antisimmetrica è soddisfatta.\\ Se $xRy$ e $yRx$ allora avremo che $xRz$, nel caso in cui $x=y$ e $y=z$ si ha chiaramente che $x=z$ e dunque la proprietà transitiva è soddisfatta. Supponiamo ora $x\neq y$ e $y\neq z$, abbiamo che $y=k\cdot 2x$ e $z=m\cdot 2y$ da cui possiamo ottenere $$z=mk\cdot 2x$$ che significa $xRy$ per cui anche in questo caso la proprietà transitiva è soddisfatta.\\
+(Per essere un ordine totale deve succedere che o $x$ sia in relazione con $y$ o $y$ sia in relazione con $x$, in pratica due suoi elementi qualsiasi devono costituire una coppia confrontabile per la relazione stessa)
+\item Non è un ordine totale perché se prendiamo $x=1$ e $y=3$ abbiamo che non valgono né $xRy$ né $yRx$ per cui questa coppia non è confrontabile.
+
+\item Prendiamo $n, m$ due numeri naturali dispari, tra di essi la relazione $2m$ divide $n$ non sarà mai verificata 
+e quindi $R$ si riduce a $nRm$ se $n = m$, la relazione di uguaglianza è ovviamente una relazione di equivalenza le cui classi di equivalenza sono i singleton.
+
+\end{itemize}
+
+\end{soluzione}
+% -------------
+
+% -------------
+
+\begin{esercizio}
+    In $\mathbb{N}\times\mathbb{N}$ si consideri la relazione $(a,b)R(c,d)$ se $a+b \leq c+d$ e $a\leq c$.
+
+\begin{itemize}\setlength\itemsep{1em}
+\item Verificare che si tratta di una relazione d'ordine parziale.
+\item Verificare che si tratta di una relazione d'ordine totale.
+\item provare che $(0,0)$ è il minimo di $\mathbb{N}\times\mathbb{N}$
+\end{itemize}
+\end{esercizio}
+
+\begin{soluzione}
+    \begin{itemize}\setlength\itemsep{1em}
+\item Iniziamo col verificare la proprietà riflessiva, dunque $(a,b)R(a,b)$ la condizione $a+b\leq a+b \wedge a\leq a$ è sempre verificata per cui la proprietà riflessiva è soddisfatta.\\ Verifichiamo ora la proprietà transitiva, dunque se $(a,b)R(c,d)\wedge (c,d)R(e,f)$ allora $(a,b)R(e,f)$. Se $a+b\leq c+d$ e $c+d\leq e+f$ allora anche $a+b \leq e+f$ vale. Se $a\leq c$ e $c\leq e$ allora anche $a\leq e$ è verificata. Per cui anche la proprietà transitiva è soddisfatta.\\ Passiamo ora alla proprietà antisimmetrica; supponiamo $(a,b)R(c,d)$ e $(c,d)R(a,b)$ dunque avremo che $$a+b\leq c+d\ \text{e}\ c+d\leq a+b$$ da cui segue $a+b=c+d$ e avremo anche che $$a\leq c\ \text{e}\ c\leq a$$ da cui $a=c$. Da queste relazioni ne consegue che
+\begin{align*}
+a+b&=c+d\\
+b&=(a+b)-a\ \text{dato\ che}\ c+d=a+b\\
+b&=(c+d)-c\ \text{dato\ che}\ a=c\\
+b&=d
+\end{align*}
+Dunque le due coppie coincidono e di conseguenza la proprietà antisimmetrica è soddisfatta. Per cui la relazione è sicuramente una relazione di ordine parziale.
+
+\item La relazione è anche una relazione di ordine totale in quanto tutti i suoi elementi sono confrontabili, infatti date due coppie $(a,b)$ e $(c,d)$ varrà sempre una tra le due seguenti relazioni $a+b\leq c+d \wedge a\leq c$ oppure $c+d\leq a+b\wedge c\leq a$.
+
+\item per ogni coppia $(a,b)\in\mathbb{N}\times\mathbb{N}$ non nulla si ha $0+0<a+b$ e $0< a$ per cui $(0,0)R(a,b)\forall (a,b)\in\mathbb{N}\times\mathbb{N}$.
+\end{itemize}
+\end{soluzione}
+% -------------
+
+
+
+
+% -------------
+\begin{esercizio}
+  Dire quali delle proprietà delle relazioni soddisfa la relazione $R$ in $A$ nei seguenti casi:
+
+\begin{itemize}\setlength\itemsep{1em}
+
+\item[a)] $A=\mathbb{Z}\qquad xRy$ se $x-y=n^2$ per un qualche $n\in\mathbb{Z}$;
+
+\item[b)] $A=\mathbb{Z}\qquad xRy$ se $x-y=n^5$ per un qualche $n\in\mathbb{Z}$;
+
+\item[c)] $A=\mathbb{R}\qquad xRy$ se $|x|=|y|$;
+
+\item[d)] $A=\mathbb{R}\qquad xRy$ se $|x|\leq|y|$;
+
+\item[e)] $A=\mathbb{Q}\setminus \{0\}\qquad xRy$ se $xy^{-1}$ può essere scritto come frazione con $m, n$ interi dispari;
+
+\item[f)] $A=\mathbb{N}\qquad xRy$ se $x-y=3n$ per un qualche $n\in\mathbb{N}$;
+
+\item[g)] $A=\mathbb{N}\qquad xRy$ se $x-y=3n$ per un qualche $n\in\mathbb{Z}$;
+
+\end{itemize}
+  
+\end{esercizio}
+
+\begin{soluzione}
+    
+
+
+
+\begin{itemize}\setlength\itemsep{1em}
+
+\item Le relazioni sono tutte riflessive.
+
+\item Sono simmetriche: b, c, e, g.
+
+\item Sono transitive: c, d, e, f, g.
+
+\item Sono antisimmetriche: a, f.
+
+\item L'unica relazione d'ordine parziale è la f e non è totale.
+
+\item Sono relazioni di equivalenza le seguenti:
+\begin{itemize}
+\item c, $[1]=\{-1,1\}$
+\item e, $[1]=\bigg\{\dfrac{m}{n}\in\mathbb{Q}\ |\ m,n\in\mathbb{Z}\ \text{entrambi\ dispari}\bigg\}$
+\item g, $[0]=3\mathbb{N}$
+\end{itemize}
+
+\end{itemize}
+\end{soluzione}
+
+
+% -------------
+

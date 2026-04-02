@@ -1,0 +1,71 @@
+\intro{}
+
+
+\section{Introduzione}
+
+\defn{Ricorsione}{
+    La ricorsione è un metodo di risoluzione di problemi computazionali in cui la soluzione di un problema dipende dalla soluzione di istanze più piccole dello stesso problema 
+    e questo processo si realizza attraverso una funzione che richiama se stessa dall'interno del proprio corpo.
+}
+
+Una funzione ricorsiva è corretta e completa è sempre composta da esattamente due componenti fondamentali e inscindibili:
+
+\begin{itemize}
+    \item Caso base: il caso più elementare del problema, per cui la risposta è nota e immediata  la funzione lo risolve senza richiamare se stessa. È la condizione di arresto che garantisce la terminazione della catena ricorsiva. Senza di esso, la ricorsione continuerebbe all'infinito.
+    \item Passo ricorsivo: il caso generale, in cui il problema non è ancora nella sua forma più semplice La funzione lo riduce in una versione più piccola e si richiama su quella versione ridotta, avanzando progressivamente verso il caso base.
+\end{itemize}
+\subsection{Struttura formale}
+Matematicamente, una definizione ricorsiva si esprime sempre in questa forma:
+\[
+\begin{cases}
+    \text{soluzione diretta} \ \text{se } n=\text{caso base}\\
+    g\bigl(n,f(n')\bigr) \qquad \quad \text{altrimenti , dove } n'<n
+\end{cases}
+\]
+
+Dove $n'$ è una versione ridotta di $n$, e $g$ è una qualsiasi operazione che combina il risultato della chiamata ricorsiva con il valore corrente. L'importante è che ogni passo ricorsivo garantisca che $n'$ converga verso il  caso base.
+
+
+\section{Pattern ricorsivi } 
+Da ora consideriamo la ricorsione non come “trucco”, ma come un insieme di pattern mentali ricorrenti.
+
+\subsection{Ricorsione lineare}
+
+Una funzione ricorsiva è lineare quando genera una chiamata ricorsiva per ogni esecuzione. Lo stack cresce come una catena, non come un albero.
+\subsubsection{Pre-order vs Post-order}
+In una ricorsione lineare ci sono 2 possibilità:
+\begin{itemize}
+    \item Pre-order: fa il lavoro \textbf{Prima} della chiamata ricorsiva.
+    \item Post-order: fa il lavoro \textbf{Dopo} la chiamata ricprsiva.
+\end{itemize}
+
+
+
+
+\begin{codeexample}[Stampa\_preorder]
+    \begin{codebox}
+        \begin{lstlisting}
+void stampa_preorder(int n, int i = 1) {
+    if (i > n) return;        
+    cout << i << " ";        
+    stampa_preorder(n, i + 1);
+}
+        \end{lstlisting}
+    \end{codebox}
+\end{codeexample}
+L'obiettivo della funzione \inlinecode{stampa\_preorder} è stampare i numeri da 1 a n usando la ricorsione, senza usare cicli espliciti come \inlinecode{for} o \inlinecode{while}. L’idea è: invece di far avanzare un contatore dentro un loop, lasci che sia la ricorsione stessa a comportarsi come un loop, facendo una chiamata dopo l’altra finché non raggiunge un caso base.
+
+
+La funzione ha due parametri: $n$, che rappresenta il numero massimo fino a cui vogliamo contare, e $i$, che rappresenta il numero corrente da stampare, inizializzato a 1 per default. Ad ogni chiamata, la prima cosa che la funzione fa è controllare se i ha superato n: se i > n, significa che abbiamo già stampato tutti i numeri desiderati, quindi non c'è più lavoro da fare e la funzione termina con un semplice  \inlinecode{return}. Questo è il caso base, cioè la condizione che ferma la ricorsione.
+
+Se invece $i$ è ancora minore o uguale a n, entriamo nel caso ricorsivo. Qui succedono due cose in ordine preciso: prima la funzione stampa il valore corrente di $ i$ con
+\inlinecode{cout << i << " ";}, poi richiama se stessa con 
+\inlinecode{stampa\_preorder(n, i + 1)}.
+
+Stampare prima di chiamare di nuovo la funzione significa che il “lavoro” viene fatto in discesa nello stack di chiamate: la sequenza delle stampe segue l’ordine naturale 1, 2, 3, …, n, ed è per questo che si parla di ricorsione pre-order.
+
+
+
+
+
+

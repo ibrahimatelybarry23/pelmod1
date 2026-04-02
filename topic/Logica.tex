@@ -1,0 +1,1459 @@
+
+\intro{
+In questo capitolo vedremo i concetti fondamentali della logica matematica, inclusi proposizioni, predicati e connettivi logici, le leggi di De Morgan e i quantificatori universale ed esistenziale. Inoltre, vedremo come costruire tavole di verità. Infine, applicheremo questi concetti attraverso esercizi pratici.
+}
+\section{Introduzione alla logica}
+\subsection{Cosa significa logica?}
+
+Il termine logica deriva dal greco lógos, parola che ha molteplici significati: pensiero, linguaggio, parola, ragionamento, ragione, ma anche concetti legati alla misurabilità, come rapporto e commensurabilità.
+
+In questo senso, la logica può essere definita come lo studio del lógos, ovvero lo studio del linguaggio, del pensiero, del ragionamento e delle relazioni misurabili tra elementi.
+
+\subsection{Cos'è la logica?}
+La logica si occupa della struttura del ragionamento. Per esempio, la logica ci consente di determinare se (la verità di) una conclusione segue necessariamente dalla verità delle sue premesse.
+
+\begin{esempio}
+Se la sintassi del programma è errata o se l'esecuzione comporta una divisione per zero, allora il computer genererà un messaggio di errore. Pertanto, se il computer non genera un messaggio di errore, allora la sintassi del programma è corretta e l'esecuzione non comporta una divisione per zero.
+\end{esempio}
+
+
+\subsection{Cos'è la logica matematica?}
+La logica matematica è un ambito della matematica che si occupa dello studio del ragionamento e del pensiero matematico. Poiché la logica viene analizzata attraverso strumenti matematici, la logica matematica ne costituisce una parte integrante.
+
+\begin{esempio}
+Se $x$ è un numero reale tale che $x<-2$ o $x>2$, allora $x^2>4$. Pertanto, se $x^2 \not> 4$, allora $x\not<-2$ e $x \not > 2$.
+\end{esempio}
+
+
+
+
+\section{Proposizioni e Predicati }
+Dopo aver visto che la logica si occupa del ragionamento, introduciamo ora le \textbf{componenti essenziali del linguaggio logico}: le \textbf{proposizioni} e i \textbf{predicati}, che costituiscono gli strumenti con cui esprimiamo verità e relazioni tra oggetti.
+\medskip
+
+\noindent Una \textbf{proposizione}  o \textbf{enunciato} è un'affermazione che può essere \textbf{vera} oppure \textbf{falsa}, ma non entrambe contemporaneamente.
+Per esempio, “$3$ è un numero dispari" è una proposizione vera, mentre "$3<2$" è una proposizione falsa. Espressioni come "chiudi la porta" oppure "quanti anni hai?" non sono proposizioni poiché non possono essere valutate come vere o false.La logica si occupa dunque dello studio di proposizioni  che possono assumere valori di verità ben definiti.
+\medskip
+
+I \textbf{predicati}, invece,  sono enunciati che dipendono da uno o più parametri (variabili), appartenenti a un certo insieme $D$ detto \textbf{dominio}. 
+Un predicato diventa una proposizione vera o falsa solo quando alle sue variabili viene assegnato un valore specifico all'interno del dominio.
+\\
+
+Per esempio, l'enunciato “$x$ è un numero pari” non è né vero né falso finché non si specifica il valore di $x$:  
+se $x=4$, l'enunciato è vero; se $x=5$, è falso.
+
+\subsection{Algebra di Boole}
+Il termine \textit{algebra} deriva dall'arabo \textit{al-jabr} e significa “unione”, “connessione” o “completamento”. 
+\medskip
+
+\noindent La logica proposizionale pu\`o essere formalizzata mediante una particolare struttura algebrica, detta \textbf{algebra di Boole} (o \textbf{algebra booleana}).
+\medskip
+
+L'algebra di Boole \`e definita su un insieme costituito da due soli elementi, comunemente indicati come \textbf{vero} (\textbf{V}) e \textbf{falso} (\textbf{F}).
+Questi elementi rappresentano i due possibili valori di verit\`a delle proposizioni logiche.
+Su tale insieme sono definite alcune operazioni:
+\begin{itemize}
+
+    \item \textbf{Operazioni binarie:}
+    \begin{enumerate}[label = \alph*)]
+        \item \textit{congiunzione} 
+        \item \textit{disgiunzione}
+    \end{enumerate}
+    \item \textbf{Operazioni unarie:}
+    \begin{enumerate}[label=\alph*)]
+        \item \textit{negazione}
+    \end{enumerate}
+\end{itemize}
+% (ad esempio la congiunzione e la disgiunzione) 
+
+% (la negazione), 
+Queste operazioni soddisfano specifiche leggi algebriche analoghe a quelle delle strutture algebriche classiche, come la \textbf{commutatività}, l'\textbf{associatività} e la \textbf{distributività}.
+
+
+
+\defn{Proposizione atomica}
+{
+Una \textbf{proposizione atomica} $P$ è un'affermazione che può essere \textbf{vera} o \textbf{falsa}, ma non può essere scomposta in parti più semplici mediante connettivi logici. Essa esprime una relazione tra oggetti, come un confronto numerico o una proprietà.
+}
+\begin{esempio}
+Nella tabella seguente  sono riportati alcuni esempi di proposizioni atomiche  con i loro corrispettivi valori di verità. Ogni enunciato rappresenta un fatto semplice, il cui valore di verità può essere verificato direttamente, senza dover ricorrere a operazioni logiche tra proposizioni.
+\begin{table}[h!]
+\centering
+\begin{tabular}{|l|c|}
+\hline
+\textbf{Proposizione} & \textbf{Valore di verità} \\
+\hline
+$3 < 5$ & V \\
+$5 + 7 = 12$ & V \\
+$5 < 3$ & F \\
+$5 + 7 = 13$ & F \\
+$3$ divide $21$ & V \\
+$121$ è multiplo di $11$ & V \\
+$3 = 5 + 6$ & F \\
+$11 + 6$ è un numero primo & V \\
+$5$ è dispari & V \\
+\hline
+\end{tabular}
+\caption{Esempi di proposizioni atomiche con i  loro corrispettivi valori di  verità}
+\end{table}
+
+\noindent Dalla tabella si osserva che ogni proposizione atomica può essere classificata come \textbf{vera} $(V)$ o \textbf{falsa} $(F)$.
+
+\end{esempio}
+
+
+\defn{Predicato atomico}
+{
+ Un\textbf{ predicato atomico} è un enunciato che contiene una o più variabili e rappresenta una proprietà o una relazione tra oggetti. Per esempio,  un predicato come $P(x)$ indica che l'oggetto $x$   soddisfa una certa proprietà $P$.
+Quando alle variabili viene assegnato un valore all'interno di un dominio di interpretazione, il predicato assume un valore di verità (vero o falso).
+
+}
+\begin{esempio}
+Di seguito alcuni esempi di predicati atomici.
+    \begin{itemize}
+    \item $x$ divide $22$ 
+    \item $x+y=y+x$
+    \item $x$ è un numero primo 
+    \item  $x$ è un numero dispari
+    \item $P(x)$ $\left( \text{leggi: } x \text{ soddisfa la proprietà } P\right) $
+\end{itemize}
+Osserviamo  che, finché  le variabili non assumono valori nel dominio, il predicato non ha un valore di verità definito. Diventa quindi una proposizione solo dopo la sostituzione delle variabili con elementi concreti del dominio preso in considerazione.
+\end{esempio}
+
+
+
+
+\defn{Proposizione composta}{
+ Una \textbf{proposizione composta} è un enunciato formato a partire da due o più proposizioni semplici tramite l'uso dei \textbf{connettivi logici} (come "e","o", "non"). In alcuni casi possono essere presenti anche \textbf{quantificatori} (come "ogni","esiste"). Questi strumenti consentono di costruire frasi logiche più complesse a partire da affermazioni elementari.
+ 
+}
+\begin{esempio}
+Di seguito alcuni esempi di proposizioni composte:
+    \begin{itemize}
+    \item $ 5$  è un numero primo \textbf{e}  $8 $ è un numero pari
+    \item  Un  numero è pari \textbf{se e solo se} è divisibile per $2$
+    \item \textbf{Ogni} numero naturale è somma di due numeri primi
+    \item \textbf{Per ogni} $x$ esiste $y$ tale che $P \left(x,y\right)$
+
+\end{itemize}
+Nel primo e nel secondo esempio si utilizzano connettivi logici per combinare due proposizioni semplici. Nel terzo e nel quarto esempio  vengono impiegati i quantificatori per esprimere enunciati generali o di esistenza.
+
+
+
+
+\noindent Osserviamo che  ciascuna di queste frasi deriva dalla combinazione di proposizioni  semplici o dall'applicazione di quantificatori, ottenendo così enunciati più articolati rispetto alle proposizioni atomiche.
+\end{esempio}
+
+
+\subsection{Connettivi logici}
+
+\defn{Connettivi logici}{
+ I \textbf{connettivi logici} sono operatori che  permettono di combinare una o più proposizioni per formarne di nuove e più complesse. Dati due enunciati $P$ e $Q$, le principali proposizioni logiche sono :
+\begin{center}
+\begin{tabular}{c c c}
+\textbf{Negazione} & \textbf{Congiunzione} & \textbf{Disgiunzione} \\[2mm]
+\( \neg P \) & \( P \land Q \) & \( P \lor Q \) \\[2mm]
+NOT & AND & OR \\
+\end{tabular}
+\end{center}
+}
+
+
+I connettivi logici seguono delle regole ben precise: 
+\begin{itemize}
+    \item \( \neg P \) è \textbf{vero} quando \( P \) è \textbf{falso}; \\
+          \( \neg P \) è \textbf{falso} quando \( P \) è \textbf{vero}.
+    
+    \item \( P \land Q \) è \textbf{vero} quando \textbf{entrambi} \( P \) e \( Q \) sono veri; \\
+          altrimenti è \textbf{falso}.
+    
+    \item \( P \lor Q \) è \textbf{vero} quando \textbf{almeno uno} tra \( P \) e \( Q \) è vero; \\
+          è \textbf{falso} quando \textbf{entrambi} sono falsi.
+\end{itemize}
+
+
+\subsection*{Ordine delle Operazioni}
+Analogamente alle operazioni aritmetiche, i connettivi logici seguono una gerarchia:
+\begin{itemize}
+    \item La \textbf{negazione} (\(\neg\)) ha la priorità più alta, quindi viene eseguita per prima.
+    \item La \textbf{congiunzione} (\(\land\)) ha una priorità maggiore rispetto alla disgiunzione (\(\lor\)).
+    \item La \textbf{disgiunzione} (\(\lor\)) ha la priorità più bassa.
+\end{itemize}
+
+Pertanto, quando si incontrano più operatori, si segue questo ordine per valutarli.
+
+
+
+\medskip 
+Per consolidare i concetti, vediamo alcuni esempi.
+% mettere strategia 
+\begin{esempio}
+Formalizzare le seguenti frasi in logica proposizionale:
+
+   \begin{enumerate}[label=\alph*)]
+
+        \item Non fa caldo ma c'è il sole
+        \begin{itemize}
+            \item Definizione delle proposizioni:
+            \[
+            P: \text{fa caldo}
+            \]
+            \[
+            Q: \text{c'è il sole}
+            \]
+            
+            \item Traduzione logica della frase:
+            \begin{itemize}
+                \item "Non fa caldo" si traduce in \( \neg P \)
+                \item "C'è il sole" si traduce in \( Q \)
+                \item "Ma" equivale all'operatore logico \( \land \) (e)
+            \end{itemize}
+            
+            \item Formalizzazione completa:
+            \[
+            \neg P \land Q
+            \]
+        \end{itemize}
+
+        \item Non piove né fa freddo
+        \begin{itemize}
+            \item Definizione delle proposizioni:
+            \[
+            P: \text{piove}
+            \]
+            \[
+            Q: \text{fa freddo}
+            \]
+            
+            \item Traduzione logica della frase:
+            \begin{itemize}
+                \item "Non piove" si traduce in \( \neg P \)
+                \item "Non fa freddo" si traduce in \( \neg Q \)
+                \item "Né" si traduce con l'operatore logico \( \land \) (e)
+            \end{itemize}
+            
+            \item Formalizzazione completa:
+            \[
+            \neg P \land \neg Q
+            \]
+        \end{itemize}
+    \medskip In ciascun caso traduciamo le parti in linguaggio "\textit{naturale}" ("non", "e", "né") nei corrispettivi connettivi logici. 
+\end{enumerate}
+
+ 
+\end{esempio}
+
+
+% mettere strategia
+\begin{esempio} 
+Costruiamo la \textbf{tabella di verità} per le proposizioni \(P\) e \(Q\), al fine di analizzare il comportamento dei principali connettivi logici. Le tabelle di verità mostrano come varia il valore logico in funzione dei valori di verità delle proposizioni di partenza.
+    
+    \begin{center}    
+    \begin{tabular}{c|c|c|c|c}
+      \(P\) & \(Q\) & \(P \land Q\) & \(P \lor Q\) & \(\neg P\) \\
+      \hline
+      V & V & V & V & F \\
+      V & F & F & V & F \\
+      F & V & F & V & V \\
+      F & F & F & F & V \\
+    \end{tabular}
+    \end{center}
+    
+    \medskip Osserviamo:
+    
+    \begin{itemize}
+        \item La colonna di \(P \land Q\) è vera solo quando entrambe le proposizioni sono vere 
+        \item  La colonna di \( P \lor Q \) è vera quando una tra $P$ e $Q$ è vera.
+        \item La colonna di \(\neg P\) mostra che la negazione inverte  i valori di verità di $P$. 
+    \end{itemize}
+\end{esempio}
+
+\begin{esempio}
+Analizziamo ora la seguente espressione logica:
+    \[
+    \bigl(P \lor Q \bigr) \land \neg\bigl(P \land Q \bigr)
+    \]
+    
+Per comprenderne il significato, costruiamo la relativa tabella di verità:
+
+    \begin{center}
+    \begin{tabular}{c c|c c c|c}
+      \(P\) & \(Q\) & \(P \lor Q\) & \(P \land Q\) & \(\neg(P \land Q)\) & \(\bigl(P \lor Q\bigr) \land \neg\bigl(P \land Q\bigr) \) \\
+      \hline
+      V & V & V & V & F & F \\
+      V & F & V & F & V & V \\
+      F & V & V & F & V & V \\
+      F & F & F & F & V & F \\
+    \end{tabular}
+    \end{center}
+    Osserviamo che l'espressione è vera solo nei casi in cui \textbf{ esattamente una} delle due proposizioni è vera, ma non entrambe contemporaneamente. Questo comportamento merita una definizione formale come connettivo logico a sé stante.
+\end{esempio}
+    
+\subsection{Or esclusivo XOR (\texorpdfstring{$\oplus$}{XOR})}
+L'espressione vista nell'esempio precedente definisce un nuovo connettivo logico chiamato \textbf{or esclusivo} \textbf{(XOR)}, che formalizziamo come segue:
+
+\defn{XOR}{
+La proposizione \( P \oplus Q \) (XOR) è vera quando esattamente una delle due proposizioni è vera, ma non entrambe. In altre parole, XOR è equivalente 
+
+\[
+P \oplus Q \equiv (P \lor Q) \land \neg (P \land Q)
+\]
+
+Per comodità riportiamo la tabella di verità  di \( P \oplus Q \) in forma sintetica :
+
+
+\begin{center}
+\begin{tabular}{c|c|c}
+  \(P\) & \(Q\) & \(P \oplus Q\) \\
+  \hline
+  V & V & F \\
+  V & F & V \\
+  F & V & V \\
+  F & F & F \\
+\end{tabular}
+\end{center}
+}
+
+% mettere strategia 
+\thmp{}{ Per ogni numero naturale $n$, la quantità $n^2+n$ è sempre un numero pari 
+
+è un numero naturale pari. }{
+Dobbiamo verificare che $n^2+n$ \'e pari per ogni numero naturale $n$. Procediamo per casi, a seconda $n$ sia \textbf{pari} o \textbf{dispari}
+
+\begin{itemize}
+ 
+    \item \textbf{Caso 1: $n$ è pari}
+    
+    Se $n$ è un numero pari allora $n=2 r$, dove $r \in \mathbb{N}$. Quindi:
+\[
+    n^2+n = \left( 2r\right)^2+2r  = 2 \left(2r+1\right)
+\]
+
+e questo \`e un numero pari perch\`e \`e della forma $2t$ con $t=(2r+1)$.
+
+\item  \textbf{Caso 2: $n$ è dispari}
+
+Se $n$ è un numero dispari allora $n=2r+1 $, dove $r \in \mathbb{N}$. Quindi:
+
+\[
+    n^2+n =  \left( 2r+1\right)^2+2r+1 = 4r^2+4r+1+2r+1 = 4r^2+6r+2= 2\left(2r^2+3r+1\right)
+\]
+
+e questo \`e un numero pari perch\`e \`e della forma $2s$ con $s=(2r^2+3r+1)$.
+\end{itemize}
+
+\textbf{Conclusione:} in entrambi i casi la somma è un multiplo di $2$ quindi sempre pari.
+}
+
+\section{Equivalenze logiche}
+Talvolta due proposizioni dal signficato apparentemente  diverso in realtà esprimono esattamente la stessa situazione. Questo può avvenire sia per ragioni \textbf{semantiche}  sia a \textbf{livello logico}, grazie alla struttura delle formule.
+Ad esempio:
+
+Le proposizioni: 
+\[
+6 > 3 \ \text{e} \ 3<6
+\]
+
+ sono due modi diversi di esprimere lo stesso concetto,  come si vede dalla definizione dei simboli "maggiore di" (\(>\)) e "minore di" (\(<\)).
+
+\begin{itemize}
+    \item La proposizione \(6 > 3\) significa che \(6\) è maggiore di \(3\).
+    \item La proposizione \(3 < 6\) significa che \(3\) è minore di \(6\).
+\end{itemize}
+
+
+Per la definizione dei simboli di maggiore e minore, possiamo dire che queste proposizioni sono \textbf{logicamente equivalenti}, ovvero hanno sempre lo stesso valore di verità.
+
+
+
+Un secondo esempio di equivalenza logica riguarda la forma delle proposizioni unite tramite connettivi: 
+\begin{itemize}
+    \item i cani abbaiano e i gatti miagolano.
+    \item i gatti miagolano e i cani abbaiano.
+\end{itemize}
+
+Anche se cambiamo l'ordine delle affermazioni, dal punto vista logico sono equivalenti. 
+
+% esprimono lo stesso significato, ma non a partire dal significato delle parole, bensì per la loro forma logica. Questo può essere verificato osservando la seguente tavola di verità, dove le variabili \(P\) e \(Q\) sostituiscono gli enunciati "i cani abbaiano" e "i gatti miagolano" dell'esempio precedente, rispettivamente.
+Per chiarire, costruiamo la tavola  di verità che confronta  \(P \land Q\)  e 
+\(Q \land P\), dove:
+\begin{itemize}
+    \item $P$: i cani abbaiano
+    \item $Q$: i gatti miagolano 
+\end{itemize}
+
+
+
+
+\begin{center}
+\begin{tabular}{c|c|c|c}
+  \(P\) & \(Q\) & \(P \land Q\) & \(Q \land P\) \\
+  \hline
+  V & V & V & V \\
+  V & F & F & F \\
+  F & V & F & F \\
+  F & F & F & F \\
+\end{tabular}
+\end{center}
+
+Osservando la tabella, notiamo che i valori delle colonne di  \(P \land Q\) e di \(Q \land P\) coincidono.
+
+
+\defn{Logicamente equivalente}{
+
+ Due proposizioni si dicono logicamente equivalenti se, e solo se, hanno lo stesso valore di verità per ogni possibile assegnazione di verità alle variabili proposizionali che contengono. In simboli,
+\[P \equiv Q\] 
+}
+
+
+
+
+
+
+
+\begin{esempio} 
+    Consideriamo le due proposizioni:
+    \[
+    \neg(P \land Q) \quad \text{e} \quad \neg P \lor \neg Q
+    \]
+    Costruiamo la tavola di verità per verificarne l'equivalenza logica:
+    \begin{center}
+    \begin{tabular}{c|c|c|c|c|c}
+      \(P\) & \(Q\) & \(\neg P\) & \(\neg Q\) & \(\neg(P \land Q)\) & \(\neg P \lor \neg Q\) \\
+      \hline
+      V & V & F & F & F & F \\
+      V & F & F & V & V & V \\
+      F & V & V & F & V & V \\
+      F & F & V & V & V & V \\
+    \end{tabular}
+    \end{center}
+
+% Questa tavola di verità mostra che \(\neg(P \land Q)\) e \(\neg P \lor \neg Q\) hanno gli stessi valori di verità in tutti i casi, quindi possiamo affermare che sono logicamente equivalenti:
+% \[
+% \neg(P \land Q) \equiv \neg P \lor \neg Q
+% \]
+
+
+Osservando la tabella di verità notiamo che le colonne relative a \(\neg(P \land Q)\)  e \(\neg P \lor \neg Q\) coincidono in tutti i casi: per ogni possibile assegnazione dei valori di verità a $P$ e $Q$, le proposizioni assumono lo stesso valore. Per tanto le proposizioni sono logicamente equivalenti, in simboli:
+\[
+\neg(P \land Q) \equiv \neg P \lor \neg Q
+\]
+\end{esempio}
+
+\section{Leggi di De Morgan}
+Le l\textbf{eggi di De Morgan} permettono di trasformare la\textbf{ negazione di una congiunzione} in \textbf{una disgiunzione di negazioni}, e viceversa. Andiamole a vedere nel dettaglio: 
+
+\begin{itemize}
+    \item la negazione di una disgiunzione è logicamente equivalente alla congiunzione delle negazioni
+   \[
+    \neg \left(P \lor Q\right) \equiv  \left(\neg P \right) \land (\neg Q)
+    \]
+
+
+    \item La negazione di una congiunzione è logicamente equivalente alla disgiunzione delle negazioni
+
+\[
+    \neg \left(P \land Q\right) \equiv  \left(\neg P \right) \lor (\neg Q)
+\]
+
+\end{itemize}
+
+
+
+
+\begin{esempio} Dimostriamo la prima legge di  De Morgan
+\[
+\neg (P \lor Q) \equiv (\neg P) \land (\neg Q)
+\]
+Costruiamo due tavole di verità per entrambe le proposizioni:
+\begin{center}
+\begin{tabular}{c|c|c|c}
+  \(P\) & \(Q\) & \(P \lor Q\) & \(\neg (P \lor Q)\)  \\
+  \hline
+  V & V & V & F \\
+  V & F & V & F\\
+  F & V & V & F  \\
+  F & F & F & V  \\
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{tabular}{c|c|c|c|c}
+  \(P\) & \(Q\) & \(\neg P\) & \(\neg Q\) &  \(\neg P \land \neg Q\) \\
+  \hline
+  V & V & F & F & F \\
+  V & F & F & V & F  \\
+  F & V & V & F & F  \\
+  F & F & V & V & V  \\
+\end{tabular}
+\end{center}
+
+Osserviamo che la colonna finale di ciascuna tavola di verità \( (\neg \left(P \lor Q\right) )\) e  \( (\neg P) \land (\neg Q)\) assume gli stessi valori in tutti i possibili casi. Questo conferma che le due proposizioni sono logicamente equivalenti.
+\[
+\neg (P \lor Q) \equiv (\neg P) \land (\neg Q)
+\]
+
+In altre parole:  La negazione di \(P\) oppure \(Q\) è vera solo quando sia \(P\) sia \(Q\) sono entrambe, esattamente come  non \(P\) e non \(Q\)
+\end{esempio} 
+
+
+
+
+
+
+\begin{esempio} Dimostriamo la seconda legge di De Morgan: \[
+\neg (P \land Q) \equiv (\neg P) \lor (\neg Q)
+\]
+Costruiamo due tavole di verità per entrambe le proposizioni:
+
+\begin{center}
+\begin{tabular}{c|c|c|c}
+  \(P\) & \(Q\) & \(P \land Q\) & \(\neg (P \land Q)\) \\
+  \hline
+  V & V & V & F  \\
+  V & F & F & V   \\
+  F & V & F & V    \\
+  F & F & F & V     \\
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{tabular}{c|c|c|c|c}
+  \(P\) & \(Q\) & \(\neg P\) & \(\neg Q\) & \(\neg P \lor \neg Q\) \\
+  \hline
+  V & V & F & F & F \\
+  V & F & F & V & V  \\
+  F & V & V & F & V  \\
+  F & F & V & V & V  \\
+\end{tabular}
+\end{center}
+Osserviamo che la colonna finale di ciascuna tavola di verità \( (\neg(P\land Q))  \) e \( (\neg P) \lor (\neg Q) \) ha gli stessi valori in tutti i casi possibili. Questo conferma che le due riproposizioni sono logicamente equivalenti.
+
+\[
+\neg (P \land Q) \equiv (\neg P) \lor (\neg Q)
+\]
+
+In altre parole: la negazione di \(P\) e \(Q\) è vera ogni volta che almeno uno tra \(P\) e \(Q\) è falso, proprio come non \(P\) oppure non \(Q\).
+\end{esempio}
+
+
+
+\begin{esempio} \textbf{Doppia Negazione}
+\medskip
+
+Consideriamo la proposizione:
+
+\[
+\neg(\neg P) \equiv P
+\]
+
+Costruiamo la sua tavola di verità per verificarne l'equivalenza:
+\begin{center}
+\begin{tabular}{c|c|c}
+  \(P\) & \(\neg P\) & \(\neg(\neg P)\) \\
+  \hline
+  V & F & V \\
+  F & V & F \\
+\end{tabular}
+\end{center}
+Osserviamo che la colonna di $P$ e quella di \( \neg(\neg P)\) coincidono sempre:  la negazione della negazione di una proposizione restituisce la proposizione stessa. Per Ogni valore di verità di \(P\), \( \neg(\neg P)\) è sempre equivalente a \(P\).
+\end{esempio}
+
+
+
+\begin{esempio} \textbf{Applicazione delle leggi di De Morgan alle disuguaglianze}
+\medskip
+
+Supponiamo di voler negare la disuguaglianza composta:
+\[
+-1 < x < 4
+\]
+
+Questa condizione esprime che \(x\) è maggiore di $-1$ e minore di $4$, ovvero:
+\[
+P = (x < 4) \quad \land \quad Q = (x > -1)
+\]
+
+La negazione può essere descritta come:
+\[
+\neg (P \land Q) \equiv \neg (x < 4) \lor \neg (x > -1)
+\]
+
+Per scrivere la negazione, possiamo usare la legge di De Morgan:
+\[
+\neg (P\land Q) \equiv (\neg P) \lor (\neg Q)
+\]
+\[
+\neg (x > -1) \lor \neg (x < 4)
+\]
+
+Sostituendo le definizioni dei predicati di \(P\) e \(Q\)
+\[
+\neg \big[ (x>-1) \land (x<4)\big] \equiv \neg(x>-1) \lor \neg (x>4)
+\]
+Notiamo che: 
+\[
+    \neg (x>-1) \text{è equivalente a } x \leq -1
+\]
+\[
+    \neg (x<4) \text{è equivalente a } x \geq 4
+\]
+
+Quindi, la negazione della disuguaglianza originale può essere scritta come:
+\[
+x \leq -1 \lor x \geq 4
+\]
+La negazione dell'intervallo aperto \(-1 < x < 4\) equivale a chiedere che \(x\) sia fuori dall'intervallo, ossia minore o uguale a \(-1\) oppure maggiore o uguale a \(4\).
+\end{esempio}
+
+
+
+\section{Implicazione}
+% Consideriamo due proposizioni $P$ e $Q$ tali che tutte le volte in cui
+% P risulta vera anche Q deve essere necessariamente vera, si scrive
+% \[
+%     P \Rightarrow Q
+% \]
+% si legge “se P allora Q” oppure “P implica Q”.
+
+% $P$ è detta ipotesi, e $Q$ conclusione. Una proposizione è detta condizionale perché la verità di $Q$ dipende da $P$.
+% La notazione $P \Rightarrow Q$ indica che $\Rightarrow$ è un connettivo logico che può essere utilizzato per unire enunciati e creare nuovi enunciati.
+Consideriamo due proposizioni $P$ e $Q$. Si dice che $P$ implica $Q$, se tutte le volte che $P$ è vera anche $Q$ è necessariamente vera. 
+\[
+ P \Rightarrow Q
+\]
+
+\begin{itemize}
+    \item $P$ si chiama \textbf{ipotesi}
+    \item  $Q$ si chiama \textbf{conclusione} 
+\end{itemize}
+
+L'implicazione si legge : 
+\begin{itemize}
+    \item se $P$ allora $Q$
+    \item $P$ implica $Q$”
+\end{itemize}
+
+ Una proposizione condizionale è tale perchè la verità di $Q$ dipende logicamente dalla verità di $P$.
+
+\begin{esempio}
+Sia $P(x) \equiv x \geq 10$  e  $Q(x) \equiv x > 5$. Per ogni numero naturale $n$, vale
+    \[
+    P(n) \Rightarrow Q(n)
+    \]
+    Infatti, se $n$ è almeno 10, allora è sicuramente maggiore di 5.
+\end{esempio}
+
+\begin{esempio}
+    Sia $P = \text{ possedere la patente di guida}$ e $Q= \text{avere raggiunto la maggior età}$.
+    
+    \[
+        P \Rightarrow Q
+    \]
+    
+Significa: Chi possiede la patente di guida ha sicuramente raggiunto la maggiore età.
+Tuttavia, non sempre vale il contrario,
+
+% Affinché l'implicazione valga, bisogna  che risulti impossibile che si verifichi $P$ ma che, contemporaneamente, non si verifichi $Q$, ossia deve essere falso.
+\[
+ Q \not\Rightarrow P
+\]
+Ciò significa che non è detto che chi ha compiuto 18 anni abbia la patente.
+
+L'implicazione è falsa solo nel caso in cui si abbia \(P\) vera e \(Q\) falsa, cioè:
+
+\[
+    P \land(\neg Q)
+\]
+
+In tutti gli altri casi ( se non ha la patente, oppure se è maggiorenne e ha la patente), l'implicazione risulta vera.
+
+
+Applicando le leggi di De Morgan abbiamo
+\[
+\neg(P \land(\neg Q)) = (\neg P) \lor Q
+\]
+Quindi 
+\[
+    P \implies Q \text{ è logicamente equivalente a } (\neg P) \lor Q
+\]
+\end{esempio}
+
+
+
+
+
+
+
+\begin{esempio} Supponiamo che tu vada a fare un colloquio di lavoro in un negozio e il proprietario ti faccia la seguente promessa:
+
+\textit{"Se ti presenti al lavoro lunedì mattina, allora sarai assunto."}
+
+In quale circostanza si può dire che il datore di lavoro ha mentito?
+
+La promessa sarebbe falsa se e solo se:
+\begin{itemize}
+    \item ti presenti al lavoro lunedì (ipotesi vera)
+    \item on vieni assunto (conclusione falsa)
+\end{itemize}
+
+Questo esempio dimostra che una proposizione condizionale può essere considerata falsa solo quando l'ipotesi è vera e la conclusione è falsa. In tutti gli altri casi l'enunciato è vero.
+\medskip 
+
+\textbf{Tavola di verità:}
+\begin{center}
+\begin{tabular}{c|c|c}
+  \(P\) & \(Q\) & \(P \Rightarrow Q\) \\
+  \hline
+  V & V & V \\
+  V & F & F \\
+  F & V & V \\
+  F & F & V \\
+\end{tabular}
+\end{center}
+Dunque, l'implicazione \(P \Rightarrow Q\) è vera in tutti i casi, tranne quando   \(P\) è vera e \(Q\) è falsa.
+
+\end{esempio}
+
+
+
+
+
+
+\begin{esempio}
+Dimostriamo che \(P \Rightarrow Q \) è logicamente equivalente  \( \neg P \lor Q\).
+
+\medskip
+
+Costruiamo la tavola di verità per entrambe le proposizioni:
+\begin{center}
+\begin{tabular}{c|c|c|c|c}
+  \(P\) & \(Q\) & \(\neg P\) & \(P \Rightarrow Q\) & \(\neg P \lor Q\) \\
+  \hline
+  V & V & F & V & V \\
+  V & F & F & F & F \\
+  F & V & V & V & V \\
+  F & F & V & V & V \\
+\end{tabular}
+\end{center}
+Osserviamo che la colonna relativa a \(P \Rightarrow Q\) coincide esattamente con quella di \(\neg P \lor Q\) per ogni possibile valore delle proposizioni. Dunque le due espressioni sono logicamente equivalenti:
+\[
+P \Rightarrow Q \equiv \neg P \lor Q
+\]
+\end{esempio}
+
+
+\subsection{Modus Ponens}
+
+Il Modus Ponens è una delle regole fondamentali del ragionamento deduttivo e si basa sulla seguente   struttura logica:
+\begin{center}
+\begin{tabular}{l}
+  Premessa 1: \( P \Rightarrow Q \) \\
+  Premessa 2: \( P \) \\
+  \hline
+  Conclusione: \( Q \)
+\end{tabular}
+\end{center}
+
+\[
+  \text{Se }  P \implies Q \text{  è vero, allora } Q \text{ è vero}
+\]
+\textbf{In altre  parole:} Se sappiamo che "\(P\) implica \(Q\)" è vero, e sappiamo che \(P\) è vero, allora possiamo concludere che \(Q\) è vero.
+\medskip
+
+\noindent La dimostrazione di un teorema spesso si articola come  una catena di implicazioni:
+\[
+P_0 \Rightarrow P_1 \Rightarrow P_2 \Rightarrow \dots \Rightarrow P_m = P
+\]
+dove \(P_0\) è un assioma o postulato, e ogni passaggio segue la regola del modus pones. 
+
+
+\subsection{Forma Contropositiva}
+
+
+
+
+La \textbf{forma contropositiva} di una proposizione \(P \Rightarrow Q\) è la proposizione \(\neg Q \Rightarrow \neg P\), e le due sono logicamente equivalenti
+Questa forma è logicamente equivalente all'originale \(P \Rightarrow Q\).
+\begin{esempio}
+    Si noti che $ \neg  (\neg (X)) = X $ quindi:
+\[
+    P \Rightarrow Q \equiv (\neg P) \lor Q \equiv (\neg P )\lor (\neg(\neg Q)) \equiv (\neg(\neg Q)) \lor (\neg P ) \equiv (\neg Q) \Rightarrow \neg P
+    \]
+    Pertanto:
+    \( P \Rightarrow Q\) è logicamente equivalente a \( (\neg Q) \implies \neg P\)
+\end{esempio}
+
+
+
+
+\begin{osservazione}
+   La contropositiva è utile nelle dimostrazioni: invece di dimostrare direttamente \(P \Rightarrow Q\), a volte è più semplice dimostrare \(\neg Q \Rightarrow \neg P\), che è logicamente equivalente.
+\end{osservazione}
+
+
+
+
+
+
+\begin{esempio}
+Esempio pratico:
+
+\(
+P: \text{"Oggi è Pasqua"} \qquad Q: \text{"Domani è lunedì"}
+\)
+
+La contropositiva è:
+\[
+\neg Q \Rightarrow \neg P
+\]
+che si legge: Se domani non è lunedì, allora oggi non è Pasqua.
+
+\medskip
+La contrapostiva di un'implicazione è sempre logicamente all'implicazione originale.
+\end{esempio}
+
+
+\section{Doppia implicazione}
+Dire "$P$ se e solo se $Q$" significa che \(P\) è vero esattamente quando \(Q\) è vero, cioè se \(P\) e \(Q\) hanno lo stesso valore di verità. La doppia implicazione è vera se si verifica:
+\[
+    P \iff Q \quad \text{cioè} \quad (P\Rightarrow Q) \land (Q\Rightarrow P)
+\]
+
+\defn{Doppia implicazione}{ Date due variabili di enunciato \(P\) e \(Q\), il bi-condizionale \(P \iff Q\) è vero se e solo se \(P\) e \(Q\) hanno lo stesso valore di verità, ed è falso quando \(P\) e \(Q\) hanno valori di verità opposti.}
+
+
+
+
+\begin{center}
+\begin{tabular}{c|c|c}
+  \(P\) & \(Q\) & \(P \iff Q\) \\
+  \hline
+  V & V & V \\
+  V & F & F \\
+  F & V & F \\
+  F & F & V \\
+\end{tabular}
+\end{center}
+
+
+\exm{dimostrare che un numero naturale è un multiplo di $12$ se e solo se esso è un multiplo di $3$ e un multiplo di $4$.}
+{La dimostrazione è divisa in due parti:
+
+$\bigl(\implies\bigr)$ se $n$ è un multiplo di $12$ allora $n=12m$. Poiché:
+\[
+12=3\cdot4=4\cdot3 \ \text{abbiamo:}
+\]
+\[
+ n = 3 \cdot \bigl(4m\bigr) \ \ \text{e} \ \ n= 4\cdot\bigl(3m\bigr)
+\]
+\vspace{0.1cm}
+
+cioè $n$ è un multiplo sia di $3$ che di $4$.
+\vspace{0.2cm}
+
+$\bigl(\impliesleft\bigr)$ Supponiamo che $n=3r$ e $n=4s$ e dimostriamo che $n=12t$. Da $3r=4s$ abbiamo che $4s$ è un multiplo di $3$, ma 4 non è un multiplo di$3$, quindi s deve essere un multiplo di 3, cioè $s=3t$. Ora abbiamo:
+\[
+n=4s=4\cdot\bigl(3t\bigr)=12t
+\]
+quindi $n$ è un multiplo di 12.}
+
+
+\subsection{Ordine di priorità degli operatori logici }
+
+L'ordine di priorità dei connettivi logici è il seguente:
+\begin{center}
+\begin{tabular}{c|l}
+  \textbf{Priorità} & \textbf{Connettivo logico} \\
+  \hline
+  1 & \( \neg \)  (NOT) \\
+  2 & \( \land \)  (AND) \\
+  3 & \( \lor \)  (OR) \\
+  4 & \( \Rightarrow \)  (Implica) \\
+  5 & \( \iff \)  (Doppia implicazione) \\
+\end{tabular}
+\end{center}
+
+
+
+
+\section{Quantificatori}
+
+In logica proposizionale e predicativa esistono due quantificatori fondamentali:
+\begin{center}
+    
+\begin{tabular}{c|l}
+   \textbf{Simbolo} & \textbf{Significato} \\
+  \hline
+  \( \forall \):  \textbf{ Quantificatore universale} & per ogni \\
+\( \exists \): \textbf{ Quantificatore esistenziale}   & esiste \\
+\end{tabular}
+\end{center}
+
+Essi permettono di trasformare i predicati in enunciati, specificando se una certa proprietà vale per tutti o per alcuni elementi di un dominio.
+
+\subsection{Quantificatore universale \texorpdfstring{$\forall$}{forall}}
+
+\defn{Quantificatore universale}{
+Sia \(P(x)\) un predicato e \(D\) il dominio di \(x\). Un enunciato universale ha la forma:
+\[
+\forall x \in D, \; P(x)
+\]
+ed è \textbf{vero} se, e solo se, \(P(x)\) è vero per \emph{ogni} \(x\) appartenente al dominio \(D\).  
+È \textbf{falso} se esiste almeno un \(x \in D\) per cui \(P(x)\) è falso.
+
+Un valore \(x\) per cui \(P(x)\) è falso è detto \textbf{controesempio}.
+}
+
+Il quantificatore universale indica che una proprietà vale per tutti gli elementi di un insieme. Si pensi all'affermazione "tutti gli studenti hanno superato l'esame di strutture discrete": basta che uno non lo abbia superato per rendere falso l'enunciato.
+
+
+\exm{Controesempio per un enunciato universale}{
+Sia \(D=\{n \in \mathbb{N} \mid 1 \le n \le 100\}\) e consideriamo la proposizione:
+\[
+\forall x \in D, \; x^2 + x + 41 \ \text{è un numero primo}.
+\]
+Verifichiamo alcuni valori:
+\[
+x=1 \ \Rightarrow \ 1^2+1+41 = 43 \ (\text{primo}),
+\]
+\[
+x=2 \ \Rightarrow \ 2^2+2+41 = 47 \ (\text{primo}).
+\]
+Per \(x=41\) otteniamo:
+\[
+41^2 + 41 + 41 = 41^2 + 2\cdot 41 = 41(41+2) = 41 \cdot 43
+\]
+che è composto.  
+Dunque \(x=41\) è un \textbf{controesempio} e la proposizione è falsa.
+}
+
+\noindent Questo esempio mostra come sia sufficiente trovare una sola eccezione \textbf{(controesempio)} per confutare un enunciato universale. 
+
+\subsection{Quantificatore esistenziale \texorpdfstring{$\exists$}{esiste}}
+
+\defn{Quantificatore esistenziale}{
+Sia \(P(x)\) un predicato e \(D\) il dominio di \(x\). Un enunciato esistenziale ha la forma:
+\[
+\exists x \in D, \; P(x)
+\]
+ed è \textbf{vero} se esiste almeno un \(x \in D\) per cui \(P(x)\) è vero.  
+È \textbf{falso} se \(P(x)\) è falso per ogni \(x \in D\).
+
+Il quantificatore esistenziale può essere visto come una disgiunzione.  
+Ad esempio, se \(x \in \{0,1,2,3,4\}\):
+\[
+\exists x \, P(x) \quad \Longleftrightarrow \quad P(0) \lor P(1) \lor P(2) \lor P(3) \lor P(4)
+\]
+Se \(x \in \mathbb{N}\), l'enunciato è equivalente a una disgiunzione infinita.
+
+}
+Il quantificatore esistenziale cerca almeno un elemento che soddisfa la proprietà.
+
+\exm{Esempio di enunciato esistenziale}{
+Sia \(D\) l'insieme degli studenti iscritti a Strutture Discrete e \(P(x)\) = ``\(x\) ha superato l'esame''.  
+L'enunciato:
+\[
+\exists x \in D, \; P(x)
+\]
+significa ``almeno uno studente ha superato l'esame''.
+}
+Questo enunciato è vero anche se solo uno studente tra tutti ha superato l'esame e non richiede che lo abbiano fatto tutti. 
+\subsection{Negazione dei quantificatori}
+
+Le leggi di negazione sono:
+\[
+\neg (\forall x \in D, P(x)) \ \equiv\ \exists x \in D, \neg P(x)
+\]
+\[
+\neg (\exists x \in D, P(x)) \ \equiv\ \forall x \in D, \neg P(x)
+\]
+
+ Negare "per ogni" vuol dire "esiste almeno uno per cui non vale"; negare "esiste" vuol dire "per tutti non vale".
+
+
+
+\exm{Negazione di un enunciato universale}{
+``Tutti gli studenti hanno superato l'esame'':
+\[
+\forall x \in D, \ P(x)
+\]
+Negazione:
+\[
+\exists x \in D, \ \neg P(x)
+\]
+che significa ``esiste almeno uno studente che \emph{non} ha superato l'esame''.
+}
+
+
+
+
+\exm{Negazione di un enunciato esistenziale}{
+``Esiste un programma che termina'':
+\[
+\exists x \in D, \ P(x)
+\]
+Negazione:
+\[
+\forall x \in D, \ \neg P(x)
+\]
+che significa ``nessun programma termina''.
+}
+
+
+
+
+
+\section{Tautologia, contraddizione e soddisfacibilità}
+
+\defn{Tautologia}{
+Una proposizione è una \textbf{tautologia} se è vera per \emph{ogni} assegnazione di valori di verità ai predicati atomici che essa contiene.
+\[
+\forall \text{ interpretazione } I, \quad I(P) = \text{Vero}.
+\]
+\begin{center}
+\begin{tabular}{c|c|c}
+  \(P\) & \(\neg P\) & \(P \lor \neg P\) \\
+  \hline
+  V & F & V \\
+  F & V & V \\
+\end{tabular}
+\end{center}
+}
+Una tautologia è una proposizione che è sempre vera, indipendentemente dai valori di verità assegnati. Sono utili in logica perché rappresentano verità universali.
+
+
+\defn{Contraddizione}{
+Una proposizione è una \textbf{contraddizione} se è falsa per \emph{ogni} assegnazione di valori di verità ai predicati atomici
+che essa contiene.
+
+\[
+\forall \text{ interpretazione } I, \quad I(P) = \text{Falso}.
+\]
+\begin{center}
+\begin{tabular}{c|c|c}
+  \(P\) & \(\neg P\) & \(P \land \neg P\) \\
+  \hline
+  V & F & F \\
+  F & V & F \\
+\end{tabular}
+\end{center}
+}
+
+Una contraddizione è una proposizione sempre falsa, qualunque assegnazione si dia. Non può mai verificarsi.
+
+\defn{Soddisfacibilità}{
+Una formula \(F\) è \textbf{soddisfacibile} se esiste almeno un'assegnazione dei valori di verità che la rende vera:
+\[
+\exists \text{ interpretazione } I \quad \text{tale che} \quad I(F) = \text{Vero}.
+\]
+Ogni tautologia è soddisfacibile; una contraddizione non lo è.
+}
+Una formula è soddisfacibile se esiste almeno una combinazione di valori di verità che la rende vera. Le tautologie sono sempre soddisfacibili, mentre le contraddizioni non lo sono mai.
+
+\subsection{Legge di Dummett}
+
+La seguente legge di Dummett è una \textbf{tautologia}
+\[
+    (A \implies B) \lor (B \implies A)
+\]
+
+
+\begin{center}
+\begin{tabular}{c|c|c|c|c}
+  \(A\) & \(B\) & \( A \implies B\) & \(B \implies A\) & \(\ (A \implies B) \lor (B\implies A)\) \\
+  \hline
+  V & V & V & V & V \\
+  V & F & F & V & V \\
+  F & V & V & F & V \\
+  F & F & V & V & V \\
+\end{tabular}
+\end{center}
+
+La tavola mostra che, qualunque combinazione di valori scegliamo per \(A\) e \(B\), almeno una delle implicazioni risulta vera. Questa è la ragione per cui la legge di Dummett è una tautologia.
+
+
+\newpage
+\section{Esercizi}
+\begin{esercizio}
+Scrivere in forma simbolica le seguenti proposizioni composte. 
+\begin{enumerate}
+    \item Non è vero che Piero non gioca a carte ogni sera
+    \item Non è vero che il gatto è vivo o è morto
+    \item La luce non è spenta ed è verde
+    \item Piove o c’è il sole
+    \item 2 è un numero primo e non è dispari
+    \item Mario e Lucia guardano le stelle
+\end{enumerate}
+\end{esercizio}
+
+\begin{soluzione}
+\begin{enumerate}
+    \item $\neg (\neg g)$\newline
+    con $g$: \virgolette{Piero gioca a carte ogni sera.}
+    
+    \item $\neg(v \vee m)$\newline
+    con $v$: \virgolette{Il gatto è vivo.} e $m$: \virgolette{Il gatto è morto.}
+    
+    \item $(\neg s) \wedge v$\newline
+    con $s$: \virgolette{La luce è spenta} e $v$: \virgolette{La luce è verde}
+    
+    \item $p \vee s$\newline
+    con $p$: \virgolette{Piove.} e $s$: \virgolette{C’è il sole.}
+    
+    \item $p \wedge (\neg d)$\newline
+    con $p$: \virgolette{2 è un numero primo.} e $d$: \virgolette{2 è un numero dispari.}
+    
+    \item $m \wedge l$\newline
+    con $m$: \virgolette{Mario guarda le stelle.} e $l $: \virgolette{Lucia guarda le stelle.}
+\end{enumerate}
+\end{soluzione}
+
+
+\begin{esercizio}
+Costruire la tabella di verità della seguente espressione logica.
+$$w = \neg ((x \vee y) \wedge z \wedge (y \vee z))$$
+\end{esercizio}
+\begin{soluzione}
+\begin{center}
+    \begin{tabular}{ | c | c | c | c | c | c | c |}
+        \hline 
+        $x$ & $y$ & $z$ & $(x \vee y)$ &  $(y \vee z)$ & $((x \vee y) \wedge z \wedge (y \vee z))$ & $w$ \\
+        \hline 
+        F & F & F & F &	F &	F	& V \\
+        \hline
+        F & F & V & F & V &	F	& V \\
+        \hline
+        F & V & F & V & V &	F	&	V \\
+        \hline
+        F & V & V &	 V & V & V	& F \\
+        \hline
+        V & F & F & V &	F &	F	& V \\
+        \hline
+        V & F & V & V &	V &	V & F \\
+        \hline
+        V & V & F & V &	V &	F &V \\
+        \hline
+        V & V & V & V &	V &	V &F \\
+        \hline
+    \end{tabular}
+\end{center}
+\end{soluzione}
+
+\begin{esercizio}
+Scrivere in forma simbolica la seguente proposizione composta. 
+\begin{center}
+    \virgolette{Se al capo non piaccio o pensa che io sia pigro allora non mi darà un aumento e dovrò trovare un altro appartamento}. 
+\end{center}
+\end{esercizio}
+    
+\begin{soluzione}
+\begin{enumerate}
+    \item[$A$:] \virgolette{Al capo piaccio.}
+    \item[$B$:] \virgolette{Il capo pensa che io sia pigro.}
+    \item[$C$:] \virgolette{Il capo mi darà un aumento.}
+    \item[$D$:] \virgolette{Io dovrò trovare un altro appartamento.}
+\end{enumerate}
+$$(\neg A \vee B) \Rightarrow (\neg C \wedge D)$$
+
+\noindent Costruiamo la tabella di verità dell'espressione logica sopra:
+	\begin{center}
+		\begin{tabular}{ | c | c | c | c | c | c | c | c | c |}
+			\hline 
+			A & B & C & D &  $\neg$A & $\neg$C & $\neg$A$\vee B$ & $\neg$ C $\wedge$ D &  $(\neg $A$ \vee $B$) \Rightarrow (\neg $C$ \wedge $D $)$  \\
+			\hline 
+			F & F & F & F &	V & V & V & F & F \\
+			\hline
+			F & F & F & V & V & V & V & V & V\\
+			\hline
+			F & F & V & F & V & F & V & F & F \\
+			\hline
+			F & F & V & V & V & F & V  & F & F\\
+			\hline
+			F & V & F & F &	 V &	V	& V & F & F\\
+			\hline
+			F & V & F & V & V & V & V & V & V\\
+			\hline
+			F & V & V & F & V &	F & V & F & F \\
+			\hline
+			F & V & V & V & V &	F & V & F & F \\
+			\hline
+			V & F & F & F & F & V & F & F & V\\
+			\hline
+			V & F & F & V & F & V & F & V & V\\
+			\hline
+			V & F & V & F & F & F & F & F & V\\
+			\hline
+			V & F & V & V & F & F & F & F & V\\
+			\hline
+			V & V & F & F & F & V & V & F & F\\
+			\hline
+			V & V & F & V & F & V & V & V & V\\
+			\hline
+			V & V & V & F & F & F & V & F & F\\
+			\hline
+			V & V & V & V & F & F & V & F & F\\
+			\hline
+		\end{tabular}
+	\end{center}
+\end{soluzione}
+
+\begin{esercizio}
+Sia $L(x,y)$ il predicato \virgolette{a $x$ piace $y$}. Sia l'universo del discorso l'insieme di tutte le persone. Usare i quantificatori per esprimere ognuna delle seguenti proposizioni: 	
+\begin{enumerate}
+    \item A tutti piacciono tutti
+    \item A qualcuno non piace nessuno
+    \item Non c'è nessuno che piaccia a tutti 
+\end{enumerate}
+\end{esercizio}
+
+
+\begin{soluzione}
+\begin{enumerate}
+    \item $\forall x \forall y \ (L(x,y))$
+    \item $\exists x \forall y \ (\neg (L(x,y)))$
+    \item $\neg \exists y \forall x \ (L(x,y))$
+\end{enumerate}
+\end{soluzione}
+
+\begin{esercizio}
+Sia $S(x)$ il predicato \virgolette{$x$ è uno studente}, $B(y)$ il predicato \virgolette{$y$ è un libro} e $H(x,y)$ il predicato \virgolette{$x$ possiede $y$}. Sia l'universo del discorso l'insieme di tutti gli oggetti e persone. Usare i quantificatori per esprimere ognuna delle seguenti proposizioni: 
+	
+\begin{enumerate}
+    \item Ogni studente possiede un libro
+    \item Esiste un libro che ogni studente possiede
+\end{enumerate}
+\end{esercizio}
+\begin{soluzione}
+\begin{enumerate}
+    \item $\forall x (S(x) \Rightarrow \exists y (B(y) \wedge H(x,y)))$\newline
+    \virgolette{Per ogni $x$, se $x$ è uno studente, allora esiste un $y$ che è un libro e $x$ possiede $y$}
+    \item $\exists y (B(y) \wedge \forall x ( S(x) \Rightarrow H(x,y) ))$\newline
+    \virgolette{Esiste un $y$ che è un libro e per ogni $x$, se $x$ è uno studente, allora $x$ possiede $y$}
+\end{enumerate}
+\end{soluzione}	
+
+% --------
+
+\begin{esercizio}    
+Formalizzare i seguenti enunciati: 	
+\begin{enumerate}
+    \item Ogni studente studia qualche libro
+    \item Qualche studente non legge 
+\end{enumerate}
+\end{esercizio}
+
+\begin{soluzione}	
+Sia $S(x)$ il predicato \virgolette{$x$ è uno studente}, $B(y)$ il predicato \virgolette{$y$ è un libro}, $L(x)$ il predicato \virgolette{$x$ legge} e  $T(x,y)$ il predicato \virgolette{$x$ studia $y$}. 
+
+\begin{enumerate}
+    \item $\forall x (S(x) \Rightarrow \exists y (B(y) \wedge T(x,y)))$
+    \item $\exists x (S(x) \wedge \neg L(x))$
+\end{enumerate}
+\end{soluzione}
+
+% --------
+
+\begin{esercizio}
+Sia $P(x, y)$ il predicato \virgolette{la persona $x$ ha letto il libro $y$} e sia $Q(w, z)$ il predicato \virgolette{$w$ è un libro dell'autore $z$}.
+Viene richiesto di:
+\begin{enumerate}
+    \item Utilizzare i quantificatori per esprimere la seguente proposizione: ``non esiste una persona che ha letto un libro di ciascun autore del mondo'' nella maniera più diretta possibile.
+    \item Riscrivere la proposizione precedente in modo che nessuna negazione preceda un quantificatore.
+\end{enumerate}
+\end{esercizio}
+
+\begin{soluzione}
+La proposizione può essere riletta come segue: ``non esiste una persona $x$ tale che, per ogni autore $z$, esiste un libro $y$ scritto da $z$ e che $x$ ha letto''.
+In formule:
+$$\neg\exists x \forall z \exists y (P(x, y)\land Q(y, z))$$
+La proposizione si può esprimere anche come:
+``Per ogni persona $x$, ed ogni libro $y$, esiste un autore $z$ per il quale, se $y$ è stato scritto da $z$, allora $x$ non ha letto $y$'':
+$$\forall x\forall y \exists z (Q(y,z)\implies \neg P(x, y))$$
+$$\forall x\forall y \exists z (\neg P(x,y) \lor \neg Q(y,z))$$
+Applicando le leggi di de Morgan si può ottenere anche
+$$\forall x\forall y \exists z \neg(P(x,y) \land Q(y,z))$$
+
+\end{soluzione}
+
+% --------
+
+\begin{esercizio}
+Il quantificatore \virgolette{esiste un unico} è indicato con il simbolo $\exists!$ ed è una variante del tradizionale quantificatore esistenziale $\exists$ che introduce un vincolo di unicità sull’elemento su cui si sta predicando.
+Per esempio, la formula $\exists!x.P(x)$ indica che esiste un unico elemento per cui il predicato $P$ vale.
+Riscrivere $\exists!x.P(x)$ in una formula equivalente che utilizzi solo i quantificatori ed i connettivi logici della logica tradizionale.
+\end{esercizio}
+
+\begin{soluzione}
+Possiamo richiedere che tutti gli altri elementi $y\neq x$ non soddisfino il predicato $P$, conducendo alla seguente formula:
+$$\exists x (P(x) \land \forall y (y\neq x \implies \neg P(y)))$$
+Un'altra formula equivalente è:
+$$\exists x (P(x) \land \forall y (P(y)\implies y = x))$$
+\end{soluzione}
+% --------
+
+\begin{esercizio}    
+Dimostrare che $\neg (\neg p)$ è logicamente equivalente a $p$. Utilizzare le tavole di verità. 
+\end{esercizio}
+
+\begin{soluzione}
+Qualsiasi valore di verità noi assegniamo a $p$, se è logicamente equivalente a $\neg (\neg p)$ allora le due proposizioni avranno gli stessi valori di verità. 
+
+\begin{center}
+    \begin{tabular}{|c|c|c|}
+        \hline 
+        $p$ & $\neg p$ & $\neg (\neg p)$ \\
+        \hline 
+        T & F & T \\
+        \hline 
+        F & T & F \\	
+        \hline 
+    \end{tabular}
+\end{center}
+$p$ e $\neg (\neg p)$ sono logicamente equivalenti perché i loro valori di verità coincidono.\\
+\end{soluzione}
+
+% --------
+
+\begin{esercizio}
+Riscrivere la seguente formula logica in modo che le negazioni $\neg$ appaiano solo all'interno dei predicati (cioè nessuna negazione deve essere all'esterno di un quantificatore o di una formula che faccia uso di connettivi logici):
+$$\neg\exists y (Q(y) \land \forall x \neg R(x,y))$$
+\end{esercizio}
+
+\begin{soluzione}
+La formula è logicamente equivalente a:
+$$\forall y \neg (Q(y) \land \forall x \neg R(x,y))$$
+Applicando De Morgan si ottiene
+$$\forall y (\neg Q(y) \lor \neg\forall x \neg R(x,y))$$
+che è equivalente a
+$$\forall y (\neg Q(y) \lor \exists x R(x,y))$$
+\end{soluzione}
+
+% --------
+
+\begin{esercizio}
+    
+Costruire la tabella di verità della seguente espressione logica.
+$$p \Rightarrow (q \vee r)$$
+
+Tale espressione è logicamente equivalente a $(p \Rightarrow q) \vee (p \Rightarrow r)$? \newline
+\end{esercizio}
+
+\begin{soluzione}	
+\begin{center}
+    \begin{tabular}{| c | c | c || c | c | c || c | c |}
+        \hline
+        $p$ & $q$ & $r$ & $q \vee r$ & $p \Rightarrow q$ & $p \Rightarrow r$ & $p \Rightarrow (q \vee r)$ & $(p \Rightarrow q) \vee (p \Rightarrow r)$  \\
+        \hline 
+        V &V &V &V &V &V &V &V \\ \hline
+        V &V &F &V &V &F &V &V \\ \hline
+        V &F &V &V &F &V &V &V \\ \hline
+        V &F &F &F &F &F &F &F \\ \hline
+        F &V &V &V &V &V &V &V \\ \hline
+        F &V &F &V &V &V &V &V \\ \hline
+        F &F &V &V &V &V &V &V \\ \hline
+        F &F &F &F &V &V &V &V \\ \hline
+    \end{tabular}
+\end{center}
+
+Le due espressioni logiche sono logicamente equivalenti perché i loro valori di verità coincidono.\\
+\end{soluzione}
+
+% -------
+
+\begin{esercizio}
+Dimostrare che le formule $(p\implies r)\land(q \implies r)$ e $(p\lor q)\implies r$ sono logicamente equivalenti.
+\end{esercizio}
+
+\begin{soluzione}
+Per dimostrare l'equivalenza è sufficiente costruire le tabelle di verità per le due formule e dimostrare che coincidono.
+\begin{center}
+\begin{tabular}{| c | c | c || c | c | c || c | c |}
+    \hline
+    $p$ & $q$ & $r$ & $p \lor q$ & $p \Rightarrow r$ & $q \Rightarrow r$ & $(p \lor q) \Rightarrow r$ & $(p \Rightarrow q) \land (p \Rightarrow r)$  \\
+    \hline 
+    V &V &V  &V &V &V &V &V \\ \hline
+    V &V &F  &V &F &F &F &F \\ \hline
+    V &F &V  &V &V &V &V &V \\ \hline
+    V &F &F  &V &F &V &F &F \\ \hline
+    F &V &V  &V &V &V &V &V \\ \hline
+    F &V &F  &V &V &F &F &F \\ \hline
+    F &F &V  &F &V &V &V &V \\ \hline
+    F &F &F  &F &V &V &V &V \\ \hline
+\end{tabular}
+\end{center}
+\end{soluzione}
+
+
+% -------
+
+\begin{esercizio}
+Utilizzare le equivalenze note per dimostrare l'equivalenza logica tra $\neg(p \Rightarrow q)$ e $p \wedge \neg q$. 
+\end{esercizio}
+
+\begin{soluzione}
+\begin{align*}
+    \neg(p \Rightarrow q) & \iff \neg (\neg p \lor q) && \text{(Implicazione)}\\
+    & \iff \neg (\neg p) \land \neg q && \text{(De Morgan)} \\
+    & \iff  p \land \neg q && \text{(Doppia Negazione)}
+\end{align*}
+\end{soluzione}
+
+\begin{esercizio}
+Utilizzare le equivalenze logiche per dimostrare che $\neg(p \vee \neg(p \wedge q))$ è una contraddizione 
+\end{esercizio}
+
+\begin{soluzione}	
+\begin{align*}
+        \neg(p \land \neg(p \lor q)) & \iff \neg p \lor \neg(\neg (p \lor q)) && \text{(De Morgan)}\\
+        & \iff \neg p \lor (p \lor q) && \text{(Doppia Negazione)}\\
+        & \iff (\neg p \lor p) \lor q && \text{(Associatività)}\\
+        & \iff F \lor q && \text{(Contraddizione)}\\
+        & \iff F && \text{(Dominanza e Commutatività)}
+\end{align*}
+\end{soluzione}
+
+\begin{esercizio}    
+Il predicato \virgolette{se $n$ è un multiplo di 3 allora $n$ è un multiplo di 6} è vero o falso? Se è vero, fornire una prova della sua veridicità, se è falso, fornire un contro-esempio. 
+\end{esercizio}
+	
+\begin{soluzione}
+	Il più piccolo multiplo di 3 è 3, che non è un multiplo di 6. Questo è di fatto un contro-esempio ed il predicato iniziale è falso. \\
+\end{soluzione}
+
+\begin{esercizio}
+Definire e provare un teorema basato sul seguente predicato: \virgolette{se $n$ è multiplo di $6$ allora $n$ è multiplo di $3$}.
+\end{esercizio}
+	
+\begin{soluzione}
+	\textbf{Teorema.} Per ogni numero naturale $n$, se $n$ è multiplo di 6 allora $n$ è multiplo di $3$. 
+    \medskip
+	
+	\noindent\textit{Dimostrazione.} Se $n$ è un multiplo di $6$ esiste un numero naturale $m$ tale che $n = 6m$. Questo può essere riscritto come $n = 3\times 2m$. Quindi possiamo concludere che $n$ è un multiplo di $3$. \\
+\end{soluzione}
+
+\begin{esercizio}
+    
+Quale dei seguenti predicati è vero? Quale è falso?
+	
+	\begin{enumerate}
+		\item se 256 è un quadrato perfetto allora 1024 è un quadrato perfetto
+		
+		\item se 250 è un quadrato perfetto allora 1000 è un quadrato perfetto
+		
+		\item se 257 è un numero primo allora 1028 è un numero primo
+	\end{enumerate}
+\end{esercizio}
+
+\begin{soluzione}
+Notare che in ogni predicato il secondo numero è quattro volte il primo. 
+
+\begin{enumerate}
+    \item Dato che $1024 = 4 \times 256 = 2^2 \times 256$, se 256 è un quadrato perfetto allora $1024$ è un quadrato perfetto a sua volta. \virgolette{se 256 è un quadrato perfetto} può essere riscritto come \virgolette{se $256=n^2$ per qualche $n \in \mathbb{N}$} e certamente, se $256=n^2$ per qualche $n \in \mathbb{N}$ allora $1024 = (2n)^2$, quindi 1024 è a sua volta un quadrato perfetto. Il primo predicato è vero. 
+    
+    \item Analogamente, se $250 = m^2$ per qualche $m \in \mathbb{N}$ allora $1000 = (2m)^2$. Quindi 1000 è a sua volta un quadrato perfetto. Il secondo predicato è vero anche se 250 non è un quadrato perfetto.\newline
+    Alternativamente, essendo l'ipotesi dell'implicazione falsa (250 non è un quadrato perfetto), possiamo dedurre direttamente che il predicato è vero.
+    
+    \item Se $x \in \mathbb{N}$ è un numero primo allora $4x$ non è mai primo, perché $x$ moltiplicato per un numero pari risulterà sempre in un numero pari che come divisore ha certamente il 2. Il terzo predicato è falso. 
+\end{enumerate}
+\end{soluzione}
