@@ -1,0 +1,12 @@
+PWD /Users/ibrabarry/Downloads/pelmod1-main
+INPUT /Users/ibrabarry/Library/TinyTeX/texmf.cnf
+INPUT /Users/ibrabarry/Library/TinyTeX/texmf-dist/web2c/texmf.cnf
+INPUT /Users/ibrabarry/Library/TinyTeX/texmf-var/web2c/pdftex/pdflatex.fmt
+INPUT /Users/ibrabarry/Downloads/pelmod1-main/main.tex
+OUTPUT main.log
+INPUT /Users/ibrabarry/Library/TinyTeX/texmf-dist/tex/latex/base/book.cls
+INPUT /Users/ibrabarry/Library/TinyTeX/texmf-dist/tex/latex/base/book.cls
+INPUT /Users/ibrabarry/Library/TinyTeX/texmf-dist/tex/latex/base/bk12.clo
+INPUT /Users/ibrabarry/Library/TinyTeX/texmf-dist/tex/latex/base/bk12.clo
+INPUT /Users/ibrabarry/Library/TinyTeX/texmf-dist/tex/latex/base/bk12.clo
+INPUT /Users/ibrabarry/Library/TinyTeX/texmf-dist/fonts/tfm/public/cm/cmr12.tfm

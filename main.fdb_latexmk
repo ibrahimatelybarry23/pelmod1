@@ -1,0 +1,17 @@
+# Fdb version 4
+["pdflatex"] 1775300548.99837 "/Users/ibrabarry/Downloads/pelmod1-main/main.tex" "main.pdf" "main" 1775300549.03395 2
+  "/Users/ibrabarry/Downloads/pelmod1-main/main.tex" 1775145738 20860 78fb950920ae1a8f41eb59d618e7be25 ""
+  "/Users/ibrabarry/Library/TinyTeX/texmf-dist/fonts/tfm/public/cm/cmr12.tfm" 1136768653 1288 655e228510b4c2a1abe905c368440826 ""
+  "/Users/ibrabarry/Library/TinyTeX/texmf-dist/tex/latex/base/bk12.clo" 1748806692 8285 eb2e07a9e456f2e445aaaabcc61b0d24 ""
+  "/Users/ibrabarry/Library/TinyTeX/texmf-dist/tex/latex/base/book.cls" 1748806692 23268 0045640547c14751e547e94fe4a0e0a8 ""
+  "/Users/ibrabarry/Library/TinyTeX/texmf-dist/web2c/texmf.cnf" 1749313668 42213 4e2ca030e8e2640502016e9e45868dcb ""
+  "/Users/ibrabarry/Library/TinyTeX/texmf-var/web2c/pdftex/pdflatex.fmt" 1765856490 2235600 629033ed279b9936552be3c21e6cb12d ""
+  "/Users/ibrabarry/Library/TinyTeX/texmf.cnf" 1766011412.53502 708 85fd07691b6294ba94c59dbc62380410 ""
+  "main.aux" 0 -1 0 "pdflatex"
+  "main.tex" 1775145738 20860 78fb950920ae1a8f41eb59d618e7be25 ""
+  "pgfplots.sty" 0 -1 0 ""
+  (generated)
+  "main.aux"
+  "main.log"
+  "main.pdf"
+  (rewritten before read)
