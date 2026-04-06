@@ -26,46 +26,1076 @@ Matematicamente, una definizione ricorsiva si esprime sempre in questa forma:
 Dove $n'$ è una versione ridotta di $n$, e $g$ è una qualsiasi operazione che combina il risultato della chiamata ricorsiva con il valore corrente. L'importante è che ogni passo ricorsivo garantisca che $n'$ converga verso il  caso base.
 
 
-\section{Pattern ricorsivi } 
 Da ora consideriamo la ricorsione non come “trucco”, ma come un insieme di pattern mentali ricorrenti.
 
-\subsection{Ricorsione lineare}
-
-Una funzione ricorsiva è lineare quando genera una chiamata ricorsiva per ogni esecuzione. Lo stack cresce come una catena, non come un albero.
-\subsubsection{Pre-order vs Post-order}
-In una ricorsione lineare ci sono 2 possibilità:
-\begin{itemize}
-    \item Pre-order: fa il lavoro \textbf{Prima} della chiamata ricorsiva.
-    \item Post-order: fa il lavoro \textbf{Dopo} la chiamata ricprsiva.
-\end{itemize}
-
-
-
-
-\begin{codeexample}[Stampa\_preorder]
-    \begin{codebox}
-        \begin{lstlisting}
-void stampa_preorder(int n, int i = 1) {
-    if (i > n) return;        
-    cout << i << " ";        
-    stampa_preorder(n, i + 1);
+\section{Ricorsione lineare}
+\defn{Ricorsone lineare}{
+    Una ricorsione è \textbf{lineare} quando ogni chiamataata genera esattamente una chiamata ricorsiva. La struttura è una catena: il problema di taglia n viene ridotto a un problema della stessa natura ma più piccolo, fino al caso base
 }
-        \end{lstlisting}
+Il principio è identico all'induzione matematica: il caso base corrisponde al passo base dell'induzione il passo ricorsivo corrisponde al passo induttivo
+
+Non va simulata la catena nella testa.  Si Assume che la funzione funzioni già per input più piccoli.
+
+\newpage
+
+La ricorsione lineare si divide in tre sottotipi a seconda di dove avviene il lavoro rispetto alla chiamata ricorsiva.
+
+\subsection{Post-order}
+    Il lavoro avviene \textbf{dopo} la chiamata ricorsiva. La chiamata ricorsiva viene fatta prima, il suo risultato viene usato dopo.
+
+
+\begin{codeexample}[Somma elementi positivi]
+  \strategia{
+    \begin{itemize}
+      \item Facciamo la \textbf{ricorsione sull'indice} \inlinecode{i},
+            avanzato di 1 ad ogni passo.
+      \item \textbf{Ipotesi induttiva:} la funzione è corretta per qualsiasi
+            indice strettamente maggiore di \inlinecode{i}.
+      \item \textbf{Passo ricorsivo:} uso la funzione (corretta per ipotesi
+            su \inlinecode{i+1}) e aggiungo il contributo di \inlinecode{v.at(i)}.
+            \vspace{0.1cm}
+
+            \inlinecode{int contributo = v.at(i) > 0 ? v.at(i) : 0;}
+            \vspace{0.1cm}
+
+            \inlinecode{return contributo + somma(v, i + 1);}
+
+      \item \textbf{Caso base:} quando \inlinecode{i == (int)v.size()}
+            non ci sono più elementi da esaminare; la somma è 0.
+            \vspace{0.1cm}
+
+            \inlinecode{if (i == (int)v.size()) return 0;}
+    \end{itemize}
+  }
+
+  \begin{codebox}
+    \begin{lstlisting}
+int somma(const vector<int>& v, int i = 0) {
+    if (i == (int)v.size()) return 0;
+    int contributo = v.at(i) > 0 ? v.at(i) : 0;
+    return contributo + somma(v, i + 1);
+}
+    \end{lstlisting}
+  \end{codebox}
+
+\end{codeexample}
+
+
+
+\begin{codeexample}[Massimo]
+  \strategia{
+    \begin{itemize}
+      \item Facciamo la \textbf{ricorsione sull'indice} \inlinecode{i},
+            avanzato di 1 ad ogni passo.
+      \item \textbf{Ipotesi induttiva:} la funzione è corretta per qualsiasi
+            indice strettamente maggiore di \inlinecode{i}.
+      \item \textbf{Passo ricorsivo:} uso la funzione (corretta per ipotesi
+            su \inlinecode{i+1}) e confronto \inlinecode{v.at(i)} con il
+            massimo del resto già noto.
+            \vspace{0.1cm}
+
+            \inlinecode{return max(v.at(i), massimo(v, i + 1));}
+
+      \item \textbf{Caso base:} quando \inlinecode{i == (int)v.size() - 1}
+            c'è un solo elemento, il massimo è lui.
+            \vspace{0.1cm}
+
+            \inlinecode{if (i == (int)v.size() - 1) return v.at(i);}
+    \end{itemize}
+  }
+
+  \begin{codebox}
+    \begin{lstlisting}
+int massimo(const vector<int>& v, int i = 0) {
+    if (i == (int)v.size() - 1) return v.at(i);
+    return max(v.at(i), massimo(v, i + 1));
+}
+    \end{lstlisting}
+  \end{codebox}
+
+\end{codeexample}
+
+  \subsection{Pre-order}
+Il lavoro avviene prima della chiamata ricorsiva. L'effetto è l'opposto della post-order: si elabora in ordine naturale invece che inverso.
+  \begin{codeexample}[Stampa da 1 a n]
+  \strategia{
+    \begin{itemize}
+      \item Facciamo la \textbf{ricorsione sull'indice} \inlinecode{i},
+            avanzato di 1 ad ogni passo.
+      \item \textbf{Ipotesi induttiva:} la funzione è corretta per qualsiasi
+            indice strettamente maggiore di \inlinecode{i}.
+      \item \textbf{Passo ricorsivo:} uso la funzione (corretta per ipotesi
+            su \inlinecode{i+1}) e stampo \inlinecode{i} prima di delegare
+            il resto, il lavoro avviene alla discesa (pre-order).
+            \vspace{0.1cm}
+
+            \inlinecode{cout << i << " ";}
+            \vspace{0.1cm}
+
+            \inlinecode{stampa(i + 1, n);}
+
+      \item \textbf{Caso base:} quando \inlinecode{i > n} non c'è più
+            nulla da stampare.
+            \vspace{0.1cm}
+
+            \inlinecode{if (i > n) return;}
+    \end{itemize}
+  }
+
+  \begin{codebox}
+    \begin{lstlisting}
+void stampa(int i, int n) {
+    if (i > n) return;
+    cout << i << " ";
+    stampa(i + 1, n);
+}
+    \end{lstlisting}
+  \end{codebox}
+
+\end{codeexample}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{codeexample}[Somma con accumulatore]
+  \strategia{
+    \begin{itemize}
+      \item Facciamo la \textbf{ricorsione sull'indice} \inlinecode{i},
+            avanzato di 1 ad ogni passo, con \inlinecode{acc} che porta
+            la somma parziale degli elementi positivi già visitati.
+      \item \textbf{Ipotesi induttiva:} la funzione è corretta per qualsiasi
+            indice strettamente maggiore di \inlinecode{i}.
+      \item \textbf{Passo ricorsivo:} uso la funzione (corretta per ipotesi
+            su \inlinecode{i+1}) aggiornando l'accumulatore con il contributo
+            dell'elemento corrente  nessun calcolo rimane pendente al ritorno.
+            \vspace{0.1cm}
+
+            \inlinecode{int contributo = v.at(i) > 0 ? v.at(i) : 0;}
+            \vspace{0.1cm}
+
+            \inlinecode{return somma(v, i + 1, acc + contributo);}
+
+      \item \textbf{Caso base:} quando \inlinecode{i == v.size()} tutti gli
+            elementi sono stati processati; viene restituito direttamente
+            l'accumulatore \inlinecode{acc}.
+            \vspace{0.1cm}
+
+            \inlinecode{if (i == v.size()) return acc;}
+    \end{itemize}
+  }
+
+  \begin{codebox}
+    \begin{lstlisting}
+int somma(const vector<int>& v, int i = 0, int acc = 0) {
+    if (i == v.size()) return acc;
+    int contributo = v.at(i) > 0 ? v.at(i) : 0;
+    return somma(v, i + 1, acc + contributo);
+}
+    \end{lstlisting}
+  \end{codebox}
+
+\end{codeexample}
+  \subsection{Tail recursion}
+  La chiamata ricorsiva è l'ultima operazione assoluta della funzione nessun calcolo pendente dopo di essa. Lo stato che nella post-order si accumula nello stack viene qui portato in avanti come parametro accumulatore.
+
+  \begin{codeexample}[Somma con accumulatore]
+  \strategia{
+    \begin{itemize}
+      \item Facciamo la \textbf{ricorsione sull'indice} \inlinecode{i},
+            avanzato di 1 ad ogni passo, con \inlinecode{acc} che porta
+            la somma parziale degli elementi positivi già visitati.
+      \item \textbf{Ipotesi induttiva:} la funzione è corretta per qualsiasi
+            indice strettamente maggiore di \inlinecode{i}.
+      \item \textbf{Passo ricorsivo:} uso la funzione (corretta per ipotesi
+            su \inlinecode{i+1}) aggiornando l'accumulatore con il contributo
+            dell'elemento corrente  nessun calcolo rimane pendente al ritorno.
+            \vspace{0.1cm}
+
+            \inlinecode{int contributo = v.at(i) > 0 ? v.at(i) : 0;}
+            \vspace{0.1cm}
+
+            \inlinecode{return somma(v, i + 1, acc + contributo);}
+
+      \item \textbf{Caso base:} quando \inlinecode{i == (int)v.size()} tutti
+            gli elementi sono stati processati; viene restituito direttamente
+            l'accumulatore \inlinecode{acc}.
+            \vspace{0.1cm}
+
+            \inlinecode{if (i == (int)v.size()) return acc;}
+    \end{itemize}
+  }
+
+  \begin{codebox}
+    \begin{lstlisting}
+int somma(const vector<int>& v, int i = 0, int acc = 0) {
+    if (i == (int)v.size()) return acc;
+    int contributo = v.at(i) > 0 ? v.at(i) : 0;
+    return somma(v, i + 1, acc + contributo);
+}
+    \end{lstlisting}
+  \end{codebox}
+
+\end{codeexample}
+
+\begin{codeexample}[Massimo comun divisore di Euclide]
+  La proprietà matematica su cui si fonda l'algoritmo è la seguente:
+  \[
+    \text{MCD}(a,\ b) = \text{MCD}(b,\ a \bmod b)
+  \]
+  \textbf{Perché è vera.} Dalla divisione euclidea si ha $a = q \cdot b + r$
+  con $r = a \bmod b$. Qualsiasi divisore comune $d$ di $a$ e $b$ divide anche
+  $r = a - q \cdot b$, e viceversa. I due insiemi di divisori comuni di
+  $(a,b)$ e $(b,r)$ sono quindi identici, e in particolare lo è il loro massimo.
+
+  \strategia{
+    \begin{itemize}
+      \item \textbf{Ricorsione su:} $b$, ridotto via $a \bmod b$ ad ogni passo.
+            Poiché $0 \le a \bmod b < b$, il secondo argomento decresce
+            strettamente la sequenza raggiunge $b = 0$ in tempo finito.
+      \item \textbf{Ipotesi induttiva:} la funzione è corretta per qualsiasi
+            valore di $b$ strettamente minore di quello corrente.
+      \item \textbf{Passo ricorsivo:} per la proprietà sopra,
+            $\text{MCD}(a,b) = \text{MCD}(b,\ a \bmod b)$;
+            per ipotesi la funzione è già corretta su $(b,\ a \bmod b)$,
+            quindi la chiamata ricorsiva restituisce il risultato corretto.
+            La chiamata è \textit{tail}: $a \bmod b$ viene calcolato prima
+            di essere passato, nessun calcolo rimane pendente al ritorno.
+      \item \textbf{Caso base:} quando $b = 0$, ogni intero divide $0$,
+            quindi $\text{MCD}(a,\ 0) = a$.
+    \end{itemize}
+  }
+
+  \begin{codebox}
+    \begin{lstlisting}
+int mcd(int a, int b) {
+    if (b == 0) return a;    
+    return mcd(b, a % b);   
+}
+    \end{lstlisting}
+  \end{codebox}
+
+\end{codeexample}
+
+
+
+Ora andiamo a vedere il secondo pattern la \textbf{Tail recursion}.
+
+\section{Tail recursion}
+\defn{Tail recursion}{
+    Una chiamata ricorsiva è in coda, quando è l'ultima operazione assoluta della funzione nessun calcolo rimane pendente dopo di essa. Il valore restituito della chiama ricorsiva viene restituito direttamente ,senza ulteriori elaborazioni.
+}
+
+La tail recursion si divide in due famiglie principali: con accumulatore e senza accumulatore:
+
+\subsection{Senza accumulatore}
+La chiamata ricorsiva è  l'ultima operazione, ma non c'è nulla da comunicare in avanti ,  il risultato della chiamata ricorsiva viene restituito direttamente senza modifiche.
+
+Si usa quando la ricorsione \textbf{elimina} possibilità invece di costruire qualcosa. Tipicamente ricerche, verifiche, riduzioni immediate. 
+
+
+\begin{codeexample}[Ricerca lineare]
+  \strategia{
+    \begin{itemize}
+      \item Facciamo la \textbf{ricorsione sull'indice} \inlinecode{i},
+            avanzato di 1 ad ogni passo.
+      \item \textbf{Ipotesi induttiva:} la funzione è corretta per qualsiasi
+            indice strettamente maggiore di \inlinecode{i}.
+      \item \textbf{Passo ricorsivo:} se \inlinecode{v.at(i)} non è il
+            target, uso la funzione (corretta per ipotesi su \inlinecode{i+1})
+            e ne restituisco direttamente il risultato  nessun calcolo
+            rimane pendente al ritorno.
+            \vspace{0.1cm}
+
+            \inlinecode{return contiene(v, target, i + 1);}
+
+      \item \textbf{Casi base:} due condizioni distinte.
+            \vspace{0.1cm}
+
+            \inlinecode{if (i == (int)v.size()) return false;}
+            \vspace{0.1cm}
+
+            \inlinecode{if (v.at(i) == target) return true;}
+    \end{itemize}
+  }
+
+  \begin{codebox}
+    \begin{lstlisting}
+bool contiene(const vector<int>& v, int target, int i = 0) {
+    if (i == (int)v.size()) return false;
+    if (v.at(i) == target)  return true;
+    return contiene(v, target, i + 1);
+}
+    \end{lstlisting}
+  \end{codebox}
+
+\end{codeexample}
+
+
+
+
+
+
+
+
+
+\begin{codeexample}[Vettore ordinato]
+  \strategia{
+    \begin{itemize}
+      \item Facciamo la \textbf{ricorsione sull'indice} \inlinecode{i},
+            avanzato di 1 ad ogni passo.
+      \item \textbf{Ipotesi induttiva:} la funzione è corretta per qualsiasi
+            indice strettamente maggiore di \inlinecode{i}.
+      \item \textbf{Passo ricorsivo:} se \inlinecode{v.at(i) <= v.at(i+1)},
+            il confronto corrente è soddisfatto; uso la funzione (corretta
+            per ipotesi su \inlinecode{i+1}) e ne restituisco direttamente
+            il risultato  nessun calcolo rimane pendente al ritorno.
+            \vspace{0.1cm}
+
+            \inlinecode{return ordinato(v, i + 1);}
+
+      \item \textbf{Casi base:} due condizioni distinte.
+            \vspace{0.1cm}
+
+            \inlinecode{if (v.at(i) > v.at(i + 1)) return false;}
+            \vspace{0.1cm}
+
+            \inlinecode{if (i == (int)v.size() - 1) return true;}
+    \end{itemize}
+  }
+
+  \begin{codebox}
+    \begin{lstlisting}
+bool ordinato(const vector<int>& v, int i = 0) {
+    if (i == (int)v.size() - 1)  return true; 
+    if (v.at(i) > v.at(i + 1))   return false;
+    return ordinato(v, i + 1);
+}
+    \end{lstlisting}
+  \end{codebox}
+
+\end{codeexample}
+
+
+\subsection{Con accumulatore}
+Serve quando si deve costruire o calcolare qualcosa lungo il percorso.
+Questo sottotipo a sua volta ha altri sottotipi:
+
+\subsubsection{Accumulatore singolo numerico}
+Lo stato è un singolo valore numerico che si aggiorna ad ogni passo.
+
+
+
+
+\begin{codeexample}[Fattoriale con accumulatore]
+
+  Il \textbf{fattoriale} di un intero non-negativo $n$ ammette una
+  definizione ricorsiva diretta:
+  \[
+    n! = \begin{cases}
+      1              & \text{se } n = 0 \\
+      n \cdot (n-1)! & \text{se } n > 0
+    \end{cases}
+  \]
+  Per ottenere una \textbf{tail recursion}, si introduce un accumulatore
+  \inlinecode{acc} che porta il prodotto parziale in avanti invece di
+  lasciarlo pendente sullo stack. Poiché \inlinecode{acc} è un dettaglio
+  implementativo interno, si separa la logica in due funzioni: una
+  \textbf{funzione helper} che espone \inlinecode{acc} come parametro
+  esplicito, e una \textbf{funzione wrapper} pubblica che la chiama
+  inizializzando \inlinecode{acc} al valore neutro della moltiplicazione,
+  ovvero \inlinecode{1}.
+
+  \strategia{
+    \begin{itemize}
+      \item Facciamo la \textbf{ricorsione su} \inlinecode{n},
+            ridotto di 1 ad ogni passo, con accumulatore \inlinecode{acc}
+            che porta il prodotto parziale.
+      \item \textbf{Ipotesi induttiva:} la funzione è corretta per qualsiasi
+            valore di \inlinecode{n} strettamente minore di quello corrente.
+      \item \textbf{Passo ricorsivo:} aggiorno \inlinecode{acc}
+            moltiplicando per \inlinecode{n} e delego  nessun calcolo
+            rimane pendente al ritorno.
+            \vspace{0.1cm}
+
+            \inlinecode{return fact\_helper(n - 1, acc * n);}
+
+      \item \textbf{Caso base:} quando \inlinecode{n == 0} il calcolo
+            è completo; viene restituito direttamente \inlinecode{acc}.
+            \vspace{0.1cm}
+
+            \inlinecode{if (n == 0) return acc;}
+    \end{itemize}
+  }
+
+  \begin{codebox}
+    \begin{lstlisting}
+int fact_helper(int n, long long acc) {
+    if (n == 0) return acc;
+    return fact_helper(n - 1, acc * n);
+}
+
+int fact(int n) {
+    return fact_helper(n, 1);   // acc inizializzato al valore neutro
+}
+    \end{lstlisting}
+  \end{codebox}
+
+\end{codeexample}
+
+\subsection{ Accumulatore stringa}
+Lo stato è una stringa che si costruisce progressivamente.
+
+
+\begin{codeexample}[Inversione stringa con accumulatore]
+
+  Per ottenere una tail recursion, si introduce un accumulatore
+  \inlinecode{acc} di tipo \inlinecode{string} che costruisce la
+  stringa invertita progressivamente, portandola in avanti invece
+  di lasciarla pendente sullo stack. \inlinecode{acc} viene
+  inizializzato alla stringa vuota, valore neutro della
+  concatenazione.
+
+  \strategia{
+    \begin{itemize}
+      \item Facciamo la \textbf{ricorsione sull'indice} \inlinecode{i},
+            avanzato di 1 ad ogni passo, con accumulatore \inlinecode{acc}
+            che porta la stringa invertita parziale.
+      \item \textbf{Ipotesi induttiva:} la funzione è corretta per qualsiasi
+            indice strettamente maggiore di \inlinecode{i}.
+      \item \textbf{Passo ricorsivo:} prependo \inlinecode{s.at(i)}
+            all'accumulatore e delego  nessun calcolo rimane
+            pendente al ritorno.
+            \vspace{0.1cm}
+
+            \inlinecode{return inverti(s, i + 1, s.at(i) + acc);}
+
+      \item \textbf{Caso base:} quando \inlinecode{i == (int)s.size()}
+            tutti i caratteri sono stati processati; viene restituito
+            direttamente \inlinecode{acc}.
+            \vspace{0.1cm}
+
+            \inlinecode{if (i == s.size()) return acc;}
+    \end{itemize}
+  }
+
+  \begin{codebox}
+    \begin{lstlisting}
+string inverti(const string& s, int i = 0, string acc = "") {
+    if (i == (int)s.size()) return acc;
+    return inverti(s, i + 1, s.at(i) + acc);
+}
+    \end{lstlisting}
+  \end{codebox}
+
+\end{codeexample}
+\subsection{ Accumulatori multipli paralleli}
+Serve quando lo stato richiede più valori che evolvono insieme. I parametri accumulatori sono due o più e si aggiornano in parallelo ad ogni passo.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{codeexample}[Fibonacci con accumulatori paralleli]
+
+  La successione di Fibonacci è definita come:
+  \[
+    F(n) = \begin{cases}
+      0               & \text{se } n = 0 \\
+      1               & \text{se } n = 1 \\
+      F(n-1) + F(n-2) & \text{se } n > 1
+    \end{cases}
+  \]
+  La definizione standard genera una ricorsione multipla con
+  sottoproblemi sovrapposti. Per ottenere una tail recursion si
+  introducono due accumulatori paralleli \inlinecode{a} e
+  \inlinecode{b} che portano avanti gli ultimi due valori della
+  sequenza, aggiornandosi ad ogni passo senza calcoli pendenti
+  al ritorno.
+
+  \strategia{
+    \begin{itemize}
+      \item Facciamo la \textbf{ricorsione su} \inlinecode{n},
+            ridotto di 1 ad ogni passo, con due accumulatori
+            paralleli \inlinecode{a} e \inlinecode{b} che portano
+            rispettivamente $F(k)$ e $F(k+1)$ per il passo corrente.
+      \item \textbf{Ipotesi induttiva:} la funzione è corretta per
+            qualsiasi valore di \inlinecode{n} strettamente minore
+            di quello corrente.
+      \item \textbf{Passo ricorsivo:} aggiorno entrambi gli
+            accumulatori in parallelo  \inlinecode{a} diventa
+            \inlinecode{b} e \inlinecode{b} diventa \inlinecode{a+b}
+             e delego. Nessun calcolo rimane pendente al ritorno.
+            \vspace{0.1cm}
+
+            \inlinecode{return fib(n - 1, b, a + b);}
+
+      \item \textbf{Caso base:} quando \inlinecode{n == 0},
+            \inlinecode{a} contiene già $F(0)$; viene restituito
+            direttamente.
+            \vspace{0.1cm}
+
+            \inlinecode{if (n == 0) return a;}
+    \end{itemize}
+  }
+
+  \begin{codebox}
+    \begin{lstlisting}
+int fib_helper(int n, long long a, long long b) {
+    if (n == 0) return a;
+    return fib_helper(n - 1, b, a + b);
+}
+
+    int fib(int n) {
+    return fib_helper(n, 0, 1);   // a=F(0)=0, b=F(1)=1
+}
+    \end{lstlisting}
+  \end{codebox}
+
+\end{codeexample}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Divide et impera}
+\defn{}{
+Divide et impera è una strategia ricorsiva che risolve un problema dividendolo in sotto problemi indipendenti della stessa natura, risolvendo ognuno per ipotesi induttiva,e poi combinando i risultati parziali in una soluzione completa.
+}
+
+Nel pattern Divide et impera ci sono due sottotipi, i quali sono:
+\subsection{Divide et impera con combine esplicita}
+Il lavoro principale avviene nella fase combina, dopo che entrambe la metà sono state risolte, si fa un lavoro non banale per unire i  risultati. 
+
+
+\begin{codeexample}[Merge sort]
+
+
+
+
+
+
+
+
+  Il \textbf{Merge Sort} è un algoritmo di ordinamento \textit{divide et impera}.
+  Opera in due fasi:
+  \begin{enumerate}
+    \item \textbf{Divide:} trova il punto medio $m = \lfloor(l+r)/2\rfloor$ e
+          richiama ricorsivamente \inlinecode{mergeSort} sulle due metà
+          \inlinecode{[l,m]} e \inlinecode{[m+1,r]}.
+    \item \textbf{Merge:} fonde le due metà ordinate confrontando elemento
+          per elemento e copiando ogni volta il minore in un array di supporto,
+          poi ricopia il risultato in \inlinecode{arr[l..r]}.
+  \end{enumerate}
+
+
+\begin{center}
+
+\begin{tikzpicture}[
+    nodes={minimum width=0.7cm, minimum height=0.7cm},
+    row sep=-\pgflinewidth,
+    column sep=-\pgflinewidth,
+    >=stealth
+]
+
+% Livello 0: Array originale
+\matrix(orig)[matrix of nodes,
+    row 1/.style={nodes={draw=none}},
+    nodes={draw}]
+{
+    \tiny{0} & \tiny{1} & \tiny{2} & \tiny{3}\\
+    5 & 2 & 4 & 1\\
+};
+
+% Livello 1: Split
+\matrix(left)[matrix of nodes,
+    row 1/.style={nodes={draw=none}},
+    nodes={draw},
+    below left=1.2cm and 0.5cm of orig]
+{
+    \tiny{0} & \tiny{1}\\
+    5 & 2\\
+};
+
+\matrix(right)[matrix of nodes,
+    row 1/.style={nodes={draw=none}},
+    nodes={draw},
+    below right=1.2cm and 0.5cm of orig]
+{
+    \tiny{2} & \tiny{3}\\
+    4 & 1\\
+};
+
+% Livello 2: Merge (ordinato)
+\matrix(mleft)[matrix of nodes,
+    row 1/.style={nodes={draw=none}},
+    nodes={draw, fill=green!15},
+    below left=1.2cm and 0.5cm of $(left)!0.5!(right)$]
+{
+    \tiny{0} & \tiny{1}\\
+    2 & 5\\
+};
+
+\matrix(mright)[matrix of nodes,
+    row 1/.style={nodes={draw=none}},
+    nodes={draw, fill=green!15},
+    below right=1.2cm and 0.5cm of $(left)!0.5!(right)$]
+{
+    \tiny{2} & \tiny{3}\\
+    1 & 4\\
+};
+
+% Livello 3: Array finale ordinato
+\matrix(final)[matrix of nodes,
+    row 1/.style={nodes={draw=none}},
+    nodes={draw, fill=orange!20},
+    below=1.2cm of $(mleft)!0.5!(mright)$]
+{
+    \tiny{0} & \tiny{1} & \tiny{2} & \tiny{3}\\
+    1 & 2 & 4 & 5\\
+};
+
+% Frecce split
+\draw[->, thick, red!70!black] (orig-2-2.south) -- (left-1-1.north)
+    node[midway, left, font=\scriptsize] {split};
+\draw[->, thick, red!70!black] (orig-2-3.south) -- (right-1-2.north);
+
+% Frecce merge
+\draw[->, thick, green!50!black] (left-2-2.south) -- (mleft-1-1.north)
+    node[midway, left, font=\scriptsize] {merge};
+\draw[->, thick, green!50!black] (right-2-1.south) -- (mright-1-2.north);
+
+% Frecce merge finale
+\draw[->, thick, orange!70!black] (mleft-2-2.south) -- (final-1-2.north)
+    node[midway, left, font=\scriptsize] {merge};
+\draw[->, thick, orange!70!black] (mright-2-1.south) -- (final-1-3.north);
+
+\end{tikzpicture}
+
+
+\end{center}
+
+
+
+
+
+
+    \strategia{
+        \begin{itemize}
+        \item Facciamo la \textbf{ricorsione sugli estremi} \inlinecode{l} e \inlinecode{r} dimezzando l'intervallo ad oggni passo. 
+        \item \textbf{Ipotesi induttiva:}: la funzione è corretta per qualsiasi intervallo di dimensione strettamente minore di \inlinecode{r-l+1}
+        \item \textbf{Passo ricorsivo:} per ipotesi le due metà sono già ordinate.
+        \item \textbf{Caso base:} quando \inlinecode{l>=r} c'è un solo elemento ed è già ordinato
+        \end{itemize}
+    }
+
+
+
+    \begin{codebox}
+    \begin{lstlisting}
+    void merge(vector<int>& v, int l, int m, int r) {
+    vector<int> sx, dx;
+
+    for (int i = l; i <= m; i++) sx.push_back(v.at(i));
+    for (int i = m + 1; i <= r; i++) dx.push_back(v.at(i));
+
+    int i = 0, j = 0, k = l;
+    while (i < (int)sx.size() && j < (int)dx.size())
+        v.at(k++) = (sx.at(i) <= dx.at(j)) ? sx.at(i++) : dx.at(j++);
+    while (i < (int)sx.size()) v.at(k++) = sx.at(i++);
+    while (j < (int)dx.size()) v.at(k++) = dx.at(j++);
+}
+    \end{lstlisting}
+    \end{codebox}
+
+
+
+
+
+
+    \begin{codebox}
+    \begin{lstlisting}
+    void mergeSort(vector<int>& v, int l, int r) {
+    if (l >= r) return;
+    int m = l + (r - l) / 2;     // DIVIDE
+    mergeSort(v, l, m);           // CONQUER sinistra
+    mergeSort(v, m + 1, r);       // CONQUER destra
+    merge(v, l, m, r);            // COMBINE
+}
+    \end{lstlisting}
     \end{codebox}
 \end{codeexample}
-L'obiettivo della funzione \inlinecode{stampa\_preorder} è stampare i numeri da 1 a n usando la ricorsione, senza usare cicli espliciti come \inlinecode{for} o \inlinecode{while}. L’idea è: invece di far avanzare un contatore dentro un loop, lasci che sia la ricorsione stessa a comportarsi come un loop, facendo una chiamata dopo l’altra finché non raggiunge un caso base.
 
 
-La funzione ha due parametri: $n$, che rappresenta il numero massimo fino a cui vogliamo contare, e $i$, che rappresenta il numero corrente da stampare, inizializzato a 1 per default. Ad ogni chiamata, la prima cosa che la funzione fa è controllare se i ha superato n: se i > n, significa che abbiamo già stampato tutti i numeri desiderati, quindi non c'è più lavoro da fare e la funzione termina con un semplice  \inlinecode{return}. Questo è il caso base, cioè la condizione che ferma la ricorsione.
+\begin{codeexample}[Massimo]
+    \strategia{
+    \begin{itemize}
+    \item Facciamo la \textbf{riscorsione sugli estremi} \inlinecode{l} e \inlinecode{r}, dimmezando l'intervallo.
+    \item \textbf{Ipotesi induttiva:} la funzione è coretta èer qualsiasi intervallo di dimensione strettamente minore di \inlinecode{r-l+1}.
+    \item \textbf{Passo ricorsivo:} per ipotesi ho il massimo delle due metà; prendo il maggiore tra i due. 
+    \item \textbf{Caso base:} quando \inlinecode{l==r} cìè un solo elemento 
+    \end{itemize}
+    }
+    \begin{codebox}
+    \begin{lstlisting}
+    int massimo(const vector<int>& v, int l, int r){
+    if(l==r) return v.at(l);
+    int m = l+(r-1)/2;
+    int maxSx = massimo(v, l, m);        // CONQUER sinistra
+    int maxDx = massimo(v, m + 1, r);    // CONQUER destra
+    return max(maxSx, maxDx);           // Combina 
+    }
+    \end{lstlisting}
+    \end{codebox}
+\end{codeexample}
 
-Se invece $i$ è ancora minore o uguale a n, entriamo nel caso ricorsivo. Qui succedono due cose in ordine preciso: prima la funzione stampa il valore corrente di $ i$ con
-\inlinecode{cout << i << " ";}, poi richiama se stessa con 
-\inlinecode{stampa\_preorder(n, i + 1)}.
-
-Stampare prima di chiamare di nuovo la funzione significa che il “lavoro” viene fatto in discesa nello stack di chiamate: la sequenza delle stampe segue l’ordine naturale 1, 2, 3, …, n, ed è per questo che si parla di ricorsione pre-order.
 
 
 
+\subsection{Divide et impera senza combina, con riduzione diretta}
+Non c'è fase di combine  dopo aver diviso, si procede su una sola delle parti. È un caso degenere di Divide et impera che assomiglia alla ricorsione lineare, ma il criterio di divisione è $n/2$ invece di $ n-1$.
+
+\begin{codeexample}[Fast power]
+\strategia{
+    \begin{itemize}
+        \item Facciamo la \textbf{ricorsione} su \inlinecode{exp}, dimezzato ad ogni passo.
+        \item \textbf{Ipotesi induttiva:} la funzione è coretta per qualsiasi valore di \inlinecode{exp} strettamente minore di quello corrente 
+        \item \textbf{Passo ricorsivo:} per ipotesi ho \inlinecode{base\^(exp/2)}.
+        \item \textbf{Caso base:}\ilinecode{exp== 0}
+    \end{itemize}
+}
+
+    \begin{codebox}
+    \begin{lstlisting}
+    int fastPow(int base,int exp){
+     if(exp== 0) return 1; 
+     int half = fastPow(base,exp/2);
+      if(exp%2 == 0) return half *hallf;
+      else
+            return base*half*half;
+    }
+    \end{lstlisting}
+    \end{codebox}
+\end{codeexample}
+
+\begin{codeexample}
+    Suppponiamo che qualcuno pensi a un numero tra 1 e 100, e noi dobbiamo indovinarlo. Ci verrà detto solo se è troppo alto , troppo basso, o se il numero è esatto.
+    Per fare ciò ci sono due strategie:
+    \begin{itemize}
+    \item \textbf{Strategia  non ottimale}: Proviamo 1, poi 2, poi 3$\ldots$ se il numero fosse 99, ci vorebbero 99 tentativi. Ogni tentativo elimina un solo numero.
+    \item \textbf{Strategia ottimale:} Ad ogni tentativo puntiamo sempre al centro dell'intervallo:
+    \begin{enumerate}
+        \item Proviamo $50 \rightarrow$ troppo alto elimino i numeri da 50 a 100.
+        \item Proviamo $25 \rightarrow$ troppo alto elimino i numeri da 25 a 49.
+        \item Proviamo $12 \rightarrow$ troppo basso limino i numeri da 1 a 12 .
+        \item Proviamo $18 \rightarrow$ troppo basso limino i numeri da 13 a 18.
+        \item Proviamo $21 \rightarrow$ troppo basso limino i numeri da 19 a 21.
+        \item 23 trovato.
+    \end{enumerate}
+    \end{itemize}
+    
+
+
+    \begin{center}
+        \begin{tikzpicture}[
+    nodes={minimum width=1cm, minimum height=0.7cm},
+    row sep=-\pgflinewidth,
+    column sep=-\pgflinewidth,
+    >=stealth
+]
+
+% === Passo 0: Array 1..100, mid=50 ===
+\matrix(s0)[matrix of nodes, nodes={draw}]
+{
+    1 & \dots & |[fill=yellow!40]| 50 & \dots & 100\\
+};
+\node[right=0.5cm of s0, font=\scriptsize, align=left]
+    {mid = 50\\ 23 < 50 $\Rightarrow$ vai a sx};
+
+% === Passo 1: Array 1..49, mid=25 ===
+\matrix(s1)[matrix of nodes, nodes={draw},
+    below=1.2cm of s0]
+{
+    1 & \dots & |[fill=yellow!40]| 25 & \dots & |[fill=red!15]| 49\\
+};
+\node[right=0.5cm of s1, font=\scriptsize, align=left]
+    {mid = 25\\ 23 < 25 $\Rightarrow$ vai a sx};
+
+% === Passo 2: Array 1..24, mid=12 ===
+\matrix(s2)[matrix of nodes, nodes={draw},
+    below=1.2cm of s1]
+{
+    1 & \dots & |[fill=yellow!40]| 12 & \dots & |[fill=red!15]| 24\\
+};
+\node[right=0.5cm of s2, font=\scriptsize, align=left]
+    {mid = 12\\ 23 > 12 $\Rightarrow$ vai a dx};
+
+% === Passo 3: Array 13..24, mid=18 ===
+\matrix(s3)[matrix of nodes, nodes={draw},
+    below=1.2cm of s2]
+{
+    |[fill=red!15]| 13 & \dots & |[fill=yellow!40]| 18 & \dots & 24\\
+};
+\node[right=0.5cm of s3, font=\scriptsize, align=left]
+    {mid = 18\\ 23 > 18 $\Rightarrow$ vai a dx};
+
+% === Passo 4: Array 19..24, mid=21 ===
+\matrix(s4)[matrix of nodes, nodes={draw},
+    below=1.2cm of s3]
+{
+    |[fill=red!15]| 19 & \dots & |[fill=yellow!40]| 21 & \dots & 24\\
+};
+\node[right=0.5cm of s4, font=\scriptsize, align=left]
+    {mid = 21\\ 23 > 21 $\Rightarrow$ vai a dx};
+
+% === Passo 5: Array 22..24, mid=23 → TROVATO ===
+\matrix(s5)[matrix of nodes, nodes={draw},
+    below=1.2cm of s4]
+{
+    22 & |[fill=green!40]| 23 & 24\\
+};
+\node[right=0.5cm of s5, font=\scriptsize, align=left, text=green!50!black]
+    {mid = 23\\ \textbf{Trovato!}};
+
+% === Frecce tra i passi ===
+\draw[->, thick] (s0.south) -- (s1.north);
+\draw[->, thick] (s1.south) -- (s2.north);
+\draw[->, thick] (s2.south) -- (s3.north);
+\draw[->, thick] (s3.south) -- (s4.north);
+\draw[->, thick] (s4.south) -- (s5.north);
+
+% === Titolo e legenda ===
+\node[above=0.4cm of s0, font=\bfseries]
+    {Ricerca Binaria --- Cerco il 23 in [1, 100]};
+
+\node[below=0.6cm of s5, font=\scriptsize, align=center]
+    {
+    \colorbox{yellow!40}{~mid~} = elemento centrale \quad
+    \colorbox{red!15}{~scartato~} \quad
+    \colorbox{green!40}{~trovato!~}\\[3pt]
+    };
+
+\end{tikzpicture}
+    \end{center}
+    \begin{codebox}
+    \begin{lstlisting}
+    bool ricercaBinaria(const vector<int>& v, int target, int da, int a){
+        if(da>=a){
+        int m = (da+a)/2
+        if(v.at(m==2)
+            return true;
+        else 
+            if(v.at(m)>e)
+                return ricercaBinaria(v,e,da,m-1);
+            else
+                return ricercaBinaria(v,e,m+1,a);
+        }
+        else
+            return false;
+    }
+    \end{lstlisting}
+    \end{codebox}
+\end{codeexample}
+
+\section{Backtracking}
+\defn{Backtracking}{
+Il backtracking è una tecnica ricorsiva per esplorare sistematicamente uno spazio di scelte costruendo una soluzione incrementalmente. Ad ogni passo si effettua una scelta, si assume per ipotesi induttiva che la ricorsione esplori correttamente tutto ciò che segue, poi si annulla la scelta per esplorare le alternative.
+}
+Nel backtracking ci sono tre sottotipi i quali sono: 
+
+\subsection{Backtracking su scelte binarie}
+Ad ogni passo la scelta è binaria:includo l'elemento corrente oppure no. 
+
+\begin{codeexample}[sottoinsiemi]
+    \strategia{
+        \begin{itemize}
+        \item Facciamo la \textbf{ricorsione sull'iindice } \inlinecode{i}, avanzando ad ogni passo.
+        \item \textbf{Passo ricorsivo:} er ogni elemento \inlinecode{v.at(i)} esploro i due rami — incluso e non incluso — usando la funzione corretta per ipotesi su \inlinecode{i+1}.
+        \item \textbf{Caso base:} \inlinecode{i == v.size()} la soluzione pariziale è completa, e viene registrata.
+
+
+        \end{itemize}
+        }
+    \begin{lstlisting}
+    void subsets(const vector<int> & v, int i, vector<int> & corrente,vector<vector<int>> & res){
+    if(i== v.size()){
+        res.push_back(corrente);
+        return;
+    }
+    subsets(v,i+1,corrente,res);
+    corrente.push_back(v.at(i));
+     subsets(v, i + 1, corrente, res);
+      corrente.pop_back();   
+    }
+    \end{lstlisting}
+    
+\end{codeexample}
+
+\subsection{ Backtracking su permutazioni}
+Ad ogni passo le scelte sono filtrate da vincoli che dipendono dallo stato corrente.
+
+
+\begin{codeexample}[Permutazioni]
+
+  \strategia{
+    \begin{itemize}
+      \item Facciamo la \textbf{ricorsione sulla lunghezza} di
+            \inlinecode{corrente}, aumentata di 1 ad ogni passo.
+      \item \textbf{Ipotesi induttiva:} la funzione è corretta per
+            qualsiasi stato con un elemento in più già scelto in
+            \inlinecode{corrente}.
+      \item \textbf{Passo ricorsivo:} per ogni elemento non ancora
+            usato, lo aggiungo a \inlinecode{corrente}, uso la funzione
+            (corretta per ipotesi) per esplorare il resto, poi annullo
+            la scelta per provare le alternative.
+            \vspace{0.1cm}
+
+            \inlinecode{usato.at(i) = true;}
+            \vspace{0.1cm}
+
+            \inlinecode{corrente.push\_back(v.at(i));}
+            \vspace{0.1cm}
+
+            \inlinecode{permutazioni(v, usato, corrente, res);}
+            \vspace{0.1cm}
+
+            \inlinecode{corrente.pop\_back();}
+            \vspace{0.1cm}
+
+            \inlinecode{usato.at(i) = false;}
+
+      \item \textbf{Caso base:} quando
+            \inlinecode{(int)corrente.size() == (int)v.size()}
+            la permutazione è completa; viene registrata.
+            \vspace{0.1cm}
+
+            \inlinecode{if ((int)corrente.size() == (int)v.size())}
+            \inlinecode{res.push\_back(corrente);}
+    \end{itemize}
+  }
+
+  \begin{codebox}
+    \begin{lstlisting}
+void permutazioni(const vector<int>& v, vector<bool>& usato,
+                  vector<int>& corrente, vector<vector<int>>& res) {
+    if ((int)corrente.size() == (int)v.size()) {
+        res.push_back(corrente);
+        return;
+    }
+    for (int i = 0; i < (int)v.size(); i++) {
+        if (!usato.at(i)) {
+            usato.at(i) = true;
+            corrente.push_back(v.at(i));            
+            permutazioni(v, usato, corrente, res);  
+            corrente.pop_back();                    
+            usato.at(i) = false;                  
+        }
+    }
+}
+    \end{lstlisting}
+  \end{codebox}
+
+\end{codeexample}
 
 
 
+
+
+
+
+\subsection{ Backtracking con vincoli strutturali }
+Ad ogni passo le scelte sono filtrate da vincoli che dipendono dallo stato corrente. 
+
+
+
+\begin{codeexample}[Parentesi ben formate]
+
+  \strategia{
+    \begin{itemize}
+      \item Facciamo la \textbf{ricorsione sulla lunghezza} di
+            \inlinecode{corrente}, aumentata di 1 ad ogni passo,
+            con contatori \inlinecode{open} e \inlinecode{close}
+            che tracciano le parentesi già inserite.
+      \item \textbf{Ipotesi induttiva:} la funzione è corretta per
+            qualsiasi stato con un carattere in più già aggiunto a
+            \inlinecode{corrente}.
+      \item \textbf{Passo ricorsivo:} provo ad aggiungere
+            \inlinecode{(} se \inlinecode{open < n}, e \inlinecode{)}
+            se \inlinecode{close < open}; il pruning è implicito nelle
+            condizioni. L'undo è implicito poiché \inlinecode{corrente}
+            è passata per valore.
+            \vspace{0.1cm}
+
+            \inlinecode{if (open < n)}
+            \vspace{0.1cm}
+
+            \inlinecode{\ \ \ \ parentesi(n, open+1, close, corrente+"(", res);}
+            \vspace{0.1cm}
+
+            \inlinecode{if (close < open)}
+            \vspace{0.1cm}
+
+            \inlinecode{\ \ \ \ parentesi(n, open, close+1, corrente+")", res);}
+
+      \item \textbf{Caso base:} quando
+            \inlinecode{(int)corrente.size() == 2*n}
+            la stringa è completa; viene registrata.
+            \vspace{0.1cm}
+
+            \inlinecode{if ((int)corrente.size() == 2*n)}
+            \inlinecode{res.push\_back(corrente);}
+    \end{itemize}
+  }
+
+  \begin{codebox}
+    \begin{lstlisting}
+void parentesi(int n, int open, int close,
+               string corrente, vector<string>& res) {
+    if ((int)corrente.size() == 2 * n) {
+        res.push_back(corrente);
+        return;
+    }
+    if (open < n)
+        parentesi(n, open + 1, close, corrente + "(", res);
+    if (close < open)
+        parentesi(n, open, close + 1, corrente + ")", res);
+}
+    \end{lstlisting}
+  \end{codebox}
+
+\end{codeexample}

@@ -1,0 +1,187 @@
+
+
+
+\intro{}
+
+
+
+\section{Introduzione alle classi}
+Una struct o classe permette di creare un tipo di dato personalizzato che raggruppa più informazioni insieme. Ad esempio, una \inlinecode{struct Prova} può contenere tre campi; un \inlinecode{float x}, un \inlinecode{int y} e una  \inlinecode{string s}. La cosa importante da capire è che la combinazione dei valori di tutti i campi in un dato momento rappresenta lo stato dell'oggetto. 
+\begin{codebox}
+    \begin{lstlisting}
+    struct Punto{
+        float x;
+        int y;
+        string s;
+    }
+    \end{lstlisting}
+\end{codebox}
+\subsection{Metodi}
+Oltre ai campi, una \inlinecode{struct} può avere dei metodi, che sono semplicemente funzioni definite al suo interno. Ad esempio, \inlinecode{void stampa()} è un metodo che stampa \inlinecode{"hello world"} a schermo. La distinzione è netta: i campi descrivono cosa è l'oggetto, i metodi descrivono cosa sa fare.
+
+Una volta definita la \inlinecode{struct}, si possono istanziare (creare) oggetti di quel tipo, ad esempio con Prova \inlinecode{o1, o2;}. Ogni oggetto è indipendente: \inlinecode{o1.x = 23.12} e \inlinecode{o2.x = 14.33} assegnano valori diversi allo stesso campo su istanze diverse. Per accedere a campi o metodi si usa l'operatore punto (.), come in \inlinecode{o1.stampa()}.
+
+
+
+
+\subsection{Struttura generale di una classe}
+Una classe può avere tre livelli di visibilità: \inlinecode{public}, \inlinecode{private} e \inlinecode{protected}.  Nella sezione \inlinecode{public} si mettono i metodi che l'utente della classe può usare dall'esterno. Nella sezione \inlinecode{private} si mettono sia i dati che eventuali metodi interni che non devono essere esposti. Quando un metodo viene definito direttamente dentrlo la classe non devono essere esposti. Quando un metodo viene definito direttamente dentro la classe si dice che è \textbf{inline}: dichiarazione e definizione coincidono nello stesso punto.
+
+\subsection{Implementare i metodi fuori dalla classe}
+Nelle classi i metodi si dichiarano dentro la classe e si definiscono separatamente usando l'operatore \inlinecode{::}. 
+
+\subsection{Incapsulamento}
+ I campi \inlinecode{double x} e \inlinecode{double y} vengono dichiarati private, il che significa che non possono essere modificati direttamente dall'esterno della \inlinecode{struct}. Per farlo, si devono usare i metodi \inlinecode{public} come \inlinecode{setx() }e \inlinecode{sety()}. In questo modo si nascondono i dati interni e si controlla come vengono modificati, evitando usi scorretti.
+
+\begin{codebox}
+    \begin{lstlisting}
+    struct Punto{
+        private:
+            double x;
+            double y;
+        public:
+        void setx(double nx);
+        void sety(double ny);
+        void setm(double nm);
+        void setdg(double na);
+        void  stampa();
+    }
+    \end{lstlisting}
+\end{codebox}
+
+\begin{center}
+    \begin{figure}[H]
+  \centering
+
+\subsection{Coordinate}
+Un punto nel piano può essere rappresentato in due modi matematicamente equivalenti:
+\begin{itemize}
+    \item \textbf{Cartesiano:} con $(x,y)$, le due coordinate lungo gli assi.
+    \item \textbf{Polare:} con $(\rho,\theta)$, dove $\rho$ è la distanza dall'origine e theta è l'angolo rispetto all'asse $x$.
+\end{itemize}
+La \inlinecode{struct} Punto sfrutta proprio questa dualità: internamente salva sempre x e y come campi privati, ma espone anche i metodi \inlinecode{setm()} (per impostare il modulo $\rho$) e \inlinecode{setdg()}. Questi metodi eseguono internamente la conversione matematica:
+
+\[
+    x = \rho \cos \theta \quad y= \rho \sin \theta
+\]
+
+Chi usa la classe non deve sapere come i dati sono salvati internamente  può usare indifferentemente il sistema cartesiano o quello polare, e sarà a gestire la conversione.
+
+
+
+
+  % ── Grafico 1: Coordinate Cartesiane ──────────────────────
+  \begin{minipage}{0.45\textwidth}
+    \centering
+    \begin{tikzpicture}
+      \draw[->] (-0.5, 0) -- (3.5, 0) node[right] {$x$};
+      \draw[->] (0, -0.5) -- (0, 3.5) node[above] {$y$};
+
+      \coordinate (P1) at (2.5, 2);
+
+      \draw[dashed] (P1) -- (2.5, 0) node[below] {$x$};
+      \draw[dashed] (P1) -- (0, 2)   node[left]  {$y$};
+
+      \filldraw[black] (P1) circle (2pt);
+      \node[below left] at (0,0) {$O$};
+    \end{tikzpicture}
+    \caption*{Coordinate cartesiane}
+  \end{minipage}
+  \hfill
+  % ── Grafico 2: Coordinate Polari ──────────────────────────
+  \begin{minipage}{0.45\textwidth}
+    \centering
+    \begin{tikzpicture}
+      \draw[->] (-0.5, 0) -- (3.5, 0);
+      \draw[->] (0, -0.5) -- (0, 3.5);
+
+      \coordinate (P2) at (2.8, 2.2);
+
+      \draw[-] (0,0) -- (P2) node[midway, above left] {$\rho$};
+      \draw[->] (0.8, 0) arc[start angle=0, end angle=38, radius=0.8]
+                node[right] {$\theta$};
+
+      \filldraw[black] (P2) circle (2pt) node[above right] {$P$};
+      \filldraw[black] (0,0) circle (1.5pt);
+      \node[below left] at (0,0) {$O$};
+    \end{tikzpicture}
+    \caption*{Coordinate polari}
+  \end{minipage}
+
+  \caption{Rappresentazione di un punto nel piano}
+\end{figure}
+\end{center}
+
+
+\subsection{Implementazione dei metodi della classe Punto}
+Ora vedremo l'implementazione dei metodi della classe Punto:
+
+\begin{codebox}
+    \begin{lstlisting}
+        void punto:: setx(double nx){
+        x=nx;
+        }
+    \end{lstlisting}
+\end{codebox}
+
+\begin{codebox}
+    \begin{lstlisting}
+        void punto:: sety(double ny){
+        y=ny;
+        }
+    \end{lstlisting}
+\end{codebox}
+\begin{codebox}
+    \begin{lstlisting}
+    void Punto::setrm(double nm) {
+     double theta = atan2(y, x);     // recupera l'angolo corrente
+     x = nm * cos(theta);
+     y = nm * sin(theta);
+}
+    \end{lstlisting}
+\end{codebox}
+
+
+Il metodo \inlinecode{setm(double nm) }è un esempio di come l'incapsulamento protegga la coerenza interna dell'oggetto. L'obiettivo è cambiare il modulo $\rho$ mantenendo invariato l'angolo $\theta$: il punto si sposta lungo la stessa direzione ma a distanza diversa dall'origine. Senza incapsulamento, un utente potrebbe cambiare $x$ senza aggiornare $y$, rompendo la coerenza  con i metodi privati questo è impossibile.
+
+\subsection{costruttore}
+
+Il costruttore è un metodo  che viene chiamato automaticamente ogni volta che si crea un nuovo oggetto di una classe. Ha due caratteristiche che lo distinguono da tutti gli altri metodi: porta lo stesso nome della classe e non ha tipo di ritorno. Il suo scopo è garantire che l'oggetto nasca in uno stato valido, evitando che i campi contengano valori casuali presenti in memoria
+\begin{codebox}
+    \begin{lstlisting}
+Punto::Punto() {
+    x = 0;
+    y = 0;
+}\end{lstlisting}
+\end{codebox}
+
+
+
+\subsection{Distruttore}
+Il distruttore è un metodo che viene chiamato automaticamente quando un oggetto viene eliminato, sia che esca dallo scope, sia che venga cancellato esplicitamente con \inlinecode{delete}. La sua sintassi è identica a quella del costruttore, ma con una tilde $\sim$ davanti al nome della classe, e anche lui non ha tipo di ritorno né parametri:
+\begin{codebox}
+    \begin{lstlisting}
+Punto:: ~ Punto() {  
+} \end{lstlisting}
+\end{codebox}
+
+
+
+\section{Live Coding  Classi in C++}
+
+In questa lezione verrà svolta una sessione di live coding dedicata
+all'introduzione delle classi in C++. Durante la lezione verranno
+analizzati i concetti fondamentali legati alla definizione di una classe,
+alla distinzione tra sezione \texttt{public} e \texttt{private}, e alla
+gestione della memoria dinamica mediante costruttore, distruttore e
+copy constructor.
+
+L'obiettivo è mostrare in modo pratico il ciclo di vita di un oggetto,
+la differenza tra allocazione su stack e su heap, e il motivo per cui
+il passaggio per valore di oggetti che gestiscono memoria dinamica può
+portare a errori come il \textit{segmentation fault}.
+
+Il materiale completo della lezione, insieme al notebook e al codice
+sviluppato durante la sessione, sarà disponibile nella repository del corso:
+
+\noindent\textbf{Repository:} \url{https://github.com/ibrahimatelybarry23/pelmod1/tree/main/LiveCoding}
