@@ -9,4 +9,4 @@ Appunti e live coding del corso **Programmazione e Laboratorio**.
 
 ## Esercizi
 
-Per esercitarsi consiglio di visitare **[esercizi]**([https://username.github.io/nome-repo](https://ibrahimatelybarry23.github.io/PEL/#/trainer))
+Per esercitarsi consiglio di visitare [https://username.github.io/nome-repo](https://ibrahimatelybarry23.github.io/PEL/#/trainer))
