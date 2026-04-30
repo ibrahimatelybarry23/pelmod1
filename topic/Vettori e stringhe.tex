@@ -96,7 +96,7 @@ che incapsula tre campi fondamentali:
           che sia necessaria una riallocazione.
 \end{itemize}
 
-In generale vale sempre $\text{size} \leq \text{capacity}$:
+In generale si ha $\text{size} \leq \text{capacity}$:
 quando si inserisce un elemento con \inlinecode{push\_back} e la size
 raggiunge la capacity, il vector alloca automaticamente un nuovo buffer
 più grande (tipicamente raddoppia la capacity), copia gli elementi
@@ -109,8 +109,8 @@ Su questo oggetto \`e possibile chiamare i seguenti metodi:
     \item \inlinecode{v.size()}: restituisce il numero di elementi logici
           attualmente contenuti nel vettore.
 
-    \item \inlinecode{v.at(i)}: restituisce un riferimento all'elemento
-          in posizione \inlinecode{i}, con controllo dei limiti.
+    \item \inlinecode{v.at(i)}: restituisce il riferimento all'elemento
+          in posizione \inlinecode{i}, controllandone i limiti.
           Se \inlinecode{i} \`e fuori dall'intervallo valido,
           lancia un'eccezione di tipo \inlinecode{std::out\_of\_range},
           causando un errore controllato anzich\`e un comportamento
@@ -868,13 +868,13 @@ void bubble(vector<int>& v) {
 \section*{Legenda}
 \begin{tikzpicture}
     \node[draw, fill=ordinato, minimum width=0.6cm, minimum height=0.6cm, rounded corners=2pt] at (0,0) {};
-    \node[right] at (0.5,0) {Ordinato (sotto soglia)};
-    \node[draw, fill=confronto, minimum width=0.6cm, minimum height=0.6cm, rounded corners=2pt] at (5.4,0) {};
-    \node[right] at (5.8,0) {Confronto};
-    \node[draw, fill=scambio, minimum width=0.6cm, minimum height=0.6cm, rounded corners=2pt] at (9,0) {};
-    \node[right] at (9.5,0) {Scambio};
-    \node[draw, fill=neutro, minimum width=0.6cm, minimum height=0.6cm, rounded corners=2pt] at (13,0) {};
-    \node[right] at (13.5,0) {Disordinato};
+    \node[right] at (0.4,0) {Ordinato (sotto soglia)};
+    \node[draw, fill=confronto, minimum width=0.6cm, minimum height=0.6cm, rounded corners=2pt] at (4.5,0) {};
+    \node[right] at (4.9,0) {Confronto};
+    \node[draw, fill=scambio, minimum width=0.6cm, minimum height=0.6cm, rounded corners=2pt] at (7.5,0) {};
+    \node[right] at (7.9,0) {Scambio};
+    \node[draw, fill=neutro, minimum width=0.6cm, minimum height=0.6cm, rounded corners=2pt] at (10.0,0) {};
+    \node[right] at (10.4,0) {Disordinato};
 \end{tikzpicture}
 
 \bigskip

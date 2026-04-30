@@ -49,6 +49,11 @@ void Foo::print() const {
 void Foo::setX(int a) {
     *x = a;
 }
+Foo::Foo(int a){
+    x=new int;
+    *x=a
+}
+
 
 // 
 //  Passaggio per VALORE:
@@ -78,7 +83,7 @@ int main() {
     Foo x;
     x.setX(42);
 
-    std::cout << "\n-- Chiamata per valore (copy ctor + dtor sulla copia) --" << std::endl;
+    std::cout    << "\n-- Chiamata per valore (copy ctor + dtor sulla copia) --" << std::endl;
     funzionePerValore(x);
 
     std::cout << "\n-- Chiamata per riferimento (nessuna copia) --" << std::endl;
@@ -101,6 +106,8 @@ int main() {
     // Vector di 12 oggetti Foo: costruttore chiamato 12 volte.
     // Quando il vector viene distrutto, chiama il distruttore su tutti gli elementi.
     // std::vector<Foo> v(12);
+
+        Foo y =x;
 
     std::cout << " Fine del programma " << std::endl;
     // x esce dallo scope → distruttore chiamato automaticamente

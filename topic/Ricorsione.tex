@@ -491,7 +491,7 @@ Lo stato è una stringa che si costruisce progressivamente.
             \vspace{0.1cm}
 
             \inlinecode{if (i == s.size()) return acc;}
-    \end{itemize}
+    \end{itemize}\vspace*{-\baselineskip}
   }
 
   \begin{codebox}
@@ -563,7 +563,7 @@ Serve quando lo stato richiede più valori che evolvono insieme. I parametri acc
             \vspace{0.1cm}
 
             \inlinecode{if (n == 0) return a;}
-    \end{itemize}
+    \end{itemize}\vspace*{-\baselineskip}
   }
 
   \begin{codebox}
@@ -721,7 +721,7 @@ Il lavoro principale avviene nella fase combina, dopo che entrambe la metà sono
         \item \textbf{Ipotesi induttiva:}: la funzione è corretta per qualsiasi intervallo di dimensione strettamente minore di \inlinecode{r-l+1}
         \item \textbf{Passo ricorsivo:} per ipotesi le due metà sono già ordinate.
         \item \textbf{Caso base:} quando \inlinecode{l>=r} c'è un solo elemento ed è già ordinato
-        \end{itemize}
+        \end{itemize}\vspace*{-\baselineskip}
     }
 
 
@@ -796,8 +796,8 @@ Non c'è fase di combine  dopo aver diviso, si procede su una sola delle parti. 
         \item Facciamo la \textbf{ricorsione} su \inlinecode{exp}, dimezzato ad ogni passo.
         \item \textbf{Ipotesi induttiva:} la funzione è coretta per qualsiasi valore di \inlinecode{exp} strettamente minore di quello corrente 
         \item \textbf{Passo ricorsivo:} per ipotesi ho \inlinecode{base\^(exp/2)}.
-        \item \textbf{Caso base:}\ilinecode{exp== 0}
-    \end{itemize}
+        \item \textbf{Caso base:}\inlinecode{exp== 0}
+    \end{itemize}\vspace*{-\baselineskip}
 }
 
     \begin{codebox}
@@ -1006,7 +1006,7 @@ Ad ogni passo le scelte sono filtrate da vincoli che dipendono dallo stato corre
 
             \inlinecode{if ((int)corrente.size() == (int)v.size())}
             \inlinecode{res.push\_back(corrente);}
-    \end{itemize}
+    \end{itemize}\vspace*{-\baselineskip}
   }
 
   \begin{codebox}
