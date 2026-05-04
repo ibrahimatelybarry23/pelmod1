@@ -103,14 +103,16 @@ minimum height=1cm, text centered, draw=black]
 
 
 % --- Stile Codice ---
-\definecolor{funcpurple}{rgb}{0.5, 0, 0.5} % Definizione colore per le funzioni
+\definecolor{funcpurple}{rgb}{0.5, 0, 0.5}
+\definecolor{typeteal}{RGB}{0, 139, 139}
+\definecolor{memberred}{RGB}{180, 50, 50}
 \lstdefinestyle{exactstyle}{
     language=C++,
     backgroundcolor=\color{backcolour},
     commentstyle=\upshape\color{codegray},
     keywordstyle=\bfseries\color{codeblue},
     stringstyle=\color{codegreen},
-    basicstyle=\ttfamily\small\upshape,  
+    basicstyle=\ttfamily\small\upshape,
     breakatwhitespace=false,
     breaklines=true,
     keepspaces=true,
@@ -121,10 +123,14 @@ minimum height=1cm, text centered, draw=black]
     showstringspaces=false,
     showtabs=false,
     tabsize=4,
-    frame=none, 
-    xleftmargin=25pt, 
+    frame=none,
+    xleftmargin=25pt,
     morekeywords=[2]{swap, main, printf, cout},
     keywordstyle={[2]\color{funcpurple}\bfseries},
+    morekeywords=[3]{List, cell},
+    keywordstyle={[3]\color{typeteal}\bfseries},
+    morekeywords=[4]{head},
+    keywordstyle={[4]\color{memberred}},
 }
 \lstset{style=exactstyle}
 
@@ -937,4 +943,6 @@ Questi appunti raccolgono i contenuti del corso  \textbf{Programmazione  e labor
 \chapter{Classi}
 \input{topic/Classi}
 
+\chapter{Liste}
+\input{topic/Liste}
 \end{document}
